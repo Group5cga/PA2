@@ -10,7 +10,6 @@ Module Module1
             c = Chr(BR.ReadByte)
             S = S + c
         Next
-
     End Sub
 
     Sub BlankRead(ByRef BR As BinaryReader, ByVal N As Integer)
@@ -19,7 +18,6 @@ Module Module1
         For i = 1 To N
             BR.ReadByte()
         Next
-
     End Sub
 
 
@@ -35,7 +33,6 @@ Module Module1
             L = L + j * m
             m = m * 256
         Next
-
     End Sub
 
     Sub BlockWriteInt(ByRef bw As BinaryWriter, ByVal N As Integer, ByVal L As Long)
@@ -46,9 +43,7 @@ Module Module1
             j = L Mod 256
             bw.Write(CByte(j))
             L = L \ 256
-
         Next
-
     End Sub
 
     Function HexToDecLSBFirst(ByVal s As String) As Long
@@ -61,9 +56,7 @@ Module Module1
             n = n + Asc(s(i)) * m
             m = m * 256
         Next
-
         Return n
-
     End Function
 
     Function OpAnd(ByVal C1 As System.Drawing.Color, ByVal c2 As System.Drawing.Color) As System.Drawing.Color
@@ -91,6 +84,4 @@ Module Module1
 
         Return c
     End Function
-
-
 End Module
