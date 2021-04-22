@@ -13,12 +13,12 @@ Public Class Form1
         'open image for background, assign to bg
 
         Bg = New CImage
-        Bg.OpenImage("C:\Users\Mbek\Pictures\inprogress\scenery.bmp")
+        Bg.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\094.bmp")
         Bg.CopyImg(Img)
         Bg.CopyImg(Bg1)
 
         SpriteMap = New CImage
-        SpriteMap.OpenImage("C:\download\1259a.bmp")
+        SpriteMap.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MCSpritesheet.bmp")
 
         SpriteMap.CreateMask(SpriteMask)
 
@@ -67,8 +67,8 @@ Public Class Form1
         DisplayImg()
         ResizeImg()
 
-        Timer1.Enabled = True
-  End Sub
+        Timer1.Enabled = False
+    End Sub
 
     Sub PutSprite(ByVal c As CCharacter)
         Dim i, j As Integer
