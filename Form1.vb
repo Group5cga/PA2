@@ -6,7 +6,7 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
-    Dim MushroomRun, MushroomJumpStart, MushroomJump, MushroomJumpEnd As CArrFrame
+    Dim MagnaStand, MagnaJump, MagnaIntro, MushroomJumpEnd As CArrFrame
     Dim SM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -23,21 +23,30 @@ Public Class Form1
         SpriteMap.CreateMask(SpriteMask)
 
         'initialize sprites
-        MushroomRun = New CArrFrame
+        MagnaIntro = New CArrFrame
+        MagnaIntro.Insert(33, 127, 6, 90, 62, 163, 1)
+        MagnaIntro.Insert(91, 127, 67, 90, 115, 163, 1)
+        MagnaIntro.Insert(146, 127, 120, 90, 171, 163, 1)
+        MagnaIntro.Insert(201, 127, 177, 90, 223, 163, 1)
+        MagnaIntro.Insert(253, 127, 229, 90, 276, 163, 1)
+        MagnaIntro.Insert(305, 127, 281, 90, 328, 163, 1)
 
-        MushroomRun.Insert(175, 170, 156, 144, 194, 191, 1)
-        MushroomRun.Insert(223, 170, 202, 144, 251, 190, 1)
-        MushroomRun.Insert(279, 170, 260, 144, 300, 192, 1)
-        MushroomRun.Insert(322, 170, 304, 146, 339, 192, 1)
-        MushroomRun.Insert(362, 169, 343, 143, 385, 191, 1)
-        MushroomRun.Insert(411, 170, 391, 146, 440, 189, 1)
-        MushroomRun.Insert(463, 169, 446, 144, 484, 193, 1)
-        MushroomRun.Insert(510, 170, 492, 146, 526, 192, 1)
+        MagnaStand = New CArrFrame
 
-        MushroomJumpStart = New CArrFrame
-        MushroomJumpStart.Insert(113, 170, 91, 144, 131, 191, 1)
-        MushroomJumpStart.Insert(55, 170, 33, 144, 80, 191, 2)
-        MushroomJumpStart.Insert(538, 33, 514, 7, 566, 60, 1)
+        MagnaStand.Insert(1884, 158, 1790, 38, 1978, 279, 1)
+        MagnaStand.Insert(2100, 158, 2005, 38, 2194, 279, 1)
+        MagnaStand.Insert(2305, 158, 2206, 38, 2401, 279, 1)
+        MagnaStand.Insert(2517, 158, 2417, 38, 2613, 279, 1)
+
+        MagnaJump = New CArrFrame
+        MagnaJump.Insert(38, 218, 12, 186, 62, 250, 1)
+        MagnaJump.Insert(93, 219, 66, 186, 117, 250, 1)
+        MagnaJump.Insert(148, 218, 125, 186, 172, 250, 1)
+        MagnaJump.Insert(206, 218, 176, 186, 234, 250, 1)
+        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 1)
+        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 1)
+        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 1)
+        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 1)
 
         MushroomJump = New CArrFrame
         MushroomJump.Insert(538, 33, 514, 7, 566, 60, 1)
@@ -50,9 +59,9 @@ Public Class Form1
 
         SM = New CCharacter
         ReDim SM.ArrSprites(3)
-        SM.ArrSprites(0) = MushroomRun
-        SM.ArrSprites(1) = MushroomJumpStart
-        SM.ArrSprites(2) = MushroomJump
+        SM.ArrSprites(0) = MagnaIntro
+        SM.ArrSprites(1) = MagnaStand
+        SM.ArrSprites(2) = MagnaJump
         SM.ArrSprites(3) = MushroomJumpEnd
 
         SM.PosX = 300
