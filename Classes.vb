@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Public Enum StateSplitMagna
+Public Enum StateMagnaCenti
     Intro
     Stand
     Jump
@@ -12,7 +12,7 @@ Public Enum StateSplitMagna
     Vanish
 End Enum
 
-Public Enum StateSplitMegaman
+Public Enum StateMegaman
     Run
     Stand
     Jump
@@ -124,14 +124,14 @@ End Class
 Public Class CCharacter
     Public PosX, PosY As Double
     Public Vx, Vy As Double
-    Public CurrState As StateSplitMagna
+    Public CurrState As StateMagnaCenti
     Public FrameIdx As Integer
     Public CurrFrame As Integer
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
 
-    Public Sub State(state As StateSplitMagna, idxspr As Integer)
+    Public Sub State(state As StateMagnaCenti, idxspr As Integer)
         CurrState = state
         IdxArrSprites = idxspr
         CurrFrame = 0
@@ -151,50 +151,53 @@ Public Class CCharacter
 
     Public Sub Update()
         Select Case CurrState
-            Case StateSplitMagna.Walk
+            Case StateMagnaCenti.Walk
                 PosX = PosX + Vx
                 GetNextFrame()
                 If PosX <= 50 Then
-                    State(StateSplitMagna.JumpStart, 1)
+                    State(StateMagnaCenti.JumpStart, 1)
                     Vx = 0
                     Vy = 0
                 End If
-            Case StateSplitMagna.JumpStart
+            Case StateMagnaCenti.JumpStart
                 GetNextFrame()
                 If FrameIdx = 1 And CurrFrame = 1 Then
                     FDir = FaceDir.Right
                 ElseIf FrameIdx = 0 Then
-                    State(StateSplitMagna.Jump, 2)
+                    State(StateMagnaCenti.Jump, 2)
                     Vx = 5
                     Vy = -5
                 End If
-            Case StateSplitMagna.Jump
+            Case StateMagnaCenti.Jump
                 PosX = PosX + Vx
                 PosY = PosY + Vy
                 Vy = Vy + 0.2
                 GetNextFrame()
                 If PosY >= 200 And Vy > 0 Then
-                    State(StateSplitMagna.JumpEnd, 3)
+                    State(StateMagnaCenti.JumpEnd, 3)
                     PosY = 200
                     Vx = 0
                     Vy = 0
                 End If
-            Case StateSplitMagna.JumpEnd
+            Case StateMagnaCenti.JumpEnd
                 GetNextFrame()
                 If FrameIdx = 2 And CurrFrame = 1 Then
                     FDir = FaceDir.Left
                 ElseIf FrameIdx = 0 Then
-                    State(StateSplitMagna.Walk, 0)
+                    State(StateMagnaCenti.Walk, 0)
                     Vx = -5
                     Vy = 0
                 End If
-            Case StateSplitMegaman.Stand
+            Case StateMegaman.Stand
+                PosX = PosX + Vx
+                If PosX <= 50 Then
+                    State(StateMegaman.Run, 0)
+                End If
+            Case StateMegaman.Run
                 GetNextFrame()
-            Case StateSplitMegaman.Run
+            Case StateMegaman.Jump
                 GetNextFrame()
-            Case StateSplitMegaman.Jump
-                GetNextFrame()
-            Case StateSplitMegaman.Hit
+            Case StateMegaman.Hit
                 GetNextFrame()
         End Select
     End Sub

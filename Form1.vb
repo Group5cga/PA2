@@ -4,9 +4,9 @@ Public Class Form1
 
     Dim bmp As Bitmap
     Dim Bg, Bg1, Img As CImage
-    Dim SpriteMap As CImage
-    Dim SpriteMask As CImage
-    Dim MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
+    Dim SpriteMap, SpriteMap2 As CImage
+    Dim SpriteMask, SpriteMask2 As CImage
+    Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
     Dim SM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -19,9 +19,32 @@ Public Class Form1
         SpriteMap = New CImage
         SpriteMap.OpenImage("Image\MCSpriteSheet.bmp")
 
+        SpriteMap2 = New CImage
+        SpriteMap2.OpenImage("Image\MMSpriteSheet.bmp")
+
         SpriteMap.CreateMask(SpriteMask)
+        SpriteMap2.CreateMask(SpriteMask2)
 
         'initialize sprites
+        MegamanStand = New CArrFrame
+        MegamanStand.Insert(241, 46, 224, 27, 257, 64, 1)
+        MegamanStand.Insert(276, 46, 259, 27, 292, 64, 1)
+        MegamanStand.Insert(310, 46, 294, 27, 326, 64, 1)
+        MegamanStand.Insert(345, 46, 328, 27, 361, 64, 1)
+
+        MegamanRun = New CArrFrame
+        MegamanRun.Insert(20, 84, 3, 65, 36, 102, 1)
+        MegamanRun.Insert(60, 84, 48, 65, 70, 102, 1)
+        MegamanRun.Insert(87, 84, 73, 65, 100, 102, 1)
+        MegamanRun.Insert(121, 84, 103, 65, 138, 103, 1)
+        MegamanRun.Insert(162, 84, 143, 65, 180, 102, 1)
+        MegamanRun.Insert(203, 84, 188, 65, 217, 102, 1)
+        MegamanRun.Insert(233, 84, 221, 65, 245, 102, 1)
+        MegamanRun.Insert(261, 84, 247, 65, 274, 102, 1)
+        MegamanRun.Insert(313, 84, 278, 65, 310, 102, 1)
+        MegamanRun.Insert(335, 84, 316, 65, 353, 102, 1)
+        MegamanRun.Insert(373, 84, 357, 65, 389, 102, 1)
+
         MagnaIntro = New CArrFrame
         MagnaIntro.Insert(33, 127, 6, 90, 62, 163, 1)
         MagnaIntro.Insert(91, 127, 67, 90, 115, 163, 1)
@@ -73,17 +96,17 @@ Public Class Form1
 
         '36, 536 gaada
         MagnaTail = New CArrFrame
-        MagnaTail.Insert(36, 536, 16, 259, 63, 335, 1)
-        MagnaTail.Insert(36, 536, 67, 259, 115, 335, 1)
-        MagnaTail.Insert(36, 536, 120, 259, 169, 335, 1)
-        MagnaTail.Insert(36, 536, 174, 259, 220, 335, 1)
-        MagnaTail.Insert(36, 536, 225, 259, 272, 335, 1)
-        MagnaTail.Insert(36, 536, 276, 259, 329, 335, 1)
-        MagnaTail.Insert(36, 536, 333, 259, 386, 335, 1)
-        MagnaTail.Insert(36, 536, 390, 259, 444, 335, 1)
-        MagnaTail.Insert(36, 536, 448, 259, 500, 335, 1)
-        MagnaTail.Insert(36, 536, 505, 259, 558, 335, 1)
-        MagnaTail.Insert(36, 536, 562, 259, 612, 335, 1)
+        MagnaTail.Insert(39, 298, 16, 259, 63, 335, 1)
+        MagnaTail.Insert(92, 298, 67, 259, 115, 335, 1)
+        MagnaTail.Insert(145, 298, 120, 259, 169, 335, 1)
+        MagnaTail.Insert(197, 298, 174, 259, 220, 335, 1)
+        MagnaTail.Insert(248, 298, 225, 259, 272, 335, 1)
+        MagnaTail.Insert(303, 298, 276, 259, 329, 335, 1)
+        MagnaTail.Insert(360, 298, 333, 259, 386, 335, 1)
+        MagnaTail.Insert(417, 298, 390, 259, 444, 335, 1)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 1)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 1)
+        MagnaTail.Insert(587, 298, 562, 259, 612, 335, 1)
 
         MagnaVanish = New CArrFrame
         MagnaVanish.Insert(25, 977, 6, 947, 44, 1005, 1)
@@ -106,7 +129,7 @@ Public Class Form1
         SM.PosY = 200
         SM.Vx = -5
         SM.Vy = 0
-        SM.State(StateSplitMagna.Intro, 0)
+        SM.State(StateMagnaCenti.Intro, 0)
         SM.FDir = FaceDir.Left
 
         bmp = New Bitmap(Img.Width, Img.Height)
