@@ -6,18 +6,18 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
-    Dim MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrow, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
+    Dim MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
     Dim SM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
         Bg = New CImage
-        Bg.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\094.bmp")
+        Bg.OpenImage("Image\094.bmp")
         Bg.CopyImg(Img)
         Bg.CopyImg(Bg1)
 
         SpriteMap = New CImage
-        SpriteMap.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MCSpritesheet.bmp")
+        SpriteMap.OpenImage("Image\MCSpriteSheet.bmp")
 
         SpriteMap.CreateMask(SpriteMask)
 
@@ -55,14 +55,13 @@ Public Class Form1
         MagnaDead.Insert(32, 736, 13, 706, 51, 765, 1)
         MagnaDead.Insert(88, 736, 65, 706, 111, 765, 1)
 
-        MagnaThrow = New CArrFrame
-        MagnaThrow.Insert(33, 376, 6, 339, 61, 411, 1)
-        MagnaThrow.Insert(95, 376, 66, 339, 123, 411, 1)
-        MagnaThrow.Insert(152, 376, 128, 339, 175, 411, 1)
-        MagnaThrow.Insert(208, 376, 179, 339, 236, 411, 1)
-        MagnaThrow.Insert(267, 376, 239, 339, 295, 411, 1)
-        MagnaThrow.Insert(326, 376, 299, 339, 253, 411, 1)
-
+        MagnaThrowing = New CArrFrame
+        MagnaThrowing.Insert(33, 376, 6, 339, 61, 411, 1)
+        MagnaThrowing.Insert(95, 376, 66, 339, 123, 411, 1)
+        MagnaThrowing.Insert(152, 376, 128, 339, 175, 411, 1)
+        MagnaThrowing.Insert(208, 376, 179, 339, 236, 411, 1)
+        MagnaThrowing.Insert(267, 376, 239, 339, 295, 411, 1)
+        MagnaThrowing.Insert(326, 375, 299, 339, 253, 411, 1)
 
         MagnaMagnet = New CArrFrame
         MagnaMagnet.Insert(38, 459, 14, 423, 62, 492, 1)
@@ -92,13 +91,13 @@ Public Class Form1
         MagnaVanish.Insert(110, 976, 90, 947, 129, 1005, 1)
 
         SM = New CCharacter
-        ReDim SM.ArrSprites(3)
+        ReDim SM.ArrSprites(7)
         SM.ArrSprites(0) = MagnaIntro
         SM.ArrSprites(1) = MagnaStand
         SM.ArrSprites(2) = MagnaJump
         SM.ArrSprites(3) = MagnaHit
         SM.ArrSprites(4) = MagnaDead
-        SM.ArrSprites(5) = MagnaThrow
+        SM.ArrSprites(5) = MagnaThrowing
         SM.ArrSprites(6) = MagnaMagnet
         SM.ArrSprites(7) = MagnaTail
         SM.ArrSprites(8) = MagnaVanish
@@ -107,7 +106,7 @@ Public Class Form1
         SM.PosY = 200
         SM.Vx = -5
         SM.Vy = 0
-        SM.State(StateSplitMushroom.Walk, 0)
+        SM.State(StateSplitMagna.Intro, 0)
         SM.FDir = FaceDir.Left
 
         bmp = New Bitmap(Img.Width, Img.Height)

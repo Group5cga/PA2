@@ -1,10 +1,15 @@
 ﻿Imports System.IO
 
-Public Enum StateSplitMushroom
-    Walk
-    JumpStart
+Public Enum StateSplitMagna
+    Intro
+    Stand
     Jump
-    JumpEnd
+    Hit
+    Dead
+    Throwing
+    Magnet
+    Tail
+    Vanish
 End Enum
 
 Public Enum FaceDir
@@ -110,14 +115,14 @@ End Class
 Public Class CCharacter
     Public PosX, PosY As Double
     Public Vx, Vy As Double
-    Public CurrState As StateSplitMushroom
+    Public CurrState As StateSplitMagna
     Public FrameIdx As Integer
     Public CurrFrame As Integer
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
 
-    Public Sub State(state As StateSplitMushroom, idxspr As Integer)
+    Public Sub State(state As StateSplitMagna, idxspr As Integer)
         CurrState = state
         IdxArrSprites = idxspr
         CurrFrame = 0
@@ -137,40 +142,40 @@ Public Class CCharacter
 
     Public Sub Update()
         Select Case CurrState
-            Case StateSplitMushroom.Walk
+            Case StateSplitMagna.Walk
                 PosX = PosX + Vx
                 GetNextFrame()
                 If PosX <= 50 Then
-                    State(StateSplitMushroom.JumpStart, 1)
+                    State(StateSplitMagna.JumpStart, 1)
                     Vx = 0
                     Vy = 0
                 End If
-            Case StateSplitMushroom.JumpStart
+            Case StateSplitMagna.JumpStart
                 GetNextFrame()
                 If FrameIdx = 1 And CurrFrame = 1 Then
                     FDir = FaceDir.Right
                 ElseIf FrameIdx = 0 Then
-                    State(StateSplitMushroom.Jump, 2)
+                    State(StateSplitMagna.Jump, 2)
                     Vx = 5
                     Vy = -5
                 End If
-            Case StateSplitMushroom.Jump
+            Case StateSplitMagna.Jump
                 PosX = PosX + Vx
                 PosY = PosY + Vy
                 Vy = Vy + 0.2
                 GetNextFrame()
                 If PosY >= 200 And Vy > 0 Then
-                    State(StateSplitMushroom.JumpEnd, 3)
+                    State(StateSplitMagna.JumpEnd, 3)
                     PosY = 200
                     Vx = 0
                     Vy = 0
                 End If
-            Case StateSplitMushroom.JumpEnd
+            Case StateSplitMagna.JumpEnd
                 GetNextFrame()
                 If FrameIdx = 2 And CurrFrame = 1 Then
                     FDir = FaceDir.Left
                 ElseIf FrameIdx = 0 Then
-                    State(StateSplitMushroom.Walk, 0)
+                    State(StateSplitMagna.Walk, 0)
                     Vx = -5
                     Vy = 0
                 End If
