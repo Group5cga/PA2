@@ -12,9 +12,18 @@ Public Enum StateSplitMagna
     Vanish
 End Enum
 
+Public Enum StateSplitMegaman
+    Run
+    Stand
+    Jump
+    Hit
+End Enum
+
 Public Enum FaceDir
     Left
     Right
+    Up
+    Down
 End Enum
 
 Public Class CImage
@@ -179,6 +188,14 @@ Public Class CCharacter
                     Vx = -5
                     Vy = 0
                 End If
+            Case StateSplitMegaman.Stand
+                GetNextFrame()
+            Case StateSplitMegaman.Run
+                GetNextFrame()
+            Case StateSplitMegaman.Jump
+                GetNextFrame()
+            Case StateSplitMegaman.Hit
+                GetNextFrame()
         End Select
     End Sub
 End Class
