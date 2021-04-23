@@ -189,16 +189,17 @@ Public Class CCharacter
                     Vy = 0
                 End If
             Case StateMegaman.Stand
-                PosX = PosX + Vx
-                If PosX <= 50 Then
-                    State(StateMegaman.Run, 0)
-                End If
+                GetNextFrame()
             Case StateMegaman.Run
+                PosX = PosX + Vx
                 GetNextFrame()
-            Case StateMegaman.Jump
-                GetNextFrame()
-            Case StateMegaman.Hit
-                GetNextFrame()
+                If FrameIdx = 2 And CurrFrame = 1 Then
+                    FDir = FaceDir.Left
+                End If
+                'Case StateMegaman.Jump
+                '   GetNextFrame()
+                'Case StateMegaman.Hit
+                '   GetNextFrame()
         End Select
     End Sub
 End Class
