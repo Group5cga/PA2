@@ -6,12 +6,11 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
-    Dim MagnaStand, MagnaJump, MagnaIntro, MushroomJumpEnd As CArrFrame
+    Dim MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrow, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
     Dim SM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
-
         Bg = New CImage
         Bg.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\094.bmp")
         Bg.CopyImg(Img)
@@ -48,21 +47,61 @@ Public Class Form1
         MagnaJump.Insert(370, 219, 352, 186, 386, 250, 1)
         MagnaJump.Insert(409, 218, 391, 186, 427, 250, 1)
 
-        MushroomJump = New CArrFrame
-        MushroomJump.Insert(538, 33, 514, 7, 566, 60, 1)
+        MagnaHit = New CArrFrame
+        MagnaHit.Insert(36, 536, 14, 503, 57, 569, 1)
+        MagnaHit.Insert(99, 536, 72, 503, 125, 569, 1)
 
-        MushroomJumpEnd = New CArrFrame
-        MushroomJumpEnd.Insert(55, 170, 33, 144, 80, 191, 1)
-        MushroomJumpEnd.Insert(481, 42, 455, 23, 508, 63, 3)
-        MushroomJumpEnd.Insert(55, 170, 33, 144, 80, 191, 2)
-        MushroomJumpEnd.Insert(113, 170, 91, 144, 131, 191, 1)
+        MagnaDead = New CArrFrame
+        MagnaDead.Insert(32, 736, 13, 706, 51, 765, 1)
+        MagnaDead.Insert(88, 736, 65, 706, 111, 765, 1)
+
+        MagnaThrow = New CArrFrame
+        MagnaThrow.Insert(33, 376, 6, 339, 61, 411, 1)
+        MagnaThrow.Insert(95, 376, 66, 339, 123, 411, 1)
+        MagnaThrow.Insert(152, 376, 128, 339, 175, 411, 1)
+        MagnaThrow.Insert(208, 376, 179, 339, 236, 411, 1)
+        MagnaThrow.Insert(267, 376, 239, 339, 295, 411, 1)
+        MagnaThrow.Insert(326, 376, 299, 339, 253, 411, 1)
+
+
+        MagnaMagnet = New CArrFrame
+        MagnaMagnet.Insert(38, 459, 14, 423, 62, 492, 1)
+        MagnaMagnet.Insert(92, 459, 67, 423, 116, 492, 1)
+        MagnaMagnet.Insert(147, 459, 122, 493, 173, 492, 1)
+        MagnaMagnet.Insert(203, 459, 178, 493, 228, 492, 1)
+        MagnaMagnet.Insert(262, 458, 236, 493, 288, 492, 1)
+        MagnaMagnet.Insert(319, 459, 293, 493, 343, 492, 1)
+
+        '36, 536 gaada
+        MagnaTail = New CArrFrame
+        MagnaTail.Insert(36, 536, 16, 259, 63, 335, 1)
+        MagnaTail.Insert(36, 536, 67, 259, 115, 335, 1)
+        MagnaTail.Insert(36, 536, 120, 259, 169, 335, 1)
+        MagnaTail.Insert(36, 536, 174, 259, 220, 335, 1)
+        MagnaTail.Insert(36, 536, 225, 259, 272, 335, 1)
+        MagnaTail.Insert(36, 536, 276, 259, 329, 335, 1)
+        MagnaTail.Insert(36, 536, 333, 259, 386, 335, 1)
+        MagnaTail.Insert(36, 536, 390, 259, 444, 335, 1)
+        MagnaTail.Insert(36, 536, 448, 259, 500, 335, 1)
+        MagnaTail.Insert(36, 536, 505, 259, 558, 335, 1)
+        MagnaTail.Insert(36, 536, 562, 259, 612, 335, 1)
+
+        MagnaVanish = New CArrFrame
+        MagnaVanish.Insert(25, 977, 6, 947, 44, 1005, 1)
+        MagnaVanish.Insert(67, 976, 47, 947, 87, 1005, 1)
+        MagnaVanish.Insert(110, 976, 90, 947, 129, 1005, 1)
 
         SM = New CCharacter
         ReDim SM.ArrSprites(3)
         SM.ArrSprites(0) = MagnaIntro
         SM.ArrSprites(1) = MagnaStand
         SM.ArrSprites(2) = MagnaJump
-        SM.ArrSprites(3) = MushroomJumpEnd
+        SM.ArrSprites(3) = MagnaHit
+        SM.ArrSprites(4) = MagnaDead
+        SM.ArrSprites(5) = MagnaThrow
+        SM.ArrSprites(6) = MagnaMagnet
+        SM.ArrSprites(7) = MagnaTail
+        SM.ArrSprites(8) = MagnaVanish
 
         SM.PosX = 300
         SM.PosY = 200
