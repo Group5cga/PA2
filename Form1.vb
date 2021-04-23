@@ -7,7 +7,7 @@ Public Class Form1
     Dim SpriteMap, SpriteMap2 As CImage
     Dim SpriteMask, SpriteMask2 As CImage
     Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
-    Dim SM As CCharacter
+    Dim SM, MM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
@@ -125,12 +125,24 @@ Public Class Form1
         SM.ArrSprites(7) = MagnaTail
         SM.ArrSprites(8) = MagnaVanish
 
+        MM = New CCharacter
+        ReDim MM.ArrSprites(2)
+        MM.ArrSprites(0) = MegamanStand
+        MM.ArrSprites(1) = MegamanRun
+
         SM.PosX = 300
         SM.PosY = 200
         SM.Vx = -5
         SM.Vy = 0
         SM.State(StateMagnaCenti.Intro, 0)
         SM.FDir = FaceDir.Left
+
+        MM.PosX = 300
+        MM.PosY = 200
+        MM.Vx = -5
+        MM.Vy = 0
+        MM.State(StateMegaman.Stand, 0)
+        MM.FDir = FaceDir.Right
 
         bmp = New Bitmap(Img.Width, Img.Height)
 
