@@ -151,43 +151,8 @@ Public Class CCharacter
 
     Public Sub Update()
         Select Case CurrState
-            Case StateMagnaCenti.Walk
-                PosX = PosX + Vx
-                GetNextFrame()
-                If PosX <= 50 Then
-                    State(StateMagnaCenti.JumpStart, 1)
-                    Vx = 0
-                    Vy = 0
-                End If
-            Case StateMagnaCenti.JumpStart
-                GetNextFrame()
-                If FrameIdx = 1 And CurrFrame = 1 Then
-                    FDir = FaceDir.Right
-                ElseIf FrameIdx = 0 Then
-                    State(StateMagnaCenti.Jump, 2)
-                    Vx = 5
-                    Vy = -5
-                End If
             Case StateMagnaCenti.Jump
-                PosX = PosX + Vx
-                PosY = PosY + Vy
-                Vy = Vy + 0.2
                 GetNextFrame()
-                If PosY >= 200 And Vy > 0 Then
-                    State(StateMagnaCenti.JumpEnd, 3)
-                    PosY = 200
-                    Vx = 0
-                    Vy = 0
-                End If
-            Case StateMagnaCenti.JumpEnd
-                GetNextFrame()
-                If FrameIdx = 2 And CurrFrame = 1 Then
-                    FDir = FaceDir.Left
-                ElseIf FrameIdx = 0 Then
-                    State(StateMagnaCenti.Walk, 0)
-                    Vx = -5
-                    Vy = 0
-                End If
             Case StateMegaman.Stand
                 GetNextFrame()
                 If FrameIdx = 0 Then
@@ -205,10 +170,6 @@ Public Class CCharacter
                     FDir = FaceDir.Left
                     State(StateMegaman.Run, 1)
                 End If
-                'Case StateMegaman.Jump
-                '   GetNextFrame()
-                'Case StateMegaman.Hit
-                '   GetNextFrame()
         End Select
     End Sub
 End Class

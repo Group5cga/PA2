@@ -114,7 +114,7 @@ Public Class Form1
         MagnaVanish.Insert(110, 976, 90, 947, 129, 1005, 1)
 
         SM = New CCharacter
-        ReDim SM.ArrSprites(7)
+        ReDim SM.ArrSprites(9)
         SM.ArrSprites(0) = MagnaIntro
         SM.ArrSprites(1) = MagnaStand
         SM.ArrSprites(2) = MagnaJump
@@ -205,6 +205,7 @@ Public Class Form1
         'display bg and sprite on picturebox
         Dim i, j As Integer
         PutSprite(SM)
+        PutSprite(MM)
 
         For i = 0 To Img.Width - 1
             For j = 0 To Img.Height - 1
