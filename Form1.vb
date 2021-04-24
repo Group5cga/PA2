@@ -7,20 +7,20 @@ Public Class Form1
     Dim SpriteMap, SpriteMap2 As CImage
     Dim SpriteMask, SpriteMask2 As CImage
     Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
-    Dim SM, MM As CCharacter
+    Dim MC, MM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
         Bg = New CImage
-        Bg.OpenImage("Image\094.bmp")
+        Bg.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\094.bmp")
         Bg.CopyImg(Img)
         Bg.CopyImg(Bg1)
 
         SpriteMap = New CImage
-        SpriteMap.OpenImage("Image\MCSpriteSheet.bmp")
+        SpriteMap.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MCSpriteSheet.bmp")
 
         SpriteMap2 = New CImage
-        SpriteMap2.OpenImage("Image\MMSpriteSheet.bmp")
+        SpriteMap2.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MMSpriteSheet.bmp")
 
         SpriteMap.CreateMask(SpriteMask)
         SpriteMap2.CreateMask(SpriteMask2)
@@ -113,29 +113,29 @@ Public Class Form1
         MagnaVanish.Insert(67, 976, 47, 947, 87, 1005, 1)
         MagnaVanish.Insert(110, 976, 90, 947, 129, 1005, 1)
 
-        SM = New CCharacter
-        ReDim SM.ArrSprites(9)
-        SM.ArrSprites(0) = MagnaIntro
-        SM.ArrSprites(1) = MagnaStand
-        SM.ArrSprites(2) = MagnaJump
-        SM.ArrSprites(3) = MagnaHit
-        SM.ArrSprites(4) = MagnaDead
-        SM.ArrSprites(5) = MagnaThrowing
-        SM.ArrSprites(6) = MagnaMagnet
-        SM.ArrSprites(7) = MagnaTail
-        SM.ArrSprites(8) = MagnaVanish
+        MC = New CCharacter
+        ReDim MC.ArrSprites(9)
+        MC.ArrSprites(0) = MagnaIntro
+        MC.ArrSprites(1) = MagnaStand
+        MC.ArrSprites(2) = MagnaJump
+        MC.ArrSprites(3) = MagnaHit
+        MC.ArrSprites(4) = MagnaDead
+        MC.ArrSprites(5) = MagnaThrowing
+        MC.ArrSprites(6) = MagnaMagnet
+        MC.ArrSprites(7) = MagnaTail
+        MC.ArrSprites(8) = MagnaVanish
 
         MM = New CCharacter
         ReDim MM.ArrSprites(2)
         MM.ArrSprites(0) = MegamanStand
         MM.ArrSprites(1) = MegamanRun
 
-        SM.PosX = 300
-        SM.PosY = 200
-        SM.Vx = -5
-        SM.Vy = 0
-        SM.State(StateMagnaCenti.Intro, 0)
-        SM.FDir = FaceDir.Left
+        MC.PosX = 300
+        MC.PosY = 200
+        MC.Vx = -5
+        MC.Vy = 0
+        MC.State(StateMagnaCenti.Intro, 0)
+        MC.FDir = FaceDir.Left
 
         MM.PosX = 300
         MM.PosY = 200
@@ -204,7 +204,7 @@ Public Class Form1
     Sub DisplayImg()
         'display bg and sprite on picturebox
         Dim i, j As Integer
-        PutSprite(SM)
+        PutSprite(MC)
         PutSprite(MM)
 
         For i = 0 To Img.Width - 1
@@ -234,7 +234,7 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        SM.Update()
+        MC.Update()
         DisplayImg()
     End Sub
 End Class
