@@ -130,15 +130,15 @@ Public Class Form1
         MM.ArrSprites(0) = MegamanStand
         MM.ArrSprites(1) = MegamanRun
 
-        MC.PosX = 300
-        MC.PosY = 200
+        MC.PosX = 200
+        MC.PosY = 100
         MC.Vx = -5
         MC.Vy = 0
         MC.State(StateMagnaCenti.Intro, 0)
         MC.FDir = FaceDir.Left
 
-        MM.PosX = 300
-        MM.PosY = 200
+        MM.PosX = 30
+        MM.PosY = 150
         MM.Vx = -5
         MM.Vy = 0
         MM.State(StateMegaman.Stand, 0)
