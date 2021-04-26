@@ -164,7 +164,33 @@ Public Class CCharacter
                     GetNextFrame()
                 End If
             Case StateMagnaCenti.Jump
+                If FrameIdx <= 4 Then
+                    GetNextFrame()
+                ElseIf FrameIdx = 4 Then
+                    FDir = FaceDir.Down
+                End If
+            Case StateMagnaCenti.Dead
+                If FrameIdx <= 1 Then
+                    GetNextFrame()
+                End If
+            Case StateMagnaCenti.Magnet
+                If FrameIdx <= 5 Then
+                    GetNextFrame()
+                End If
+            Case StateMagnaCenti.Tail
                 GetNextFrame()
+            Case StateMagnaCenti.Throwing
+                If FrameIdx <= 5 Then
+                    GetNextFrame()
+                End If
+            Case StateMagnaCenti.Vanish
+                If FrameIdx <= 2 Then
+                    GetNextFrame()
+                End If
+            Case StateMagnaCenti.Hit
+                If FrameIdx <= 1 Then
+                    GetNextFrame()
+                End If
             Case StateMegaman.Stand
                 GetNextFrame()
                 If FrameIdx = 0 Then

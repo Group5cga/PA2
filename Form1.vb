@@ -71,10 +71,11 @@ Public Class Form1
         MagnaJump.Insert(93, 219, 66, 186, 117, 250, 1)
         MagnaJump.Insert(148, 218, 125, 186, 172, 250, 1)
         MagnaJump.Insert(206, 218, 176, 186, 234, 250, 1)
-        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 1)
-        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 1)
         MagnaJump.Insert(370, 219, 352, 186, 386, 250, 1)
         MagnaJump.Insert(409, 218, 391, 186, 427, 250, 1)
+        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 1)
+        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 1)
+
 
         MagnaHit = New CArrFrame
         MagnaHit.Insert(36, 536, 14, 503, 57, 569, 1)
