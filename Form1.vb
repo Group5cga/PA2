@@ -130,31 +130,27 @@ Public Class Form1
         MM.ArrSprites(0) = MegamanStand
         MM.ArrSprites(1) = MegamanRun
 
-        'MC.PosX = 200
-        'MC.PosY = 100
-        'MC.Vx = -5
-        'MC.Vy = 0
-        'MC.State(StateMagnaCenti.Intro, 0)
-        'MC.FDir = FaceDir.Left
-
-        'MM.PosX = 30
-        'MM.PosY = 150
-        'MM.Vx = -5
-        'MM.Vy = 0
-        'MM.State(StateMegaman.Stand, 0)
-        'MM.FDir = FaceDir.Right
-
-        MC.PosX = 30
-        MC.PosY = 150
-        MC.Vx = 1
+        MC.PosX = 200
+        MC.PosY = 100
+        MC.Vx = -1
         MC.Vy = 0
-        MC.FDir = FaceDir.Right
-        MC.State(StateMagnaCenti.Stand, 0)
+        MC.State(StateMagnaCenti.Intro, 0)
+        MC.FDir = FaceDir.Left
+
+        MM.PosX = 30
+        MM.PosY = 150
+        MM.Vx = 1
+        MM.Vy = 0
+        MM.State(StateMegaman.Stand, 0)
+        MM.FDir = FaceDir.Right
 
         bmp = New Bitmap(Img.Width, Img.Height)
 
         DisplayImg()
         ResizeImg()
+        MM.Update()
+        MC.Update()
+        DisplayImg()
 
         Timer1.Enabled = False
     End Sub
@@ -211,7 +207,7 @@ Public Class Form1
     Sub DisplayImg()
         'display bg and sprite on picturebox
         Dim i, j As Integer
-        PutSprite(MC)
+        'PutSprite(MC)
         PutSprite(MM)
 
         For i = 0 To Img.Width - 1
@@ -239,6 +235,7 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
+        MM.Update()
         MC.Update()
         DisplayImg()
     End Sub
