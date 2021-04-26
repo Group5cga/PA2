@@ -151,6 +151,18 @@ Public Class CCharacter
 
     Public Sub Update()
         Select Case CurrState
+            Case StateMagnaCenti.Stand
+                GetNextFrame()
+                If PosX <= 50 Then
+                    PosX = PosX + Vx
+                    FDir = FaceDir.Right
+                    State(StateMagnaCenti.Stand, 1)
+                End If
+                If PosX >= 200 Then
+                    PosX = PosX - Vx
+                    FDir = FaceDir.Left
+                    State(StateMagnaCenti.Stand, 1)
+                End If
             Case StateMagnaCenti.Jump
                 GetNextFrame()
             Case StateMegaman.Stand

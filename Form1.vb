@@ -12,15 +12,15 @@ Public Class Form1
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
         Bg = New CImage
-        Bg.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\094.bmp")
+        Bg.OpenImage("Image\094.bmp")
         Bg.CopyImg(Img)
         Bg.CopyImg(Bg1)
 
         SpriteMap = New CImage
-        SpriteMap.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MCSpriteSheet.bmp")
+        SpriteMap.OpenImage("Image\MCSpriteSheet2.bmp")
 
         SpriteMap2 = New CImage
-        SpriteMap2.OpenImage("C:\Users\user\Documents\GitHub\PA2\Image\MMSpriteSheet.bmp")
+        SpriteMap2.OpenImage("Image\MMSpriteSheet.bmp")
 
         SpriteMap.CreateMask(SpriteMask)
         SpriteMap2.CreateMask(SpriteMask2)
@@ -130,19 +130,26 @@ Public Class Form1
         MM.ArrSprites(0) = MegamanStand
         MM.ArrSprites(1) = MegamanRun
 
-        MC.PosX = 200
-        MC.PosY = 100
-        MC.Vx = -5
-        MC.Vy = 0
-        MC.State(StateMagnaCenti.Intro, 0)
-        MC.FDir = FaceDir.Left
+        'MC.PosX = 200
+        'MC.PosY = 100
+        'MC.Vx = -5
+        'MC.Vy = 0
+        'MC.State(StateMagnaCenti.Intro, 0)
+        'MC.FDir = FaceDir.Left
 
-        MM.PosX = 30
-        MM.PosY = 150
-        MM.Vx = -5
-        MM.Vy = 0
-        MM.State(StateMegaman.Stand, 0)
-        MM.FDir = FaceDir.Right
+        'MM.PosX = 30
+        'MM.PosY = 150
+        'MM.Vx = -5
+        'MM.Vy = 0
+        'MM.State(StateMegaman.Stand, 0)
+        'MM.FDir = FaceDir.Right
+
+        MC.PosX = 30
+        MC.PosY = 150
+        MC.Vx = 1
+        MC.Vy = 0
+        MC.FDir = FaceDir.Right
+        MC.State(StateMagnaCenti.Stand, 0)
 
         bmp = New Bitmap(Img.Width, Img.Height)
 
@@ -222,8 +229,6 @@ Public Class Form1
         'Me.Width = PictureBox1.Width + 30
         'Me.Height = PictureBox1.Height + 100
     End Sub
-
-
 
     Sub ResizeImg()
         Dim w, h As Integer
