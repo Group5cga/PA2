@@ -151,6 +151,16 @@ Public Class CCharacter
 
     Public Sub Update()
         Select Case CurrState
+            Case StateMagnaCenti.Intro
+                GetNextFrame()
+                If FrameIdx > 0 Then
+                    GetNextFrame()
+                End If
+                If FrameIdx = 0 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
             Case StateMagnaCenti.Stand
                 GetNextFrame()
                 If PosX <= 50 Then
