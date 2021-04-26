@@ -6,7 +6,7 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap, SpriteMap2 As CImage
     Dim SpriteMask, SpriteMask2 As CImage
-    Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish As CArrFrame
+    Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaPartTail, Shuriken As CArrFrame
     Dim MC, MM As CCharacter
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -46,19 +46,25 @@ Public Class Form1
         MegamanRun.Insert(373, 84, 357, 65, 389, 102, 1)
 
         MagnaIntro = New CArrFrame
-        MagnaIntro.Insert(33, 127, 6, 90, 62, 163, 1)
-        MagnaIntro.Insert(91, 127, 67, 90, 115, 163, 1)
-        MagnaIntro.Insert(146, 127, 120, 90, 171, 163, 1)
-        MagnaIntro.Insert(201, 127, 177, 90, 223, 163, 1)
-        MagnaIntro.Insert(253, 127, 229, 90, 276, 163, 1)
-        MagnaIntro.Insert(305, 127, 281, 90, 328, 163, 1)
+        MagnaIntro.Insert(33, 127, 6, 90, 62, 163, 3)
+        MagnaIntro.Insert(91, 127, 67, 90, 115, 163, 3)
+        MagnaIntro.Insert(146, 127, 120, 90, 171, 163, 3)
+        MagnaIntro.Insert(201, 127, 177, 90, 223, 163, 2)
+        MagnaIntro.Insert(253, 127, 229, 90, 276, 163, 2)
+        MagnaIntro.Insert(305, 127, 281, 90, 328, 163, 2)
+        MagnaIntro.Insert(305, 127, 281, 90, 328, 163, 2)
+        MagnaIntro.Insert(253, 127, 229, 90, 276, 163, 2)
+        MagnaIntro.Insert(201, 127, 177, 90, 223, 163, 2)
+        MagnaIntro.Insert(201, 127, 177, 90, 223, 163, 2)
+        MagnaIntro.Insert(253, 127, 229, 90, 276, 163, 2)
+        MagnaIntro.Insert(305, 127, 281, 90, 328, 163, 2)
 
         MagnaStand = New CArrFrame
 
-        MagnaStand.Insert(1884, 158, 1790, 38, 1978, 279, 1)
-        MagnaStand.Insert(2100, 158, 2005, 38, 2194, 279, 1)
-        MagnaStand.Insert(2305, 158, 2206, 38, 2401, 279, 1)
-        MagnaStand.Insert(2517, 158, 2417, 38, 2613, 279, 1)
+        MagnaStand.Insert(603, 50, 576, 14, 631, 87, 4)
+        MagnaStand.Insert(670, 51, 642, 14, 699, 87, 4)
+        MagnaStand.Insert(737, 51, 709, 14, 766, 87, 4)
+        MagnaStand.Insert(805, 51, 777, 14, 833, 87, 4)
 
         MagnaJump = New CArrFrame
         MagnaJump.Insert(38, 218, 12, 186, 62, 250, 1)
@@ -112,6 +118,21 @@ Public Class Form1
         MagnaVanish.Insert(25, 977, 6, 947, 44, 1005, 1)
         MagnaVanish.Insert(67, 976, 47, 947, 87, 1005, 1)
         MagnaVanish.Insert(110, 976, 90, 947, 129, 1005, 1)
+
+        MagnaPartTail = New CArrFrame
+        MagnaPartTail.Insert(15, 821, 8, 814, 23, 829, 1)
+        MagnaPartTail.Insert(31, 821, 23, 841, 40, 829, 1)
+        MagnaPartTail.Insert(53, 824, 46, 819, 59, 830, 1)
+        MagnaPartTail.Insert(15, 838, 8, 832, 23, 845, 1)
+        MagnaPartTail.Insert(31, 838, 23, 721, 40, 845, 1)
+        MagnaPartTail.Insert(58, 838, 48, 832, 68, 845, 1)
+        MagnaPartTail.Insert(81, 838, 72, 832, 91, 845, 1)
+        MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
+
+        Shuriken = New CArrFrame
+        Shuriken.Insert(161, 911, 157, 908, 166, 914, 1)
+        Shuriken.Insert(170, 911, 166, 908, 174, 914, 1)
+        Shuriken.Insert(178, 911, 174, 908, 183, 914, 1)
 
         MC = New CCharacter
         ReDim MC.ArrSprites(9)

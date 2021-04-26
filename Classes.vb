@@ -152,7 +152,7 @@ Public Class CCharacter
     Public Sub Update()
         Select Case CurrState
             Case StateMagnaCenti.Intro
-                If FrameIdx <= 5 Then
+                If FrameIdx < 11 Then
                     GetNextFrame()
                 Else
                     State(StateMagnaCenti.Stand, 1)
@@ -160,7 +160,7 @@ Public Class CCharacter
                     Vy = 0
                 End If
             Case StateMagnaCenti.Stand
-                If FrameIdx <= 2 Then
+                If FrameIdx <= 4 Then
                     GetNextFrame()
                 End If
             Case StateMagnaCenti.Jump
