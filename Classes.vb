@@ -152,26 +152,16 @@ Public Class CCharacter
     Public Sub Update()
         Select Case CurrState
             Case StateMagnaCenti.Intro
-                GetNextFrame()
-                If FrameIdx > 0 Then
+                If FrameIdx <= 5 Then
                     GetNextFrame()
-                End If
-                If FrameIdx = 0 Then
+                Else
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0
                     Vy = 0
                 End If
             Case StateMagnaCenti.Stand
-                GetNextFrame()
-                If PosX <= 50 Then
-                    PosX = PosX + Vx
-                    FDir = FaceDir.Right
-                    State(StateMagnaCenti.Stand, 1)
-                End If
-                If PosX >= 200 Then
-                    PosX = PosX - Vx
-                    FDir = FaceDir.Left
-                    State(StateMagnaCenti.Stand, 1)
+                If FrameIdx <= 2 Then
+                    GetNextFrame()
                 End If
             Case StateMagnaCenti.Jump
                 GetNextFrame()

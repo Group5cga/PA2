@@ -152,7 +152,7 @@ Public Class Form1
         MC.Update()
         DisplayImg()
 
-        Timer1.Enabled = False
+        Timer1.Enabled = True
     End Sub
 
     Sub PutSprite(ByVal c As CCharacter)
