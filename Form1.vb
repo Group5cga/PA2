@@ -301,6 +301,16 @@ Public Class Form1
             MC.State(StateMagnaCenti.Magnet, 6)
         ElseIf e.KeyChar = ChrW(Keys.T) Then
             MC.State(StateMagnaCenti.Tail, 7)
+        ElseIf e.KeyChar = ChrW(Keys.Up) Then
+            MC.State(StateMagnaCenti.Jump, 7)
+        ElseIf e.KeyChar = ChrW(Keys.Left) Then
+            MC.FDir = FaceDir.Left
+        ElseIf e.KeyChar = ChrW(Keys.Right) Then
+            MC.FDir = FaceDir.Right
+        ElseIf e.KeyChar = ChrW(Keys.Right) And e.KeyChar = ChrW(Keys.Up) Then
+            'jump to ceiling
+        ElseIf e.KeyChar = ChrW(Keys.Left) And e.KeyChar = ChrW(Keys.Up) Then
+            'jump to ceiling
         ElseIf e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
             MsgBox("Key a")
         End If
