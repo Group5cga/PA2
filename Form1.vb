@@ -261,4 +261,10 @@ Public Class Form1
         MC.Update()
         DisplayImg()
     End Sub
+
+    Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            MsgBox("Enter Pressed!")
+        End If
+    End Sub
 End Class
