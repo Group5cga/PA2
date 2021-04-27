@@ -10,6 +10,7 @@ Public Enum StateMagnaCenti
     Magnet
     Tail
     Vanish
+    Appear
 End Enum
 
 Public Enum StateMegaman
@@ -152,9 +153,8 @@ Public Class CCharacter
     Public Sub Update()
         Select Case CurrState
             Case StateMagnaCenti.Intro
-                If FrameIdx < 11 Then
-                    GetNextFrame()
-                Else
+                GetNextFrame()
+                If FrameIdx = 15 And CurrFrame = 1 Then
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0
                     Vy = 0
@@ -162,10 +162,10 @@ Public Class CCharacter
             Case StateMagnaCenti.Stand
                 If FrameIdx <= 4 Then
                     GetNextFrame()
-                Else
-                    State(StateMagnaCenti.Jump, 1)
-                    Vx = 5
-                    Vy = -5
+                    'Else
+                    '    State(StateMagnaCenti.Jump, 1)
+                    '    Vx = 5
+                    '    Vy = -5
                 End If
             Case StateMagnaCenti.Jump
                 'untested
@@ -178,26 +178,56 @@ Public Class CCharacter
                     FDir = FaceDir.Down
                 End If
             Case StateMagnaCenti.Dead
-                If FrameIdx <= 1 Then
-                    GetNextFrame()
-                End If
-            Case StateMagnaCenti.Magnet
-                If FrameIdx <= 5 Then
-                    GetNextFrame()
-                End If
-            Case StateMagnaCenti.Tail
-                GetNextFrame()
-            Case StateMagnaCenti.Throwing
-                If FrameIdx <= 5 Then
-                    GetNextFrame()
-                End If
-            Case StateMagnaCenti.Vanish
                 If FrameIdx <= 2 Then
                     GetNextFrame()
                 End If
+            Case StateMagnaCenti.Magnet
+                GetNextFrame()
+                If FrameIdx = 5 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.Tail
+                'If FrameIdx <= 25 Then
+                'GetNextFrame()
+                'End If
+                GetNextFrame()
+                If FrameIdx = 24 And CurrFrame = 2 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.Throwing
+                GetNextFrame()
+                If FrameIdx = 4 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.Vanish
+                'If FrameIdx <= 6 Then
+                'GetNextFrame()
+                'End If
+                GetNextFrame()
+                If FrameIdx = 5 And CurrFrame = 2 Then
+                    State(StateMagnaCenti.Appear, 9)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.Appear
+                GetNextFrame()
+                If FrameIdx = 5 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
             Case StateMagnaCenti.Hit
-                If FrameIdx <= 1 Then
-                    GetNextFrame()
+                GetNextFrame()
+                If FrameIdx = 1 And CurrFrame = 9 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
                 End If
             Case StateMegaman.Stand
                 GetNextFrame()
