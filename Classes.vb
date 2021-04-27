@@ -162,8 +162,16 @@ Public Class CCharacter
             Case StateMagnaCenti.Stand
                 If FrameIdx <= 4 Then
                     GetNextFrame()
+                Else
+                    State(StateMagnaCenti.Jump, 1)
+                    Vx = 5
+                    Vy = -5
                 End If
             Case StateMagnaCenti.Jump
+                'untested
+                PosX = PosX + Vx
+                PosY = PosY + Vy
+                Vy = Vy + 0.2
                 If FrameIdx <= 4 Then
                     GetNextFrame()
                 ElseIf FrameIdx = 4 Then
