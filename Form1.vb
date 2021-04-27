@@ -293,8 +293,14 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            MsgBox("Enter Pressed!")
+        If e.KeyChar = ChrW(Keys.V) Then
+            MC.State(StateMagnaCenti.Vanish, 8)
+        ElseIf e.KeyChar = ChrW(Keys.S) Then
+            MC.State(StateMagnaCenti.Throwing, 5)
+        ElseIf e.KeyChar = ChrW(Keys.M) Then
+            MC.State(StateMagnaCenti.Magnet, 6)
+        ElseIf e.KeyChar = ChrW(Keys.T) Then
+            MC.State(StateMagnaCenti.Tail, 7)
         End If
     End Sub
 End Class
