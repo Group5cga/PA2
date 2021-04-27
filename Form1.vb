@@ -301,6 +301,8 @@ Public Class Form1
             MC.State(StateMagnaCenti.Magnet, 6)
         ElseIf e.KeyChar = ChrW(Keys.T) Then
             MC.State(StateMagnaCenti.Tail, 7)
+        ElseIf e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
+            MsgBox("Key a")
         End If
     End Sub
 End Class
