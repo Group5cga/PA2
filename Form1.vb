@@ -95,15 +95,15 @@ Public Class Form1
         MagnaThrowing.Insert(152, 376, 128, 339, 175, 411, 4)
         MagnaThrowing.Insert(208, 376, 179, 339, 236, 411, 4)
         MagnaThrowing.Insert(267, 376, 239, 339, 295, 411, 4)
-        'MagnaThrowing.Insert(326, 375, 299, 339, 253, 411, 4)kosong
+        MagnaThrowing.Insert(326, 375, 299, 339, 353, 411, 4)
 
         MagnaMagnet = New CArrFrame
-        MagnaMagnet.Insert(38, 459, 14, 423, 62, 492, 4)
-        MagnaMagnet.Insert(92, 459, 67, 423, 116, 492, 4)
-        'MagnaMagnet.Insert(147, 459, 122, 493, 173, 492, 4)kosong
-        'MagnaMagnet.Insert(203, 459, 178, 493, 228, 492, 4)kosong
-        'MagnaMagnet.Insert(262, 458, 236, 493, 288, 492, 4)kosong
-        'MagnaMagnet.Insert(319, 459, 293, 493, 343, 492, 4)kosong
+        MagnaMagnet.Insert(42, 455, 19, 419, 65, 492, 4)
+        MagnaMagnet.Insert(92, 455, 65, 419, 119, 492, 4)
+        MagnaMagnet.Insert(147, 455, 119, 419, 175, 492, 4)
+        MagnaMagnet.Insert(203, 455, 175, 419, 231, 492, 4)
+        MagnaMagnet.Insert(260, 455, 231, 419, 289, 492, 4)
+        MagnaMagnet.Insert(316, 455, 289, 419, 343, 492, 4)
 
         MagnaTail = New CArrFrame
         MagnaTail.Insert(39, 298, 16, 259, 63, 335, 3)
@@ -185,7 +185,7 @@ Public Class Form1
         MC.PosY = 158
         MC.Vx = 0
         MC.Vy = 0
-        MC.State(StateMagnaCenti.Intro, 0)
+        MC.State(StateMagnaCenti.Magnet, 0)
         MC.FDir = FaceDir.Left
 
         'MM.PosX = 200

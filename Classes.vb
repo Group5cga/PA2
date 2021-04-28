@@ -183,11 +183,11 @@ Public Class CCharacter
                 End If
             Case StateMagnaCenti.Magnet
                 GetNextFrame()
-                If FrameIdx = 5 And CurrFrame = 3 Then
-                    State(StateMagnaCenti.Stand, 1)
-                    Vx = 0
-                    Vy = 0
-                End If
+                'If FrameIdx = 5 And CurrFrame = 3 Then
+                'State(StateMagnaCenti.Stand, 1)
+                'Vx = 0
+                'Vy = 0
+                'End If
             Case StateMagnaCenti.Tail
                 'If FrameIdx <= 25 Then
                 'GetNextFrame()
