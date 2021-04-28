@@ -131,6 +131,29 @@ Public Class CCharacter
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
+    Public CurrPos As Integer
+
+    Public Sub RandomPos(CurrPos)
+        Select Case CurrPos
+            Case 1
+                PosX = 45
+                PosY = -15
+                FDir = FaceDir.Down
+            Case 2
+                PosX = 205
+                PosY = -15
+                FDir = FaceDir.Down
+            Case 3
+                PosX = 50
+                PosY = 158
+                FDir = FaceDir.Right
+            Case 4
+                PosX = 200
+                PosY = 158
+                FDir = FaceDir.Left
+        End Select
+    End Sub
+
 
     Public Sub State(state As StateMagnaCenti, idxspr As Integer)
         CurrState = state
@@ -169,13 +192,17 @@ Public Class CCharacter
                 End If
             Case StateMagnaCenti.Jump
                 'untested
-                PosX = PosX + Vx
+                PosX = PosX - Vx
                 PosY = PosY + Vy
-                Vy = Vy + 0.2
-                If FrameIdx <= 4 Then
+                Vy = Vy - 0.5
+                If FrameIdx <= 7 Then
                     GetNextFrame()
-                ElseIf FrameIdx = 4 Then
+                ElseIf FrameIdx = 7 And PosX = 45 And CurrFrame = 1 Then
+                    PosY = -15
+                    Vx = 0
+                    Vy = 0
                     FDir = FaceDir.Down
+                    State(StateMagnaCenti.Stand, 1)
                 End If
             Case StateMagnaCenti.Dead
                 If FrameIdx <= 2 Then
@@ -183,11 +210,11 @@ Public Class CCharacter
                 End If
             Case StateMagnaCenti.Magnet
                 GetNextFrame()
-                'If FrameIdx = 5 And CurrFrame = 3 Then
-                'State(StateMagnaCenti.Stand, 1)
-                'Vx = 0
-                'Vy = 0
-                'End If
+                If FrameIdx = 5 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
             Case StateMagnaCenti.Tail
                 'If FrameIdx <= 25 Then
                 'GetNextFrame()
@@ -217,6 +244,7 @@ Public Class CCharacter
                 End If
             Case StateMagnaCenti.Appear
                 GetNextFrame()
+                RandomPos(1)
                 If FrameIdx = 5 And CurrFrame = 3 Then
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0

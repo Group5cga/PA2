@@ -71,14 +71,14 @@ Public Class Form1
         MagnaStand.Insert(805, 51, 777, 14, 833, 87, 4)
 
         MagnaJump = New CArrFrame
-        MagnaJump.Insert(38, 218, 12, 186, 62, 250, 1)
-        MagnaJump.Insert(93, 219, 66, 186, 117, 250, 1)
-        MagnaJump.Insert(148, 218, 125, 186, 172, 250, 1)
-        MagnaJump.Insert(206, 218, 176, 186, 234, 250, 1)
-        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 1)
-        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 1)
-        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 1)
-        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 1)
+        MagnaJump.Insert(38, 218, 12, 186, 62, 250, 2)
+        MagnaJump.Insert(93, 219, 66, 186, 117, 250, 2)
+        MagnaJump.Insert(148, 218, 125, 186, 172, 250, 2)
+        MagnaJump.Insert(206, 218, 176, 186, 234, 250, 2)
+        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 2)
+        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 2)
+        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 2)
+        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 2)
 
 
         MagnaHit = New CArrFrame
@@ -100,6 +100,12 @@ Public Class Form1
         MagnaMagnet = New CArrFrame
         MagnaMagnet.Insert(42, 455, 19, 419, 65, 492, 4)
         MagnaMagnet.Insert(92, 455, 65, 419, 119, 492, 4)
+        MagnaMagnet.Insert(147, 455, 119, 419, 175, 492, 4)
+        MagnaMagnet.Insert(203, 455, 175, 419, 231, 492, 4)
+        MagnaMagnet.Insert(147, 455, 119, 419, 175, 492, 4)
+        MagnaMagnet.Insert(203, 455, 175, 419, 231, 492, 4)
+        MagnaMagnet.Insert(147, 455, 119, 419, 175, 492, 4)
+        MagnaMagnet.Insert(203, 455, 175, 419, 231, 492, 4)
         MagnaMagnet.Insert(147, 455, 119, 419, 175, 492, 4)
         MagnaMagnet.Insert(203, 455, 175, 419, 231, 492, 4)
         MagnaMagnet.Insert(260, 455, 231, 419, 289, 492, 4)
@@ -185,7 +191,7 @@ Public Class Form1
         MC.PosY = 158
         MC.Vx = 0
         MC.Vy = 0
-        MC.State(StateMagnaCenti.Magnet, 0)
+        MC.State(StateMagnaCenti.Intro, 0)
         MC.FDir = FaceDir.Left
 
         'MM.PosX = 200
@@ -237,7 +243,7 @@ Public Class Form1
                     Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top + j))
                 Next
             Next
-        Else 'facing right
+        ElseIf c.FDir = FaceDir.Right Then 'facing right
             Dim spriteleft = c.PosX + EF.CtrPoint.x - EF.Right
             Dim spritetop = c.PosY - EF.CtrPoint.y + EF.Top
             'set mask
@@ -253,7 +259,24 @@ Public Class Form1
                     Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Right - i, EF.Top + j))
                 Next
             Next
+        Else
+            Dim spriteleft As Integer = c.PosX - EF.CtrPoint.x + EF.Left
+            Dim spritetop As Integer = c.PosY - EF.CtrPoint.y + EF.Bottom
+            'set mask
+            For i = 0 To spritewidth
+                For j = 0 To spriteheight
+                    Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Left + i, EF.Top - j))
+                Next
+            Next
+
+            'set sprite
+            For i = 0 To spritewidth
+                For j = 0 To spriteheight
+                    Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top - j))
+                Next
+            Next
         End If
+
     End Sub
 
     Sub DisplayImg()
@@ -301,8 +324,10 @@ Public Class Form1
             MC.State(StateMagnaCenti.Magnet, 6)
         ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
             MC.State(StateMagnaCenti.Tail, 7)
-        ElseIf e.KeyChar = ChrW(Keys.Up) Then
-            MC.State(StateMagnaCenti.Jump, 7)
+        ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
+            MC.Vx = 5
+            MC.Vy = 1
+            MC.State(StateMagnaCenti.Jump, 2)
         ElseIf e.KeyChar = ChrW(Keys.Left) Then
             MC.FDir = FaceDir.Left
         ElseIf e.KeyChar = ChrW(Keys.Right) Then
