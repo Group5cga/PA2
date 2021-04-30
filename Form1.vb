@@ -17,13 +17,11 @@ Public Class Form1
         Bg.CopyImg(Bg1)
 
         SpriteMap = New CImage
-        SpriteMap.OpenImage("Image\MCSpriteSheet2.bmp")
+        SpriteMap.OpenImage("Image\MCSpriteSheet3.bmp")
 
         SpriteMap2 = New CImage
-        SpriteMap2.OpenImage("Image\MMSpriteSheet.bmp")
 
         SpriteMap.CreateMask(SpriteMask)
-        SpriteMap2.CreateMask(SpriteMask2)
 
         'initialize sprites
         MegamanStand = New CArrFrame
