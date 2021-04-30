@@ -11,8 +11,14 @@ Public Enum StateMagnaCenti
     Tail
     Vanish
     Appear
+    StandUD
+    JumpUD
+    ThrowingUD
+    MagnetUD
+    TailUD
+    VanishUD
+    AppearUD
 End Enum
-
 Public Enum StateMegaman
     Run
     Stand
@@ -136,21 +142,17 @@ Public Class CCharacter
     Public Sub RandomPos(CurrPos)
         Select Case CurrPos
             Case 1
-                PosX = 45
-                PosY = -15
-                FDir = FaceDir.Down
+                PosX = 50
+                PosY = 65
             Case 2
                 PosX = 205
-                PosY = -15
-                FDir = FaceDir.Down
+                PosY = 65
             Case 3
                 PosX = 50
                 PosY = 158
-                FDir = FaceDir.Right
             Case 4
                 PosX = 200
                 PosY = 158
-                FDir = FaceDir.Left
         End Select
     End Sub
 
@@ -185,11 +187,13 @@ Public Class CCharacter
             Case StateMagnaCenti.Stand
                 If FrameIdx <= 4 Then
                     GetNextFrame()
-                    'Else
-                    '    State(StateMagnaCenti.Jump, 1)
-                    '    Vx = 5
-                    '    Vy = -5
                 End If
+
+            Case StateMagnaCenti.StandUD
+                If FrameIdx <= 4 Then
+                    GetNextFrame()
+                End If
+
             Case StateMagnaCenti.Jump
                 'untested
                 PosX = PosX - Vx
@@ -238,15 +242,22 @@ Public Class CCharacter
                 'End If
                 GetNextFrame()
                 If FrameIdx = 5 And CurrFrame = 2 Then
-                    State(StateMagnaCenti.Appear, 9)
+                    State(StateMagnaCenti.AppearUD, 16)
                     Vx = 0
                     Vy = 0
                 End If
             Case StateMagnaCenti.Appear
                 GetNextFrame()
-                RandomPos(1)
                 If FrameIdx = 5 And CurrFrame = 3 Then
                     State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.AppearUD
+                GetNextFrame()
+                RandomPos(1)
+                If FrameIdx = 5 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.StandUD, 10)
                     Vx = 0
                     Vy = 0
                 End If
