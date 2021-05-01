@@ -104,7 +104,7 @@ Public Class Form1
         MagnaJumpUD.Insert(409, 218, 391, 186, 427, 250, 3) 'non ud
         MagnaJumpUD.Insert(370, 219, 352, 186, 386, 250, 3)
         MagnaJumpUD.Insert(409, 218, 391, 186, 427, 250, 3)
-        MagnaJumpUD.Insert(259, 216, 238, 187, 343, 250, 2)
+        MagnaJumpUD.Insert(259, 216, 238, 187, 279, 253, 2)
         MagnaJumpUD.Insert(314, 218, 284, 186, 343, 250, 2)
 
         MagnaHit = New CArrFrame
@@ -285,12 +285,12 @@ Public Class Form1
         'MM.ArrSprites(0) = MegamanStand
         'MM.ArrSprites(1) = MegamanRun
 
-        MC.PosX = 50
+        MC.PosX = 200
         MC.PosY = 158
         MC.Vx = 0
         MC.Vy = 0
         MC.State(StateMagnaCenti.Intro, 0)
-        MC.FDir = FaceDir.Right
+        MC.FDir = FaceDir.Left
 
         'MM.PosX = 200
         'MM.PosY = 100
@@ -430,9 +430,27 @@ Public Class Form1
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
                 MC.State(StateMagnaCenti.Tail, 7)
             ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
-                MC.Vx = 4
-                MC.Vy = 1
-                MC.State(StateMagnaCenti.Jump, 2)
+                If MC.PosX = 50 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Jump1, 2)
+                    MC.Vx = 4
+                    MC.Vy = 1
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Jump2, 2)
+                    MC.Vx = 4
+                    MC.Vy = 1
+                    MC.FDir = FaceDir.Right
+                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.JumpUD1, 11)
+                    MC.Vx = 4
+                    MC.Vy = -1
+                    MC.FDir = FaceDir.Right
+                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.JumpUD2, 11)
+                    MC.Vx = 4
+                    MC.Vy = -1
+                    MC.FDir = FaceDir.Left
+                End If
             ElseIf e.KeyChar = ChrW(Keys.Left) Then
                 MC.FDir = FaceDir.Left
             ElseIf e.KeyChar = ChrW(Keys.Right) Then

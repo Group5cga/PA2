@@ -3,7 +3,8 @@
 Public Enum StateMagnaCenti
     Intro
     Stand
-    Jump
+    Jump1
+    Jump2
     Hit
     Dead
     Throwing
@@ -12,7 +13,8 @@ Public Enum StateMagnaCenti
     Vanish
     Appear
     StandUD
-    JumpUD
+    JumpUD1
+    JumpUD2
     ThrowingUD
     MagnetUD
     TailUD
@@ -198,7 +200,7 @@ Public Class CCharacter
                     GetNextFrame()
                 End If
 
-            Case StateMagnaCenti.Jump
+            Case StateMagnaCenti.Jump1
                 'untested
                 GetNextFrame()
                 PosX = PosX + Vx
@@ -206,8 +208,46 @@ Public Class CCharacter
                 Vy = Vy - 0.2
                 If PosY <= 65 And Vy < 0 Then
                     State(StateMagnaCenti.StandUD, 10)
-                    PosX = 205
-                    PosY = 65
+                    RandomPos(2)
+                    Vx = 0
+                    Vy = 0
+                End If
+
+            Case StateMagnaCenti.Jump2
+                'untested
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY + Vy
+                Vy = Vy - 0.2
+                If PosY <= 65 And Vy < 0 Then
+                    State(StateMagnaCenti.StandUD, 10)
+                    RandomPos(1)
+                    Vx = 0
+                    Vy = 0
+                End If
+
+            Case StateMagnaCenti.JumpUD1
+                'untested
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY + Vy
+                Vy = Vy + 0.2
+                If PosY >= 158 And Vy > 0 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    RandomPos(3)
+                    Vx = 0
+                    Vy = 0
+                End If
+
+            Case StateMagnaCenti.JumpUD2
+                'untested
+                GetNextFrame()
+                PosX = PosX + Vx
+                PosY = PosY + Vy
+                Vy = Vy + 0.2
+                If PosY >= 158 And Vy > 0 Then
+                    State(StateMagnaCenti.Stand, 1)
+                    RandomPos(4)
                     Vx = 0
                     Vy = 0
                 End If
