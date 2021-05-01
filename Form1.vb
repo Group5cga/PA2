@@ -6,7 +6,7 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap, SpriteMap2 As CImage
     Dim SpriteMask, SpriteMask2 As CImage
-    Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken As CArrFrame
+    Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
     Dim MC, MM As CCharacter
     Dim Randomizer As New Random
@@ -24,24 +24,6 @@ Public Class Form1
         SpriteMap.CreateMask(SpriteMask)
 
         'initialize sprites
-        MegamanStand = New CArrFrame
-        MegamanStand.Insert(241, 46, 224, 27, 257, 64, 1)
-        MegamanStand.Insert(276, 46, 259, 27, 292, 64, 1)
-        MegamanStand.Insert(310, 46, 294, 27, 326, 64, 1)
-        MegamanStand.Insert(345, 46, 328, 27, 361, 64, 1)
-
-        MegamanRun = New CArrFrame
-        MegamanRun.Insert(20, 84, 3, 65, 36, 102, 1)
-        MegamanRun.Insert(60, 84, 48, 65, 70, 102, 1)
-        MegamanRun.Insert(87, 84, 73, 65, 100, 102, 1)
-        MegamanRun.Insert(121, 84, 103, 65, 138, 103, 1)
-        MegamanRun.Insert(162, 84, 143, 65, 180, 102, 1)
-        MegamanRun.Insert(203, 84, 188, 65, 217, 102, 1)
-        MegamanRun.Insert(233, 84, 221, 65, 245, 102, 1)
-        MegamanRun.Insert(261, 84, 247, 65, 274, 102, 1)
-        MegamanRun.Insert(313, 84, 278, 65, 310, 102, 1)
-        MegamanRun.Insert(335, 84, 316, 65, 353, 102, 1)
-        MegamanRun.Insert(373, 84, 357, 65, 389, 102, 1)
 
         MagnaIntro = New CArrFrame
         MagnaIntro.Insert(33, 127, 6, 90, 62, 163, 3)
@@ -260,6 +242,10 @@ Public Class Form1
         Shuriken.Insert(170, 911, 166, 908, 174, 914, 1)
         Shuriken.Insert(178, 911, 174, 908, 183, 914, 1)
 
+        MegamanRunStart = New CArrFrame
+
+        MegamanRunStart.Insert(1171, 614, 1142, 580, 1200, 648, 1)
+
         MC = New CCharacter
         ReDim MC.ArrSprites(16)
         MC.ArrSprites(0) = MagnaIntro
@@ -280,10 +266,11 @@ Public Class Form1
         MC.ArrSprites(15) = MagnaVanishUD
         MC.ArrSprites(16) = MagnaAppearUD
 
-        'MM = New CCharacter
-        'ReDim MM.ArrSprites(2)
-        'MM.ArrSprites(0) = MegamanStand
-        'MM.ArrSprites(1) = MegamanRun
+        MM = New CCharacter
+        ReDim MM.ArrSprites(2)
+        MM.ArrSprites(0) = MegamanIntro
+        MM.ArrSprites(1) = MegamanRun
+        MM.ArrSprites(2) = MegamanRunStart
 
         MC.PosX = 200
         MC.PosY = 158

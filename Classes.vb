@@ -22,10 +22,9 @@ Public Enum StateMagnaCenti
     AppearUD
 End Enum
 Public Enum StateMegaman
+    RunStart
     Run
-    Stand
-    Jump
-    Hit
+    Intro
 End Enum
 
 Public Enum FaceDir
