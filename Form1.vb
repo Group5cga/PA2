@@ -9,7 +9,8 @@ Public Class Form1
     Dim MegamanStand, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
     Dim MC, MM As CCharacter
-
+    Dim Randomizer As New Random
+    Dim resultrand As Integer
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
         Bg = New CImage
@@ -77,20 +78,34 @@ Public Class Form1
         MagnaJump.Insert(93, 219, 66, 186, 117, 250, 2)
         MagnaJump.Insert(148, 218, 125, 186, 172, 250, 2)
         MagnaJump.Insert(206, 218, 176, 186, 234, 250, 2)
-        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 2)
-        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 2)
-        MagnaJump.Insert(259, 216, 238, 187, 343, 250, 2)
-        MagnaJump.Insert(314, 218, 284, 186, 343, 250, 2)
+        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 3)
+        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 3)
+        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 3)
+        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 3)
+        MagnaJump.Insert(370, 219, 352, 186, 386, 250, 3)
+        MagnaJump.Insert(409, 218, 391, 186, 427, 250, 3)
+        MagnaJump.Insert(411, 1923, 392, 1888, 429, 1957, 3) 'ud
+        MagnaJump.Insert(371, 1923, 353, 1888, 388, 1957, 3)
+        MagnaJump.Insert(411, 1923, 392, 1888, 429, 1957, 3)
+        MagnaJump.Insert(260, 1925, 239, 1885, 280, 1972, 2)
+        MagnaJump.Insert(315, 1923, 284, 1888, 345, 1957, 2)
 
         MagnaJumpUD = New CArrFrame
         MagnaJumpUD.Insert(38, 1923, 13, 1888, 63, 1957, 2)
         MagnaJumpUD.Insert(93, 1923, 67, 1888, 119, 1957, 2)
         MagnaJumpUD.Insert(147, 1923, 123, 1888, 170, 1957, 2)
         MagnaJumpUD.Insert(205, 1923, 174, 1888, 235, 1957, 2)
-        MagnaJumpUD.Insert(260, 1925, 239, 1885, 280, 1972, 2)
-        MagnaJumpUD.Insert(315, 1923, 284, 1888, 345, 1957, 2)
-        MagnaJumpUD.Insert(371, 1923, 353, 1888, 388, 1957, 2)
-        MagnaJumpUD.Insert(411, 1923, 429, 1888, 429, 1957, 2)
+        MagnaJumpUD.Insert(371, 1923, 353, 1888, 388, 1957, 3)
+        MagnaJumpUD.Insert(411, 1923, 392, 1888, 429, 1957, 3)
+        MagnaJumpUD.Insert(371, 1923, 353, 1888, 388, 1957, 3)
+        MagnaJumpUD.Insert(411, 1923, 392, 1888, 429, 1957, 3)
+        MagnaJumpUD.Insert(371, 1923, 353, 1888, 388, 1957, 3)
+        MagnaJumpUD.Insert(411, 1923, 392, 1888, 429, 1957, 3)
+        MagnaJumpUD.Insert(409, 218, 391, 186, 427, 250, 3) 'non ud
+        MagnaJumpUD.Insert(370, 219, 352, 186, 386, 250, 3)
+        MagnaJumpUD.Insert(409, 218, 391, 186, 427, 250, 3)
+        MagnaJumpUD.Insert(259, 216, 238, 187, 343, 250, 2)
+        MagnaJumpUD.Insert(314, 218, 284, 186, 343, 250, 2)
 
         MagnaHit = New CArrFrame
         MagnaHit.Insert(36, 536, 14, 503, 57, 569, 5)
@@ -270,12 +285,12 @@ Public Class Form1
         'MM.ArrSprites(0) = MegamanStand
         'MM.ArrSprites(1) = MegamanRun
 
-        MC.PosX = 200
+        MC.PosX = 50
         MC.PosY = 158
         MC.Vx = 0
         MC.Vy = 0
         MC.State(StateMagnaCenti.Intro, 0)
-        MC.FDir = FaceDir.Left
+        MC.FDir = FaceDir.Right
 
         'MM.PosX = 200
         'MM.PosY = 100
@@ -399,28 +414,38 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-        If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
-            MC.State(StateMagnaCenti.Vanish, 8)
-        ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
-            MC.State(StateMagnaCenti.Throwing, 5)
-        ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
-            MC.State(StateMagnaCenti.Magnet, 6)
-        ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
-            MC.State(StateMagnaCenti.Tail, 7)
-        ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
-            MC.Vx = 5
-            MC.Vy = 1
-            MC.State(StateMagnaCenti.Jump, 2)
-        ElseIf e.KeyChar = ChrW(Keys.Left) Then
-            MC.FDir = FaceDir.Left
-        ElseIf e.KeyChar = ChrW(Keys.Right) Then
-            MC.FDir = FaceDir.Right
-            'ElseIf e.KeyChar = ChrW(Keys.Right) And e.KeyChar = ChrW(Keys.Up) Then
-            'jump to ceiling
-            'ElseIf e.KeyChar = ChrW(Keys.Left) And e.KeyChar = ChrW(Keys.Up) Then
-            'jump to ceiling
-        ElseIf e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
-            MsgBox("Key a")
+        If MC.CurrState = StateMagnaCenti.Stand Or MC.CurrState = StateMagnaCenti.StandUD Then
+            If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
+                MC.State(StateMagnaCenti.Vanish, 8)
+                resultrand = Randomizer.Next(1, 5)
+                If resultrand = 5 Then
+                    resultrand = Randomizer.Next(1, 5)
+                End If
+                MC.CurrPos = resultrand
+                'MsgBox(MC.CurrPos)
+            ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
+                MC.State(StateMagnaCenti.Throwing, 5)
+            ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
+                MC.State(StateMagnaCenti.Magnet, 6)
+            ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
+                MC.State(StateMagnaCenti.Tail, 7)
+            ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
+                MC.Vx = 4
+                MC.Vy = 1
+                MC.State(StateMagnaCenti.Jump, 2)
+            ElseIf e.KeyChar = ChrW(Keys.Left) Then
+                MC.FDir = FaceDir.Left
+            ElseIf e.KeyChar = ChrW(Keys.Right) Then
+                MC.FDir = FaceDir.Right
+                'ElseIf e.KeyChar = ChrW(Keys.Right) And e.KeyChar = ChrW(Keys.Up) Then
+                'jump to ceiling
+                'ElseIf e.KeyChar = ChrW(Keys.Left) And e.KeyChar = ChrW(Keys.Up) Then
+                'jump to ceiling
+                'ElseIf e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
+                'MsgBox("Key a")
+            End If
+        Else
+            MsgBox("Animation Not Finished")
         End If
     End Sub
 End Class

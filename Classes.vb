@@ -144,15 +144,19 @@ Public Class CCharacter
             Case 1
                 PosX = 50
                 PosY = 65
+                FDir = FaceDir.Right
             Case 2
                 PosX = 205
                 PosY = 65
+                FDir = FaceDir.Left
             Case 3
                 PosX = 50
                 PosY = 158
+                FDir = FaceDir.Right
             Case 4
                 PosX = 200
                 PosY = 158
+                FDir = FaceDir.Left
         End Select
     End Sub
 
@@ -196,18 +200,18 @@ Public Class CCharacter
 
             Case StateMagnaCenti.Jump
                 'untested
-                PosX = PosX - Vx
+                GetNextFrame()
+                PosX = PosX + Vx
                 PosY = PosY + Vy
-                Vy = Vy - 0.5
-                If FrameIdx <= 7 Then
-                    GetNextFrame()
-                ElseIf FrameIdx = 7 And PosX = 45 And CurrFrame = 1 Then
-                    PosY = -15
+                Vy = Vy - 0.2
+                If PosY <= 65 And Vy < 0 Then
+                    State(StateMagnaCenti.StandUD, 10)
+                    PosX = 205
+                    PosY = 65
                     Vx = 0
                     Vy = 0
-                    FDir = FaceDir.Down
-                    State(StateMagnaCenti.Stand, 1)
                 End If
+
             Case StateMagnaCenti.Dead
                 If FrameIdx <= 2 Then
                     GetNextFrame()
@@ -241,13 +245,18 @@ Public Class CCharacter
                 'GetNextFrame()
                 'End If
                 GetNextFrame()
-                If FrameIdx = 5 And CurrFrame = 2 Then
+                If FrameIdx = 5 And CurrFrame = 2 And CurrPos <= 2 Then
                     State(StateMagnaCenti.AppearUD, 16)
+                    Vx = 0
+                    Vy = 0
+                ElseIf FrameIdx = 5 And CurrFrame = 2 And CurrPos >= 3 Then
+                    State(StateMagnaCenti.Appear, 9)
                     Vx = 0
                     Vy = 0
                 End If
             Case StateMagnaCenti.Appear
                 GetNextFrame()
+                RandomPos(CurrPos)
                 If FrameIdx = 5 And CurrFrame = 3 Then
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0
@@ -255,7 +264,7 @@ Public Class CCharacter
                 End If
             Case StateMagnaCenti.AppearUD
                 GetNextFrame()
-                RandomPos(1)
+                RandomPos(CurrPos)
                 If FrameIdx = 5 And CurrFrame = 3 Then
                     State(StateMagnaCenti.StandUD, 10)
                     Vx = 0
