@@ -302,7 +302,6 @@ Public Class Form1
         MegamanRun.Insert(1008, 167, 987, 148, 1030, 187, 1)
         MegamanRun.Insert(1050, 167, 1030, 148, 1071, 187, 1)
 
-
         MM = New CCharMegaMan
         ReDim MM.ArrSprites(2)
         MM.ArrSprites(0) = MegamanIntro
@@ -322,11 +321,11 @@ Public Class Form1
 
         DisplayImg()
         ResizeImg()
-        'MM.Update()
+        MM.Update()
         MC.Update()
         DisplayImg()
 
-        Timer1.Enabled = False
+        Timer1.Enabled = True
 
     End Sub
 

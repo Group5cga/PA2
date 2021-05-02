@@ -344,22 +344,27 @@ Public Class CCharMegaMan
 
     Public Overrides Sub Update()
         Select Case CurrState
-            'Case StateMegaman.Stand
-            '   GetNextFrame()
-            'If FrameIdx = 0 Then
-            '        State(StateMegaman.Run, 0)
-             '   End If
-            Case StateMegaman.Run
+            Case StateMegaman.Intro
                 GetNextFrame()
-                If PosX <= 50 Then
-                    PosX = PosX + Vx
-                    FDir = FaceDir.Right
+                If FrameIdx = 0 Then
+                    State(StateMegaman.RunStart, 2)
+                End If
+            Case StateMegaman.RunStart
+                GetNextFrame()
+                If FrameIdx = 0 Then
                     State(StateMegaman.Run, 1)
                 End If
-                If PosX >= 200 Then
-                    PosX = PosX - Vx
+            Case StateMegaman.Run
+                GetNextFrame()
+                PosX = PosX + Vx
+                If PosX <= 50 Then
+                    PosX = PosX + Vx
+                    Vx = Vx + 1
                     FDir = FaceDir.Left
-                    State(StateMegaman.Run, 1)
+                End If
+                If PosX >= 200 Then
+                    Vx = Vx - 1
+                    FDir = FaceDir.Right
                 End If
         End Select
     End Sub
