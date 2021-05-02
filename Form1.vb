@@ -281,25 +281,26 @@ Public Class Form1
         ListChar.Add(MC)
 
         MegamanRunStart = New CArrFrame
-        MegamanRunStart.Insert(668, 186, 663, 160, 713, 213, 1)
+        MegamanRunStart.Insert(676, 167, 659, 148, 694, 187, 1)
 
         MegamanIntro = New CArrFrame
-        MegamanIntro.Insert(677, 135, 654, 110, 700, 160, 1)
-        MegamanIntro.Insert(724, 135, 700, 110, 749, 160, 1)
-        MegamanIntro.Insert(773, 135, 749, 110, 797, 160, 1)
-        MegamanIntro.Insert(823, 135, 797, 110, 849, 160, 1)
-        MegamanIntro.Insert(773, 135, 749, 110, 797, 160, 1)
+        MegamanIntro.Insert(669, 127, 652, 108, 687, 147, 1)
+        MegamanIntro.Insert(705, 127, 687, 108, 724, 147, 1)
+        MegamanIntro.Insert(742, 127, 724, 108, 761, 147, 1)
+        MegamanIntro.Insert(779, 127, 761, 108, 798, 147, 1)
+        MegamanIntro.Insert(742, 127, 724, 108, 761, 147, 1)
 
         MegamanRun = New CArrFrame
-        MegamanRun.Insert(740, 186, 722, 160, 759, 213, 1)
-        MegamanRun.Insert(778, 186, 759, 160, 798, 213, 1)
-        MegamanRun.Insert(826, 186, 798, 160, 855, 213, 1)
-        MegamanRun.Insert(885, 186, 855, 160, 915, 213, 1)
-        MegamanRun.Insert(943, 186, 922, 160, 965, 213, 1)
-        MegamanRun.Insert(985, 186, 965, 160, 1005, 213, 1)
-        MegamanRun.Insert(1025, 186, 1046, 160, 1046, 213, 1)
-        MegamanRun.Insert(1073, 186, 1100, 160, 1100, 213, 1)
-        MegamanRun.Insert(1129, 186, 1158, 160, 1158, 213, 1)
+        MegamanRun.Insert(717, 167, 705, 148, 729, 187, 1)
+        MegamanRun.Insert(745, 167, 729, 148, 761, 187, 1)
+        MegamanRun.Insert(781, 167, 761, 148, 802, 187, 1)
+        MegamanRun.Insert(824, 167, 802, 148, 847, 187, 1)
+        MegamanRun.Insert(869, 167, 853, 148, 886, 187, 1)
+        MegamanRun.Insert(900, 167, 886, 148, 914, 187, 1)
+        MegamanRun.Insert(930, 167, 914, 148, 947, 187, 1)
+        MegamanRun.Insert(967, 167, 947, 148, 987, 187, 1)
+        MegamanRun.Insert(1008, 167, 987, 148, 1030, 187, 1)
+        MegamanRun.Insert(1050, 167, 1030, 148, 1071, 187, 1)
 
 
         MM = New CCharMegaMan
@@ -309,7 +310,7 @@ Public Class Form1
         MM.ArrSprites(2) = MegamanRunStart
 
         MM.PosX = 50
-        MM.PosY = 158
+        MM.PosY = 172
         MM.Vx = 0
         MM.Vy = 0
         MM.State(StateMegaman.Intro, 0)
