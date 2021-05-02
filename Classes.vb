@@ -28,8 +28,12 @@ Public Enum StateMegaman
 End Enum
 
 Public Enum StateMagnaProjectile
-    ShurikenStart
-    Shuriken
+    ShurikenStart1
+    ShurikenStart2
+    ShurikenStart3
+    Shuriken1
+    Shuriken2
+    Shuriken3
 End Enum
 Public Enum FaceDir
     Left
@@ -384,21 +388,48 @@ Public Class CCharMagnaProjectile
 
     Public Overrides Sub Update()
         Select Case CurrState
-            Case StateMagnaProjectile.ShurikenStart
+            Case StateMagnaProjectile.ShurikenStart1
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
-                    State(StateMagnaProjectile.Shuriken, 1)
+                    State(StateMagnaProjectile.Shuriken1, 1)
                 End If
-            Case StateMagnaProjectile.Shuriken
+            Case StateMagnaProjectile.ShurikenStart2
                 GetNextFrame()
-                If PosX <= 220 Then
-                    dir = dir + 1 * Math.PI / 180
-                    'update v
-                    Vx = Math.Cos(dir)
-                    Vy = Math.Sin(dir)
-                    'update pos
-                    PosX = PosX + Vx
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaProjectile.Shuriken2, 1)
+                End If
+            Case StateMagnaProjectile.ShurikenStart3
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaProjectile.Shuriken3, 1)
+                End If
+            Case StateMagnaProjectile.Shuriken1
+                GetNextFrame()
+                If PosY <= 200 Then
+                    PosX = PosX - Vx
                     PosY = PosY + Vy
+                    Vy = Vy + 0.5
+                    Vx = Vx + 0.3
+                Else
+                    Destroy = True
+                End If
+            Case StateMagnaProjectile.Shuriken2
+                GetNextFrame()
+                If PosY <= 200 Then
+                    PosX = PosX - Vx
+                    PosY = PosY + Vy
+                    Vy = Vy + 1
+                    Vx = Vx + 0.2
+                Else
+                    Destroy = True
+                End If
+            Case StateMagnaProjectile.Shuriken3
+                GetNextFrame()
+                If PosY <= 200 Then
+                    PosX = PosX - Vx
+                    PosY = PosY + Vy
+                    Vy = Vy + 1.5
+                    Vx = Vx + 0.1
                 Else
                     Destroy = True
                 End If

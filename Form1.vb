@@ -4,8 +4,8 @@ Public Class Form1
 
     Dim bmp As Bitmap
     Dim Bg, Bg1, Img As CImage
-    Dim SpriteMap, SpriteMap2 As CImage
-    Dim SpriteMask, SpriteMask2 As CImage
+    Dim SpriteMap As CImage
+    Dim SpriteMask As CImage
     Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken, ShurikenStart As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
     Dim ListChar As New List(Of CCharacter)
@@ -447,17 +447,15 @@ Public Class Form1
         MP = New CCharMagnaProjectile
         If MC.FDir = FaceDir.Left Then
             MP.PosX = MC.PosX - 20
-            MP.FDir = FaceDir.Left
         Else
             MP.PosX = MC.PosX + 20
-            MP.FDir = FaceDir.Right
         End If
 
         MP.PosY = MC.PosY - 3
 
         MP.Vx = 0
-        MP.Vy = 0
-        MP.CurrState = StateMagnaProjectile.ShurikenStart
+        MP.Vy = -5
+        MP.CurrState = StateMagnaProjectile.ShurikenStart1
         ReDim MP.ArrSprites(1)
 
         MP.ArrSprites(0) = ShurikenStart
@@ -478,7 +476,7 @@ Public Class Form1
                 'MsgBox(MC.CurrPos)
             ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
                 MC.State(StateMagnaCenti.Throwing, 5)
-                CreateMagnaProjectile(1)
+                CreateMagnaProjectile(3)
             ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
                 MC.State(StateMagnaCenti.Magnet, 6)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
