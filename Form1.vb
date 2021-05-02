@@ -6,7 +6,7 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap, SpriteMap2 As CImage
     Dim SpriteMask, SpriteMask2 As CImage
-    Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken As CArrFrame
+    Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken, ShurikenStart As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
     Dim ListChar As New List(Of CCharacter)
     Dim MC As CCharMagna
@@ -239,6 +239,9 @@ Public Class Form1
         MagnaPartTail.Insert(81, 838, 72, 832, 91, 845, 1)
         MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
 
+        ShurikenStart = New CArrFrame
+        ShurikenStart.Insert(161, 911, 157, 908, 166, 914, 1)
+
         Shuriken = New CArrFrame
         Shuriken.Insert(161, 911, 157, 908, 166, 914, 1)
         Shuriken.Insert(170, 911, 166, 908, 174, 914, 1)
@@ -439,6 +442,31 @@ Public Class Form1
         DisplayImg()
     End Sub
 
+    Sub CreateMagnaProjectile(n As Integer)
+        Dim MP As CCharMagnaProjectile
+
+        MP = New CCharMagnaProjectile
+        If MC.FDir = FaceDir.Left Then
+            MP.PosX = MC.PosX - 20
+            MP.FDir = FaceDir.Left
+        Else
+            MP.PosX = MC.PosX + 20
+            MP.FDir = FaceDir.Right
+        End If
+
+        MP.PosY = MC.PosY - 3
+
+        MP.Vx = 0
+        MP.Vy = 0
+        MP.CurrState = StateMagnaProjectile.ShurikenStart
+        ReDim MP.ArrSprites(1)
+
+        MP.ArrSprites(0) = ShurikenStart
+        MP.ArrSprites(1) = Shuriken
+
+        ListChar.Add(MP)
+    End Sub
+
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         If MC.CurrState = StateMagnaCenti.Stand Or MC.CurrState = StateMagnaCenti.StandUD Then
             If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
@@ -451,6 +479,7 @@ Public Class Form1
                 'MsgBox(MC.CurrPos)
             ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
                 MC.State(StateMagnaCenti.Throwing, 5)
+                CreateMagnaProjectile(1)
             ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
                 MC.State(StateMagnaCenti.Magnet, 6)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
@@ -492,4 +521,5 @@ Public Class Form1
             MsgBox("Animation Not Finished")
         End If
     End Sub
+
 End Class

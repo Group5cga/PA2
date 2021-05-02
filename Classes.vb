@@ -27,6 +27,10 @@ Public Enum StateMegaman
     Intro
 End Enum
 
+Public Enum StateMagnaProjectile
+    ShurikenStart
+    Shuriken
+End Enum
 Public Enum FaceDir
     Left
     Right
@@ -137,6 +141,7 @@ Public Class CCharacter
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
+    Public dir As Double
     Public CurrPos As Integer
     Public Destroy As Boolean = False
 
@@ -359,6 +364,45 @@ Public Class CCharMegaMan
         End Select
     End Sub
 End Class
+Public Class CCharMagnaProjectile
+    Inherits CCharacter
+
+    Public CurrState As StateMagnaProjectile
+
+    Public Sub State(state As StateMagnaProjectile, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+
+    End Sub
+
+    Public Overrides Sub Update()
+        Select Case CurrState
+            Case StateMagnaProjectile.ShurikenStart
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaProjectile.Shuriken, 1)
+                End If
+            Case StateMagnaProjectile.Shuriken
+                GetNextFrame()
+                If PosX <= 220 Then
+                    dir = dir + 1 * Math.PI / 180
+                    'update v
+                    Vx = Math.Cos(dir)
+                    Vy = Math.Sin(dir)
+                    'update pos
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                Else
+                    Destroy = True
+                End If
+
+        End Select
+    End Sub
+
+End Class
+
 Public Class CElmtFrame
     Public CtrPoint As TPoint
     Public Top, Bottom, Left, Right As Integer
