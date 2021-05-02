@@ -267,27 +267,26 @@ Public Class Form1
         MC.ArrSprites(16) = MagnaAppearUD
 
         MegamanRunStart = New CArrFrame
-        MegamanRunStart.Insert(1171, 614, 1142, 580, 1200, 648, 1)
+        MegamanRunStart.Insert(668, 186, 663, 160, 713, 213, 1)
 
         MegamanIntro = New CArrFrame
-        MegamanIntro.Insert(1171, 614, 1142, 580, 1200, 648, 1)
-        MegamanIntro.Insert(1127, 614, 1200, 580, 1255, 648, 1)
-        MegamanIntro.Insert(1283, 614, 1255, 580, 1311, 648, 1)
-        MegamanIntro.Insert(1338, 614, 1311, 580, 1366, 648, 1)
-        MegamanIntro.Insert(1394, 614, 1366, 580, 1422, 648, 1)
+        MegamanIntro.Insert(677, 135, 654, 110, 700, 160, 1)
+        MegamanIntro.Insert(724, 135, 700, 110, 749, 160, 1)
+        MegamanIntro.Insert(773, 135, 749, 110, 797, 160, 1)
+        MegamanIntro.Insert(823, 135, 797, 110, 849, 160, 1)
+        MegamanIntro.Insert(773, 135, 749, 110, 797, 160, 1)
 
         MegamanRun = New CArrFrame
-        MegamanRun.Insert(883, 149, 854, 118, 913, 180, 1)
-        MegamanRun.Insert(952, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(874, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1059, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1133, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1207, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1258, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1307, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1366, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1440, 149, 1142, 580, 1200, 648, 1)
-        MegamanRun.Insert(1507, 149, 1142, 580, 1200, 648, 1)
+        MegamanRun.Insert(740, 186, 722, 160, 759, 213, 1)
+        MegamanRun.Insert(778, 186, 759, 160, 798, 213, 1)
+        MegamanRun.Insert(826, 186, 798, 160, 855, 213, 1)
+        MegamanRun.Insert(885, 186, 855, 160, 915, 213, 1)
+        MegamanRun.Insert(943, 186, 922, 160, 965, 213, 1)
+        MegamanRun.Insert(985, 186, 965, 160, 1005, 213, 1)
+        MegamanRun.Insert(1025, 186, 1046, 160, 1046, 213, 1)
+        MegamanRun.Insert(1073, 186, 1100, 160, 1100, 213, 1)
+        MegamanRun.Insert(1129, 186, 1158, 160, 1158, 213, 1)
+
 
         MM = New CCharacter
         ReDim MM.ArrSprites(2)
