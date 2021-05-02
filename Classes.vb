@@ -35,6 +35,10 @@ Public Enum StateMagnaProjectile
     Shuriken2
     Shuriken3
 End Enum
+
+Public Enum StateMagnaHomingTail
+    Magnet
+End Enum
 Public Enum FaceDir
     Left
     Right
@@ -433,6 +437,43 @@ Public Class CCharMagnaProjectile
                 Else
                     Destroy = True
                 End If
+
+        End Select
+    End Sub
+
+End Class
+Public Class CCharMagnaHomingTail
+    Inherits CCharacter
+
+    Public CurrState As StateMagnaHomingTail
+
+    Public Sub State(state As StateMagnaHomingTail, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+
+    End Sub
+
+    Public Overrides Sub Update()
+        Select Case CurrState
+            Case StateMagnaHomingTail.Magnet
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                End If
+                'Case StateMagnaProjectile.Shuriken
+                '    GetNextFrame()
+                '    If PosX <= 220 Then
+                '        dir = dir + 1 * Math.PI / 180
+                '        'update v
+                '        Vx = Math.Cos(dir)
+                '        Vy = Math.Sin(dir)
+                '        'update pos
+                '        PosX = PosX + Vx
+                '        PosY = PosY + Vy
+                '    Else
+                '        Destroy = True
+                '    End If
 
         End Select
     End Sub

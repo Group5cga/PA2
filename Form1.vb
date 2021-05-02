@@ -464,6 +464,31 @@ Public Class Form1
         ListChar.Add(MP)
     End Sub
 
+    Sub CreateMagnaHomingTail(n As Integer)
+        Dim MT As CCharMagnaHomingTail
+
+        MT = New CCharMagnaHomingTail
+        If MC.FDir = FaceDir.Left Then
+            MT.PosX = MC.PosX - 20
+            MT.FDir = FaceDir.Left
+        Else
+            MT.PosX = MC.PosX + 20
+            MT.FDir = FaceDir.Right
+        End If
+
+        MT.PosY = MC.PosY - 3
+
+        MT.Vx = 0
+        MT.Vy = 0
+        MT.CurrState = StateMagnaHomingTail.Magnet
+        ReDim MT.ArrSprites(1)
+
+        MT.ArrSprites(0) = ShurikenStart
+        MT.ArrSprites(1) = Shuriken
+
+        ListChar.Add(MT)
+    End Sub
+
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         If MC.CurrState = StateMagnaCenti.Stand Or MC.CurrState = StateMagnaCenti.StandUD Then
             If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
