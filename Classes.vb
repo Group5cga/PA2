@@ -27,6 +27,10 @@ Public Enum StateMegaman
     Intro
 End Enum
 
+Public Enum StateMagnaProjectile
+    ShurikenStart
+    Shuriken
+End Enum
 Public Enum FaceDir
     Left
     Right
@@ -132,13 +136,14 @@ End Class
 Public Class CCharacter
     Public PosX, PosY As Double
     Public Vx, Vy As Double
-    Public CurrState As StateMagnaCenti
     Public FrameIdx As Integer
     Public CurrFrame As Integer
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
+    Public dir As Double
     Public CurrPos As Integer
+    Public Destroy As Boolean = False
 
     Public Sub RandomPos(CurrPos)
         Select Case CurrPos
@@ -161,14 +166,6 @@ Public Class CCharacter
         End Select
     End Sub
 
-
-    Public Sub State(state As StateMagnaCenti, idxspr As Integer)
-        CurrState = state
-        IdxArrSprites = idxspr
-        CurrFrame = 0
-        FrameIdx = 0
-    End Sub
-
     Public Sub GetNextFrame()
         CurrFrame = CurrFrame + 1
         If CurrFrame = ArrSprites(IdxArrSprites).Elmt(FrameIdx).MaxFrameTime Then
@@ -180,7 +177,22 @@ Public Class CCharacter
         End If
     End Sub
 
-    Public Sub Update()
+    Public Overridable Sub Update()
+
+    End Sub
+End Class
+
+Public Class CCharMagna
+    Inherits CCharacter
+    Public CurrState As StateMagnaCenti
+    Public Sub State(state As StateMagnaCenti, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+    End Sub
+
+    Public Overrides Sub Update()
         Select Case CurrState
             Case StateMagnaCenti.Intro
                 GetNextFrame()
@@ -316,11 +328,27 @@ Public Class CCharacter
                     Vx = 0
                     Vy = 0
                 End If
-            Case StateMegaman.Stand
-                GetNextFrame()
-                If FrameIdx = 0 Then
-                    State(StateMegaman.Run, 0)
-                End If
+        End Select
+    End Sub
+End Class
+
+Public Class CCharMegaMan
+    Inherits CCharacter
+    Public CurrState As StateMegaman
+    Public Sub State(state As StateMegaman, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+    End Sub
+
+    Public Overrides Sub Update()
+        Select Case CurrState
+            'Case StateMegaman.Stand
+            '   GetNextFrame()
+            'If FrameIdx = 0 Then
+            '        State(StateMegaman.Run, 0)
+             '   End If
             Case StateMegaman.Run
                 GetNextFrame()
                 If PosX <= 50 Then
@@ -336,6 +364,45 @@ Public Class CCharacter
         End Select
     End Sub
 End Class
+Public Class CCharMagnaProjectile
+    Inherits CCharacter
+
+    Public CurrState As StateMagnaProjectile
+
+    Public Sub State(state As StateMagnaProjectile, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+
+    End Sub
+
+    Public Overrides Sub Update()
+        Select Case CurrState
+            Case StateMagnaProjectile.ShurikenStart
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaProjectile.Shuriken, 1)
+                End If
+            Case StateMagnaProjectile.Shuriken
+                GetNextFrame()
+                If PosX <= 220 Then
+                    dir = dir + 1 * Math.PI / 180
+                    'update v
+                    Vx = Math.Cos(dir)
+                    Vy = Math.Sin(dir)
+                    'update pos
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                Else
+                    Destroy = True
+                End If
+
+        End Select
+    End Sub
+
+End Class
+
 Public Class CElmtFrame
     Public CtrPoint As TPoint
     Public Top, Bottom, Left, Right As Integer
