@@ -28,16 +28,13 @@ Public Enum StateMegaman
 End Enum
 
 Public Enum StateMagnaProjectile
-    ShurikenStart1
-    ShurikenStart2
-    ShurikenStart3
+    ShurikenStart
     Shuriken1
-    Shuriken2
-    Shuriken3
+    Tail
 End Enum
 
 Public Enum StateMagnaHomingTail
-    Magnet
+    Tail
 End Enum
 Public Enum FaceDir
     Left
@@ -142,7 +139,7 @@ Public Class CImage
 End Class
 
 Public Class CCharacter
-    Public PosX, PosY As Double
+    Public PosX, PosY, PosXM As Double
     Public Vx, Vy As Double
     Public FrameIdx As Integer
     Public CurrFrame As Integer
@@ -300,9 +297,17 @@ Public Class CCharMagna
                     Vy = 0
                 End If
             Case StateMagnaCenti.Vanish
-                'If FrameIdx <= 6 Then
-                'GetNextFrame()
-                'End If
+                GetNextFrame()
+                If FrameIdx = 5 And CurrFrame = 2 And CurrPos <= 2 Then
+                    State(StateMagnaCenti.AppearUD, 16)
+                    Vx = 0
+                    Vy = 0
+                ElseIf FrameIdx = 5 And CurrFrame = 2 And CurrPos >= 3 Then
+                    State(StateMagnaCenti.Appear, 9)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.VanishUD
                 GetNextFrame()
                 If FrameIdx = 5 And CurrFrame = 2 And CurrPos <= 2 Then
                     State(StateMagnaCenti.AppearUD, 16)
@@ -365,13 +370,14 @@ Public Class CCharMegaMan
             Case StateMegaman.Run
                 GetNextFrame()
                 PosX = PosX + Vx
+                PosXM = PosX
                 If PosX <= 50 Then
                     PosX = PosX + Vx
-                    Vx = Vx + 1
+                    Vx = Vx + 0.2
                     FDir = FaceDir.Left
                 End If
                 If PosX >= 200 Then
-                    Vx = Vx - 1
+                    Vx = Vx - 0.2
                     FDir = FaceDir.Right
                 End If
         End Select
@@ -392,20 +398,10 @@ Public Class CCharMagnaProjectile
 
     Public Overrides Sub Update()
         Select Case CurrState
-            Case StateMagnaProjectile.ShurikenStart1
+            Case StateMagnaProjectile.ShurikenStart
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMagnaProjectile.Shuriken1, 1)
-                End If
-            Case StateMagnaProjectile.ShurikenStart2
-                GetNextFrame()
-                If FrameIdx = 0 And CurrFrame = 0 Then
-                    State(StateMagnaProjectile.Shuriken2, 1)
-                End If
-            Case StateMagnaProjectile.ShurikenStart3
-                GetNextFrame()
-                If FrameIdx = 0 And CurrFrame = 0 Then
-                    State(StateMagnaProjectile.Shuriken3, 1)
                 End If
             Case StateMagnaProjectile.Shuriken1
                 GetNextFrame()
@@ -417,27 +413,18 @@ Public Class CCharMagnaProjectile
                 Else
                     Destroy = True
                 End If
-            Case StateMagnaProjectile.Shuriken2
+            Case StateMagnaProjectile.Tail
                 GetNextFrame()
-                If PosY <= 200 Then
-                    PosX = PosX - Vx
-                    PosY = PosY + Vy
-                    Vy = Vy + 1
-                    Vx = Vx + 0.2
-                Else
-                    Destroy = True
-                End If
-            Case StateMagnaProjectile.Shuriken3
-                GetNextFrame()
-                If PosY <= 200 Then
-                    PosX = PosX - Vx
-                    PosY = PosY + Vy
-                    Vy = Vy + 1.5
-                    Vx = Vx + 0.1
-                Else
-                    Destroy = True
-                End If
+                'update dir
+                dir = dir + 1 * Math.PI / 180
 
+                'update v
+                Vx = Math.Cos(dir)
+                Vy = Math.Sin(dir)
+
+                'update pos
+                PosX = PosX + Vx
+                PosY = PosY + Vy
         End Select
     End Sub
 
@@ -457,7 +444,7 @@ Public Class CCharMagnaHomingTail
 
     Public Overrides Sub Update()
         Select Case CurrState
-            Case StateMagnaHomingTail.Magnet
+            Case StateMagnaHomingTail.Tail
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
                 End If

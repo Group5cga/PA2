@@ -6,7 +6,7 @@ Public Class Form1
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
-    Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, Shuriken, ShurikenStart As CArrFrame
+    Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, MagnaPartTail1, Shuriken, ShurikenStart1, ShurikenStart2, ShurikenStart3 As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
     Dim ListChar As New List(Of CCharacter)
     Dim MC As CCharMagna
@@ -234,13 +234,21 @@ Public Class Form1
         MagnaPartTail.Insert(31, 821, 23, 841, 40, 829, 1)
         MagnaPartTail.Insert(53, 824, 46, 819, 59, 830, 1)
         MagnaPartTail.Insert(15, 838, 8, 832, 23, 845, 1)
+
+        MagnaPartTail1 = New CArrFrame
         MagnaPartTail.Insert(31, 838, 23, 721, 40, 845, 1)
         MagnaPartTail.Insert(58, 838, 48, 832, 68, 845, 1)
         MagnaPartTail.Insert(81, 838, 72, 832, 91, 845, 1)
         MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
 
-        ShurikenStart = New CArrFrame
-        ShurikenStart.Insert(161, 911, 157, 908, 166, 914, 1)
+        ShurikenStart1 = New CArrFrame
+        ShurikenStart1.Insert(161, 911, 157, 908, 166, 914, 3)
+
+        ShurikenStart2 = New CArrFrame
+        ShurikenStart2.Insert(161, 911, 157, 908, 166, 914, 4)
+
+        ShurikenStart3 = New CArrFrame
+        ShurikenStart3.Insert(161, 911, 157, 908, 166, 914, 5)
 
         Shuriken = New CArrFrame
         Shuriken.Insert(161, 911, 157, 908, 166, 914, 1)
@@ -430,6 +438,23 @@ Public Class Form1
         For Each CC In ListChar
             CC.Update()
         Next
+
+        If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
+            CreateMagnaProjectile(1)
+        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 4 Then
+            CreateMagnaProjectile(2)
+        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 5 Then
+            CreateMagnaProjectile(3)
+        End If
+
+        If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
+            CreateMagnaHomingTail(1)
+        ElseIf MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 2 Then
+            CreateMagnaHomingTail(2)
+        ElseIf MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 3 Then
+            CreateMagnaHomingTail(3)
+        End If
+
         Dim Listchar1 As New List(Of CCharacter)
         For Each CC In ListChar
             If Not CC.Destroy Then
@@ -445,20 +470,28 @@ Public Class Form1
         Dim MP As CCharMagnaProjectile
 
         MP = New CCharMagnaProjectile
-        If MC.FDir = FaceDir.Left Then
-            MP.PosX = MC.PosX - 20
-        Else
-            MP.PosX = MC.PosX + 20
-        End If
+        'If MC.FDir = FaceDir.Left Then
+        'MP.PosX = MC.PosX - 20
+        'Else
+        'MP.PosX = MC.PosX + 20
+        'End If
 
         MP.PosY = MC.PosY - 3
-
+        MP.dir = 90 * Math.PI / 180
         MP.Vx = 0
         MP.Vy = -5
-        MP.CurrState = StateMagnaProjectile.ShurikenStart1
+        MP.CurrState = StateMagnaProjectile.ShurikenStart
         ReDim MP.ArrSprites(1)
+        If n = 1 Then
+            MP.PosX = MC.PosX - 20
+            MP.ArrSprites(0) = ShurikenStart1
+        ElseIf n = 2 Then
+            MP.PosX = MC.PosX + 20
+            MP.ArrSprites(0) = ShurikenStart2
+        Else
+            MP.ArrSprites(0) = ShurikenStart3
+        End If
 
-        MP.ArrSprites(0) = ShurikenStart
         MP.ArrSprites(1) = Shuriken
 
         ListChar.Add(MP)
@@ -469,10 +502,10 @@ Public Class Form1
 
         MT = New CCharMagnaHomingTail
         If MC.FDir = FaceDir.Left Then
-            MT.PosX = MC.PosX - 20
+            MT.PosX = MM.PosX - 20
             MT.FDir = FaceDir.Left
         Else
-            MT.PosX = MC.PosX + 20
+            MT.PosX = MM.PosX + 20
             MT.FDir = FaceDir.Right
         End If
 
@@ -480,11 +513,14 @@ Public Class Form1
 
         MT.Vx = 0
         MT.Vy = 0
-        MT.CurrState = StateMagnaHomingTail.Magnet
+        MT.CurrState = StateMagnaProjectile.Tail
         ReDim MT.ArrSprites(1)
-
-        MT.ArrSprites(0) = ShurikenStart
-        MT.ArrSprites(1) = Shuriken
+        If n = 1 Then
+            MT.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 2 Then
+            MT.ArrSprites(0) = MagnaPartTail
+        End If
+        MT.ArrSprites(1) = MagnaPartTail1
 
         ListChar.Add(MT)
     End Sub
@@ -492,12 +528,21 @@ Public Class Form1
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         If MC.CurrState = StateMagnaCenti.Stand Or MC.CurrState = StateMagnaCenti.StandUD Then
             If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
-                MC.State(StateMagnaCenti.Vanish, 8)
-                resultrand = Randomizer.Next(1, 5)
-                If resultrand = 5 Then
+                If MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Vanish, 8)
                     resultrand = Randomizer.Next(1, 5)
+                    If resultrand = 5 Then
+                        resultrand = Randomizer.Next(1, 5)
+                    End If
+                    MC.CurrPos = resultrand
+                ElseIf MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.VanishUD, 15)
+                    resultrand = Randomizer.Next(1, 5)
+                    If resultrand = 5 Then
+                        resultrand = Randomizer.Next(1, 5)
+                    End If
+                    MC.CurrPos = resultrand
                 End If
-                MC.CurrPos = resultrand
                 'MsgBox(MC.CurrPos)
             ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
                 MC.State(StateMagnaCenti.Throwing, 5)
@@ -506,6 +551,7 @@ Public Class Form1
                 MC.State(StateMagnaCenti.Magnet, 6)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
                 MC.State(StateMagnaCenti.Tail, 7)
+                CreateMagnaHomingTail(2)
             ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
                 If MC.PosX = 50 And MC.PosY = 158 Then
                     MC.State(StateMagnaCenti.Jump1, 2)
