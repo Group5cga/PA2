@@ -245,10 +245,10 @@ Public Class Form1
         ShurikenStart1.Insert(161, 911, 157, 908, 166, 914, 3)
 
         ShurikenStart2 = New CArrFrame
-        ShurikenStart2.Insert(161, 911, 157, 908, 166, 914, 4)
+        ShurikenStart2.Insert(161, 911, 157, 908, 166, 914, 5)
 
         ShurikenStart3 = New CArrFrame
-        ShurikenStart3.Insert(161, 911, 157, 908, 166, 914, 5)
+        ShurikenStart3.Insert(161, 911, 157, 908, 166, 914, 7)
 
         Shuriken = New CArrFrame
         Shuriken.Insert(161, 911, 157, 908, 166, 914, 1)
@@ -441,9 +441,9 @@ Public Class Form1
 
         If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
             CreateMagnaProjectile(1)
-        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 4 Then
-            CreateMagnaProjectile(2)
         ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 5 Then
+            CreateMagnaProjectile(2)
+        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 7 Then
             CreateMagnaProjectile(3)
         End If
 
@@ -470,25 +470,26 @@ Public Class Form1
         Dim MP As CCharMagnaProjectile
 
         MP = New CCharMagnaProjectile
-        'If MC.FDir = FaceDir.Left Then
-        'MP.PosX = MC.PosX - 20
-        'Else
-        'MP.PosX = MC.PosX + 20
-        'End If
+        If MC.FDir = FaceDir.Left Then
+            MP.PosX = MC.PosX
+        Else
+            MP.PosX = MC.PosX
+        End If
 
         MP.PosY = MC.PosY - 3
-        MP.dir = 90 * Math.PI / 180
-        MP.Vx = 0
-        MP.Vy = -5
         MP.CurrState = StateMagnaProjectile.ShurikenStart
         ReDim MP.ArrSprites(1)
         If n = 1 Then
-            MP.PosX = MC.PosX - 20
+            MP.Vx = 0
+            MP.Vy = -7
             MP.ArrSprites(0) = ShurikenStart1
         ElseIf n = 2 Then
-            MP.PosX = MC.PosX + 20
+            MP.Vx = 0
+            MP.Vy = -6
             MP.ArrSprites(0) = ShurikenStart2
         Else
+            MP.Vx = 0
+            MP.Vy = -6
             MP.ArrSprites(0) = ShurikenStart3
         End If
 
