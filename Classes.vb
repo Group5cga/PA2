@@ -419,8 +419,8 @@ Public Class CCharMagnaProjectile
                 dir = dir + 1 * Math.PI / 180
 
                 'update v
-                Vx = Math.Cos(dir)
-                Vy = Math.Sin(dir)
+                Vx = 2 * Math.Cos(dir) * 10
+                Vy = 2 * Math.Sin(dir) * 10
 
                 'update pos
                 PosX = PosX + Vx
@@ -446,9 +446,18 @@ Public Class CCharMagnaHomingTail
         Select Case CurrState
             Case StateMagnaHomingTail.Tail
                 GetNextFrame()
-                If FrameIdx = 0 And CurrFrame = 0 Then
+                If PosX <= 220 Then
+                    dir = dir + 1 * Math.PI / 180
+                    'update v
+                    Vx = Math.Cos(dir)
+                    Vy = Math.Sin(dir)
+                    'update pos
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                Else
+                    Destroy = True
                 End If
-                'Case StateMagnaProjectile.Shuriken
+                'Case StateMagnaProjectile.Tail
                 '    GetNextFrame()
                 '    If PosX <= 220 Then
                 '        dir = dir + 1 * Math.PI / 180

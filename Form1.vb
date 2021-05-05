@@ -350,6 +350,7 @@ Public Class Form1
             Dim EF As CElmtFrame = cc.ArrSprites(cc.IdxArrSprites).Elmt(cc.FrameIdx)
             Dim spritewidth = EF.Right - EF.Left
             Dim spriteheight = EF.Bottom - EF.Top
+            Dim ImgX, ImgY As Integer
 
             If cc.FDir = FaceDir.Left Then
                 Dim spriteleft As Integer = cc.PosX - EF.CtrPoint.x + EF.Left
@@ -357,14 +358,22 @@ Public Class Form1
                 'set mask
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Left + i, EF.Top + j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Left + i, EF.Top + j))
+                        End If
                     Next
                 Next
 
                 'set sprite
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top + j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top + j))
+                        End If
                     Next
                 Next
             ElseIf cc.FDir = FaceDir.Right Then 'facing right
@@ -373,14 +382,22 @@ Public Class Form1
                 'set mask
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Right - i, EF.Top + j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Right - i, EF.Top + j))
+                        End If
                     Next
                 Next
 
                 'set sprite
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Right - i, EF.Top + j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Right - i, EF.Top + j))
+                        End If
                     Next
                 Next
             Else
@@ -389,14 +406,22 @@ Public Class Form1
                 'set mask
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Left + i, EF.Top - j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpAnd(Img.Elmt(spriteleft + i, spritetop + j), SpriteMask.Elmt(EF.Left + i, EF.Top - j))
+                        End If
                     Next
                 Next
 
                 'set sprite
                 For i = 0 To spritewidth
                     For j = 0 To spriteheight
-                        Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top - j))
+                        ImgX = spriteleft + i
+                        ImgY = spritetop + j
+                        If ImgX >= 0 And ImgX <= Img.Width - 1 And ImgY >= 0 And ImgY <= Img.Height - 1 Then
+                            Img.Elmt(spriteleft + i, spritetop + j) = OpOr(Img.Elmt(spriteleft + i, spritetop + j), SpriteMap.Elmt(EF.Left + i, EF.Top - j))
+                        End If
                     Next
                 Next
             End If
@@ -514,7 +539,7 @@ Public Class Form1
 
         MT.Vx = 0
         MT.Vy = 0
-        MT.CurrState = StateMagnaProjectile.Tail
+        MT.CurrState = StateMagnaHomingTail.Tail
         ReDim MT.ArrSprites(1)
         If n = 1 Then
             MT.ArrSprites(0) = MagnaPartTail
@@ -522,7 +547,6 @@ Public Class Form1
             MT.ArrSprites(0) = MagnaPartTail
         End If
         MT.ArrSprites(1) = MagnaPartTail1
-
         ListChar.Add(MT)
     End Sub
 
