@@ -230,16 +230,26 @@ Public Class Form1
         MagnaAppearUD.Insert(26, 1164, 6, 1134, 45, 1193, 4)
 
         MagnaPartTail = New CArrFrame
-        MagnaPartTail.Insert(15, 821, 8, 814, 23, 829, 1)
-        MagnaPartTail.Insert(31, 821, 23, 841, 40, 829, 1)
-        MagnaPartTail.Insert(53, 824, 46, 819, 59, 830, 1)
-        MagnaPartTail.Insert(15, 838, 8, 832, 23, 845, 1)
+        MagnaPartTail.Insert(15, 840, 8, 833, 23, 847, 1)
+        MagnaPartTail.Insert(31, 840, 24, 833, 40, 847, 1)
+        MagnaPartTail.Insert(58, 840, 47, 833, 68, 847, 1)
+        MagnaPartTail.Insert(82, 840, 73, 833, 91, 847, 1)
+        MagnaPartTail.Insert(108, 840, 96, 833, 119, 847, 1)
+        MagnaPartTail.Insert(108, 840, 96, 833, 119, 847, 1)
+        MagnaPartTail.Insert(82, 840, 73, 833, 91, 847, 1)
+        MagnaPartTail.Insert(58, 840, 47, 833, 68, 847, 1)
+        MagnaPartTail.Insert(31, 840, 24, 833, 40, 847, 1)
+        MagnaPartTail.Insert(15, 840, 8, 833, 23, 847, 1)
 
         MagnaPartTail1 = New CArrFrame
-        MagnaPartTail.Insert(31, 838, 23, 721, 40, 845, 1)
-        MagnaPartTail.Insert(58, 838, 48, 832, 68, 845, 1)
-        MagnaPartTail.Insert(81, 838, 72, 832, 91, 845, 1)
-        MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
+        'MagnaPartTail.Insert(15, 821, 8, 814, 23, 829, 1)
+        'MagnaPartTail.Insert(31, 821, 23, 841, 40, 829, 1)
+        'MagnaPartTail.Insert(53, 824, 46, 819, 59, 830, 1)
+        'MagnaPartTail.Insert(15, 838, 8, 832, 23, 845, 1)
+        'MagnaPartTail.Insert(31, 838, 23, 721, 40, 845, 1)
+        'MagnaPartTail.Insert(58, 838, 48, 832, 68, 845, 1)
+        'MagnaPartTail.Insert(81, 838, 72, 832, 91, 845, 1)
+        'MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
 
         ShurikenStart1 = New CArrFrame
         ShurikenStart1.Insert(161, 913, 155, 908, 166, 914, 3)
@@ -532,7 +542,7 @@ Public Class Form1
         End If
 
         MT.PosY = MC.PosY - 3
-
+        MT.dir = 90 * Math.PI / 180
         MT.Vx = 0
         MT.Vy = 0
         MT.CurrState = StateMagnaHomingTail.Tail
