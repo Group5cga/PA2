@@ -415,16 +415,20 @@ Public Class CCharMagnaProjectile
                 End If
             Case StateMagnaProjectile.Tail
                 GetNextFrame()
-                'update dir
-                dir = dir + 1 * Math.PI / 180
+                If PosX <= 220 Then
+                    'update dir
+                    dir = dir + 1 * Math.PI / 180
 
-                'update v
-                Vx = 2 * Math.Cos(dir) * 10
-                Vy = 2 * Math.Sin(dir) * 10
+                    'update v
+                    Vx = Math.Cos(dir)
+                    Vy = Math.Sin(dir)
 
-                'update pos
-                PosX = PosX + Vx
-                PosY = PosY + Vy
+                    'update pos
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                Else
+                    Destroy = True
+                End If
         End Select
     End Sub
 

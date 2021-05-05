@@ -472,13 +472,9 @@ Public Class Form1
             CreateMagnaProjectile(3)
         End If
 
-        If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
-            CreateMagnaHomingTail(1)
-        ElseIf MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 2 Then
-            CreateMagnaHomingTail(2)
-        ElseIf MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 3 Then
-            CreateMagnaHomingTail(3)
-        End If
+        'If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
+        '    CreateMagnaHomingTail(1)
+        'End If
 
         Dim Listchar1 As New List(Of CCharacter)
         For Each CC In ListChar
@@ -528,7 +524,7 @@ Public Class Form1
 
         MT = New CCharMagnaHomingTail
         If MC.FDir = FaceDir.Left Then
-            MT.PosX = MM.PosX - 20
+            MT.PosX = MM.PosX - 5
             MT.FDir = FaceDir.Left
         Else
             MT.PosX = MM.PosX + 20
