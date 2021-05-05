@@ -242,18 +242,18 @@ Public Class Form1
         MagnaPartTail.Insert(107, 838, 97, 832, 117, 845, 1)
 
         ShurikenStart1 = New CArrFrame
-        ShurikenStart1.Insert(161, 911, 157, 908, 166, 914, 3)
+        ShurikenStart1.Insert(161, 913, 155, 908, 166, 914, 3)
 
         ShurikenStart2 = New CArrFrame
-        ShurikenStart2.Insert(161, 911, 157, 908, 166, 914, 5)
+        ShurikenStart2.Insert(161, 913, 155, 908, 166, 914, 5)
 
         ShurikenStart3 = New CArrFrame
-        ShurikenStart3.Insert(161, 911, 157, 908, 166, 914, 7)
+        ShurikenStart3.Insert(161, 913, 155, 908, 166, 914, 7)
 
         Shuriken = New CArrFrame
-        Shuriken.Insert(161, 911, 157, 908, 166, 914, 1)
-        Shuriken.Insert(170, 911, 166, 908, 174, 914, 1)
-        Shuriken.Insert(178, 911, 174, 908, 183, 914, 1)
+        Shuriken.Insert(160, 913, 155, 908, 166, 914, 1)
+        Shuriken.Insert(169, 913, 166, 908, 174, 914, 1)
+        Shuriken.Insert(178, 913, 174, 908, 183, 914, 1)
 
         MegamanRunStart = New CArrFrame
 
