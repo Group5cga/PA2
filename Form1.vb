@@ -528,6 +528,39 @@ Public Class Form1
 
         ListChar.Add(MP)
     End Sub
+    Sub CreateMagnaSeparateTail(n As Integer)
+        Dim MS As CCharMagnaSeparate
+
+        MS = New CCharMagnaSeparate
+
+        MS.PosX = MC.PosX
+        MS.Vx = 0
+        MS.Vy = 0
+        MS.CurrState = StateMagnaSeparate.Tail1
+        ReDim MS.ArrSprites(1)
+        If n = 1 Then
+            MS.PosY = MC.PosY - 10
+            MS.Vx = 0
+            MS.Vy = 20
+            MS.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 2 Then
+            MS.PosY = MC.PosY - 15
+            MS.Vx = -20
+            MS.Vy = 0
+            MS.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 3 Then
+            MS.PosY = MC.PosY - 20
+            MS.Vx = 20
+            MS.Vy = 0
+            MS.ArrSprites(0) = MagnaPartTail
+        Else
+            MS.PosY = MC.PosY - 25
+            MS.Vx = 0
+            MS.Vy = -20
+            MS.ArrSprites(0) = MagnaPartTail
+        End If
+        ListChar.Add(MS)
+    End Sub
 
     Sub CreateMagnaHomingTail(n As Integer)
         Dim MT As CCharMagnaHomingTail
@@ -609,6 +642,12 @@ Public Class Form1
                 MC.FDir = FaceDir.Left
             ElseIf e.KeyChar = ChrW(Keys.Right) Then
                 MC.FDir = FaceDir.Right
+            ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
+                'Test key for experiment
+                CreateMagnaSeparateTail(1)
+                CreateMagnaSeparateTail(2)
+                CreateMagnaSeparateTail(3)
+                CreateMagnaSeparateTail(4)
                 'ElseIf e.KeyChar = ChrW(Keys.Right) And e.KeyChar = ChrW(Keys.Up) Then
                 'jump to ceiling
                 'ElseIf e.KeyChar = ChrW(Keys.Left) And e.KeyChar = ChrW(Keys.Up) Then

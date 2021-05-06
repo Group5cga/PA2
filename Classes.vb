@@ -33,6 +33,9 @@ Public Enum StateMagnaProjectile
     Tail
 End Enum
 
+Public Enum StateMagnaSeparate
+    Tail1
+End Enum
 Public Enum StateMagnaHomingTail
     Tail
 End Enum
@@ -480,6 +483,33 @@ Public Class CCharMagnaHomingTail
 
 End Class
 
+Public Class CCharMagnaSeparate
+    Inherits CCharacter
+
+    Public CurrState As StateMagnaSeparate
+
+    Public Sub State(state As StateMagnaSeparate, idxspr As Integer)
+        CurrState = state
+        IdxArrSprites = idxspr
+        CurrFrame = 0
+        FrameIdx = 0
+
+    End Sub
+
+    Public Overrides Sub Update()
+        Select Case CurrState
+            Case StateMagnaSeparate.Tail1
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If PosX < 30 Then
+                    Destroy = True
+                End If
+
+        End Select
+    End Sub
+
+End Class
 Public Class CElmtFrame
     Public CtrPoint As TPoint
     Public Top, Bottom, Left, Right As Integer
