@@ -454,10 +454,10 @@ Public Class CCharMagnaHomingTail
             Case StateMagnaHomingTail.Tail
                 GetNextFrame()
                 If PosX <= 220 Then
-                    dir = dir + 1 * Math.PI / 180
+                    dir = dir + 8 * Math.PI / 180
                     'update v
-                    Vx = Math.Cos(dir)
-                    Vy = Math.Sin(dir)
+                    Vx = 4 * Math.Cos(dir)
+                    Vy = 4 * Math.Sin(dir)
                     'update pos
                     PosX = PosX + Vx
                     PosY = PosY + Vy

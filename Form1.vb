@@ -566,8 +566,8 @@ Public Class Form1
         Dim MT As CCharMagnaHomingTail
 
         MT = New CCharMagnaHomingTail
-        If MC.FDir = FaceDir.Left Then
-            MT.PosX = MM.PosX - 5
+        If MM.FDir = FaceDir.Left Then
+            MT.PosX = MM.PosX + 20
             MT.FDir = FaceDir.Left
         Else
             MT.PosX = MM.PosX + 20
@@ -576,8 +576,8 @@ Public Class Form1
 
         MT.PosY = MC.PosY - 3
         MT.dir = 90 * Math.PI / 180
-        MT.Vx = 0
-        MT.Vy = 0
+        MT.Vx = MM.Vx
+        MT.Vy = MM.Vy
         MT.CurrState = StateMagnaHomingTail.Tail
         ReDim MT.ArrSprites(1)
         If n = 1 Then
