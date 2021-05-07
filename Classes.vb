@@ -142,7 +142,7 @@ Public Class CImage
 End Class
 
 Public Class CCharacter
-    Public PosX, PosY, PosXM As Double
+    Public PosX, PosY, PosXM, PosYM As Double
     Public Vx, Vy As Double
     Public FrameIdx As Integer
     Public CurrFrame As Integer
@@ -374,6 +374,7 @@ Public Class CCharMegaMan
                 GetNextFrame()
                 PosX = PosX + Vx
                 PosXM = PosX
+                PosYM = PosY
                 If PosX <= 50 Then
                     PosX = PosX + Vx
                     Vx = Vx + 0.2
@@ -427,7 +428,7 @@ Public Class CCharMagnaProjectile
                     Vy = Math.Sin(dir)
 
                     'update pos
-                    PosX = PosX + Vx
+                    PosX = PosXM + Vx
                     PosY = PosY + Vy
                 Else
                     Destroy = True
@@ -453,7 +454,7 @@ Public Class CCharMagnaHomingTail
         Select Case CurrState
             Case StateMagnaHomingTail.Tail
                 GetNextFrame()
-                If PosX <= 220 Then
+                If dir <= 720 * Math.PI / 180 Then
                     dir = dir + 8 * Math.PI / 180
                     'update v
                     Vx = 4 * Math.Cos(dir)
@@ -461,8 +462,16 @@ Public Class CCharMagnaHomingTail
                     'update pos
                     PosX = PosX + Vx
                     PosY = PosY + Vy
+                ElseIf dir >= 720 * Math.PI / 180 Then
+                    Vx = 0
+                    Vy = Vy - (Vy - 2)
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                    If PosY >= 172 Then
+                        Destroy = True
+                    End If
                 Else
-                    Destroy = True
+                        Destroy = True
                 End If
                 'Case StateMagnaProjectile.Tail
                 '    GetNextFrame()

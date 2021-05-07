@@ -567,14 +567,14 @@ Public Class Form1
 
         MT = New CCharMagnaHomingTail
         If MM.FDir = FaceDir.Left Then
-            MT.PosX = MM.PosX + 20
+            MT.PosX = MM.PosX + 40
             MT.FDir = FaceDir.Left
         Else
-            MT.PosX = MM.PosX + 20
+            MT.PosX = MM.PosX + 40
             MT.FDir = FaceDir.Right
         End If
 
-        MT.PosY = MC.PosY - 3
+        MT.PosY = MM.PosY - 3
         MT.dir = 90 * Math.PI / 180
         MT.Vx = MM.Vx
         MT.Vy = MM.Vy
