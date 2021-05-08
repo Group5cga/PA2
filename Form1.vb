@@ -625,7 +625,7 @@ Public Class Form1
                 MC.State(StateMagnaCenti.Throwing, 5)
                 CreateMagnaProjectile(3)
             ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
-                MC.State(StateMagnaCenti.Magnet, 6)
+                MC.State(StateMagnaCenti.MagnetUD, 13)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
                 MC.State(StateMagnaCenti.Tail, 7)
                 CreateMagnaHomingTail(2)
