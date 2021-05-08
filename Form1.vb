@@ -332,10 +332,12 @@ Public Class Form1
         MegamanMagnetHit.Insert(851, 323, 835, 303, 867, 343, 1)
 
         MM = New CCharMegaMan
-        ReDim MM.ArrSprites(2)
+        ReDim MM.ArrSprites(4)
         MM.ArrSprites(0) = MegamanIntro
         MM.ArrSprites(1) = MegamanRun
         MM.ArrSprites(2) = MegamanRunStart
+        MM.ArrSprites(3) = MegamanMagnetStart
+        MM.ArrSprites(4) = MegamanMagnetHit
 
         MM.PosX = 50
         MM.PosY = 172

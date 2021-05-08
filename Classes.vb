@@ -25,6 +25,8 @@ Public Enum StateMegaman
     RunStart
     Run
     Intro
+    MagnetStart
+    MagnetHit
 End Enum
 
 Public Enum StateMagnaProjectile
@@ -278,7 +280,7 @@ Public Class CCharMagna
             Case StateMagnaCenti.Magnet
                 GetNextFrame()
                 If FrameIdx = 5 And CurrFrame = 3 Then
-                    State(StateMagnaCenti.Stand, 1)
+                    State(StateMegaman.MagnetStart, 1)
                     Vx = 0
                     Vy = 0
                 End If
@@ -384,6 +386,15 @@ Public Class CCharMegaMan
                     Vx = Vx - 0.2
                     FDir = FaceDir.Right
                 End If
+            Case StateMegaman.MagnetStart
+                GetNextFrame()
+                PosX = PosX + Vx
+                PosY = PosY + Vy
+                If FrameIdx = 4 Then
+                    State(StateMegaman.MagnetHit, 1)
+                End If
+            Case StateMegaman.MagnetHit
+                GetNextFrame()
         End Select
     End Sub
 End Class
