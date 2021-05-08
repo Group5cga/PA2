@@ -389,17 +389,28 @@ Public Class CCharMegaMan
                 End If
             Case StateMegaman.MagnetStart
                 GetNextFrame()
-                If PosX >= 50 And PosY >= 65 Then
+                If FrameIdx <= 5 Then
                     PosX = PosX + Vx
                     PosY = PosY + Vy
-                    Vx = Vx + 0.5
-                    Vy = Vy + 0.5
-                End If
-                If FrameIdx = 4 Then
-                    State(StateMegaman.MagnetHit, 1)
+                    Vy = Vy - 1
+                    Vx = Vx - 0.5
+                    If PosY <= 95 Then
+                        State(StateMegaman.MagnetHit, 4)
+                    End If
                 End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()
+                If FrameIdx <= 6 Then
+                    PosY = PosY + Vy
+                    Vy = Vy + 1
+                    If PosY >= 172 Then
+                        State(StateMegaman.Intro, 0)
+                        PosX = 40
+                        PosY = 172
+                        Vx = 0
+                        Vy = 0
+                    End If
+                End If
         End Select
     End Sub
 End Class
