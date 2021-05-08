@@ -7,7 +7,7 @@ Public Class Form1
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
     Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, MagnaPartTail1, Shuriken, ShurikenStart1, ShurikenStart2, ShurikenStart3 As CArrFrame
-    Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD As CArrFrame
+    Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD, MegamanMagnetStart, MegamanMagnetHit As CArrFrame
     Dim ListChar As New List(Of CCharacter)
     Dim MC As CCharMagna
     Dim MM As CCharMegaMan
@@ -319,6 +319,17 @@ Public Class Form1
         MegamanRun.Insert(967, 167, 947, 148, 987, 187, 1)
         MegamanRun.Insert(1008, 167, 987, 148, 1030, 187, 1)
         MegamanRun.Insert(1050, 167, 1030, 148, 1071, 187, 1)
+
+        MegamanMagnetStart = New CArrFrame
+        MegamanMagnetStart.Insert(675, 321, 661, 301, 690, 341, 1)
+        MegamanMagnetStart.Insert(700, 322, 690, 301, 711, 344, 1)
+        MegamanMagnetStart.Insert(723, 323, 711, 299, 736, 348, 1)
+        MegamanMagnetStart.Insert(749, 323, 736, 299, 762, 348, 1)
+        MegamanMagnetStart.Insert(779, 326, 762, 304, 796, 348, 1)
+
+        MegamanMagnetHit = New CArrFrame
+        MegamanMagnetHit.Insert(819, 323, 804, 303, 835, 343, 1)
+        MegamanMagnetHit.Insert(851, 323, 835, 303, 867, 343, 1)
 
         MM = New CCharMegaMan
         ReDim MM.ArrSprites(2)
