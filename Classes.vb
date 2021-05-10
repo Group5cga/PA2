@@ -27,6 +27,7 @@ Public Enum StateMegaman
     Intro
     MagnetStart
     MagnetHit
+    MagnetGoing
 End Enum
 
 Public Enum StateMagnaProjectile
@@ -395,8 +396,15 @@ Public Class CCharMegaMan
                     Vy = Vy - 1
                     Vx = Vx - 0.5
                     If PosY <= 95 Then
-                        State(StateMegaman.MagnetHit, 4)
+                        Vx = 0
+                        Vy = 0
+                        State(StateMegaman.MagnetGoing, 4)
                     End If
+                End If
+            Case StateMegaman.MagnetGoing
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMegaman.MagnetHit, 3)
                 End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()

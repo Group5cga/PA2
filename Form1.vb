@@ -656,9 +656,9 @@ Public Class Form1
                     MC.Vy = -1
                     MC.FDir = FaceDir.Left
                 End If
-            ElseIf e.KeyChar = ChrW(Keys.Left) Then
+            ElseIf e.KeyChar = ChrW(Keys.A) Or e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
                 MC.FDir = FaceDir.Left
-            ElseIf e.KeyChar = ChrW(Keys.Right) Then
+            ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
                 MC.FDir = FaceDir.Right
             ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
                 'Test key for experiment
