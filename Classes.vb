@@ -37,10 +37,12 @@ Public Enum StateMagnaProjectile
 End Enum
 
 Public Enum StateMagnaSeparate
+    Tailstart
     Tail1
 End Enum
 Public Enum StateMagnaHomingTail
     Tail
+    Tail2
 End Enum
 Public Enum FaceDir
     Left
@@ -145,14 +147,14 @@ Public Class CImage
 End Class
 
 Public Class CCharacter
-    Public PosX, PosY, PosXM, PosYM As Double
+    Public PosX, PosY As Double
     Public Vx, Vy As Double
     Public FrameIdx As Integer
     Public CurrFrame As Integer
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
-    Public dir As Double
+    Public dir, dir2 As Double
     Public CurrPos As Integer
     Public Destroy As Boolean = False
 
@@ -377,8 +379,6 @@ Public Class CCharMegaMan
             Case StateMegaman.Run
                 GetNextFrame()
                 PosX = PosX + Vx
-                PosXM = PosX
-                PosYM = PosY
                 If PosX <= 50 Then
                     PosX = PosX + Vx
                     Vx = Vx + 0.2
@@ -463,7 +463,7 @@ Public Class CCharMagnaProjectile
                     Vy = Math.Sin(dir)
 
                     'update pos
-                    PosX = PosXM + Vx
+                    PosX = PosX + Vx
                     PosY = PosY + Vy
                 Else
                     Destroy = True
@@ -506,7 +506,28 @@ Public Class CCharMagnaHomingTail
                         Destroy = True
                     End If
                 Else
+                    Destroy = True
+                End If
+            Case StateMagnaHomingTail.Tail2
+                GetNextFrame()
+                If dir <= 900 * Math.PI / 180 Then
+                    dir = dir + 8 * Math.PI / 180
+                    'update v
+                    Vx = 4 * Math.Cos(dir)
+                    Vy = 4 * Math.Sin(dir)
+                    'update pos
+                    PosX = PosX + Vx
+                    PosY = PosY + Vy
+                ElseIf dir >= 900 * Math.PI / 180 Then
+                    Vx = 0
+                    Vy = 2
+                    PosX = PosX + Vx
+                    PosY = PosY - Vy
+                    If PosY <= 172 Then
                         Destroy = True
+                    End If
+                Else
+                    Destroy = True
                 End If
                 'Case StateMagnaProjectile.Tail
                 '    GetNextFrame()
@@ -542,11 +563,16 @@ Public Class CCharMagnaSeparate
 
     Public Overrides Sub Update()
         Select Case CurrState
+            Case StateMagnaSeparate.Tailstart
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaSeparate.Tail1, 1)
+                End If
             Case StateMagnaSeparate.Tail1
                 GetNextFrame()
                 PosX = PosX - Vx
                 PosY = PosY - Vy
-                If PosX < 30 Then
+                If PosX < 0 Or PosX > 260 Or PosY = 165 Then
                     Destroy = True
                 End If
 

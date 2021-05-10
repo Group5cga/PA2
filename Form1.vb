@@ -151,8 +151,8 @@ Public Class Form1
         MagnaTail.Insert(248, 298, 225, 259, 272, 335, 3)
         MagnaTail.Insert(303, 298, 276, 259, 329, 335, 3)
         MagnaTail.Insert(360, 298, 333, 259, 386, 335, 3)
-        MagnaTail.Insert(417, 298, 390, 259, 444, 335, 3)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
+        MagnaTail.Insert(417, 298, 390, 259, 444, 335, 1)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
@@ -487,9 +487,21 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
+ 
         For Each CC In ListChar
             CC.Update()
         Next
+
+        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 7 Then
+            CreateMagnaSeparateTail(1)
+            CreateMagnaSeparateTail(2)
+            CreateMagnaSeparateTail(3)
+            CreateMagnaSeparateTail(4)
+        End If
+        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 9 Then
+            CreateMagnaHomingTail(1)
+            CreateMagnaHomingTail(2)
+        End If
 
         If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
             CreateMagnaProjectile(1)
@@ -499,6 +511,23 @@ Public Class Form1
             CreateMagnaProjectile(3)
         End If
 
+        If MC.PosY = 158 Then
+            If Math.Round(MM.PosX) = MC.PosX - 20 Then
+                MC.State(StateMagnaCenti.Vanish, 8)
+                resultrand = Randomizer.Next(1, 5)
+                If resultrand = 5 Then
+                    resultrand = Randomizer.Next(1, 5)
+                End If
+                MC.CurrPos = resultrand
+            ElseIf Math.Round(MM.PosX) = MC.PosX + 20 Then
+                MC.State(StateMagnaCenti.Vanish, 8)
+                resultrand = Randomizer.Next(1, 5)
+                If resultrand = 5 Then
+                    resultrand = Randomizer.Next(1, 5)
+                End If
+                MC.CurrPos = resultrand
+            End If
+        End If
         'If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
         '    CreateMagnaHomingTail(1)
         'End If
@@ -551,29 +580,31 @@ Public Class Form1
         MS = New CCharMagnaSeparate
 
         MS.PosX = MC.PosX
-        MS.Vx = 0
-        MS.Vy = 0
         MS.CurrState = StateMagnaSeparate.Tail1
         ReDim MS.ArrSprites(1)
         If n = 1 Then
-            MS.PosY = MC.PosY - 10
+            MS.PosY = 148
             MS.Vx = 0
             MS.Vy = 20
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 2 Then
-            MS.PosY = MC.PosY - 15
+            MS.PosY = 143
             MS.Vx = -20
             MS.Vy = 0
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 3 Then
-            MS.PosY = MC.PosY - 20
+            MS.PosY = 138
             MS.Vx = 20
             MS.Vy = 0
             MS.ArrSprites(0) = MagnaPartTail
-        Else
-            MS.PosY = MC.PosY - 25
+        ElseIf n = 4 Then
+            MS.PosY = 133
             MS.Vx = 0
             MS.Vy = -20
+            MS.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 5 Then
+            MS.PosX = MM.PosX + 3
+            MS.PosY = 225
             MS.ArrSprites(0) = MagnaPartTail
         End If
         ListChar.Add(MS)
@@ -592,14 +623,18 @@ Public Class Form1
         End If
 
         MT.PosY = MM.PosY - 3
-        MT.dir = 90 * Math.PI / 180
         MT.Vx = MM.Vx
         MT.Vy = MM.Vy
-        MT.CurrState = StateMagnaHomingTail.Tail
         ReDim MT.ArrSprites(1)
         If n = 1 Then
+            MT.CurrState = StateMagnaHomingTail.Tail
+            MT.PosX = MM.PosX + 40
+            MT.dir = 90 * Math.PI / 180
             MT.ArrSprites(0) = MagnaPartTail
         ElseIf n = 2 Then
+            MT.CurrState = StateMagnaHomingTail.Tail2
+            MT.PosX = MM.PosX - 20
+            MT.dir = 270 * Math.PI / 180
             MT.ArrSprites(0) = MagnaPartTail
         End If
         MT.ArrSprites(1) = MagnaPartTail1
@@ -633,7 +668,7 @@ Public Class Form1
                 MM.State(StateMegaman.MagnetStart, 3)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
                 MC.State(StateMagnaCenti.Tail, 7)
-                CreateMagnaHomingTail(2)
+
             ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
                 If MC.PosX = 50 And MC.PosY = 158 Then
                     MC.State(StateMagnaCenti.Jump1, 2)
@@ -662,10 +697,13 @@ Public Class Form1
                 MC.FDir = FaceDir.Right
             ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
                 'Test key for experiment
-                CreateMagnaSeparateTail(1)
-                CreateMagnaSeparateTail(2)
-                CreateMagnaSeparateTail(3)
-                CreateMagnaSeparateTail(4)
+                CreateMagnaHomingTail(1)
+                CreateMagnaHomingTail(2)
+                'CreateMagnaSeparateTail(1)
+                'CreateMagnaSeparateTail(2)
+                'CreateMagnaSeparateTail(3)
+                'CreateMagnaSeparateTail(4)
+                'CreateMagnaSeparateTail(5)
                 'ElseIf e.KeyChar = ChrW(Keys.Right) And e.KeyChar = ChrW(Keys.Up) Then
                 'jump to ceiling
                 'ElseIf e.KeyChar = ChrW(Keys.Left) And e.KeyChar = ChrW(Keys.Up) Then
