@@ -293,14 +293,24 @@ Public Class CCharMagna
                 'GetNextFrame()
                 'End If
                 GetNextFrame()
-                If FrameIdx = 24 And CurrFrame = 2 Then
+                If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMagnaCenti.Stand, 1)
+                    Vx = 0
+                    Vy = 0
+                End If
+            Case StateMagnaCenti.TailUD
+                'If FrameIdx <= 25 Then
+                'GetNextFrame()
+                'End If
+                GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaCenti.StandUD, 10)
                     Vx = 0
                     Vy = 0
                 End If
             Case StateMagnaCenti.Throwing
                 GetNextFrame()
-                If FrameIdx = 4 And CurrFrame = 3 Then
+                If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0
                     Vy = 0
@@ -499,7 +509,7 @@ Public Class CCharMagnaHomingTail
                     PosY = PosY + Vy
                 ElseIf dir >= 720 * Math.PI / 180 Then
                     Vx = 0
-                    Vy = Vy - (Vy - 2)
+                    Vy = Vy - (Vy - 4)
                     PosX = PosX + Vx
                     PosY = PosY + Vy
                     If PosY >= 172 Then
@@ -520,7 +530,7 @@ Public Class CCharMagnaHomingTail
                     PosY = PosY + Vy
                 ElseIf dir >= 900 * Math.PI / 180 Then
                     Vx = 0
-                    Vy = 2
+                    Vy = 4
                     PosX = PosX + Vx
                     PosY = PosY - Vy
                     If PosY <= 172 Then
