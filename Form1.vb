@@ -155,19 +155,39 @@ Public Class Form1
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 1)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(587, 298, 562, 259, 612, 335, 3)
 
         MagnaTailUD = New CArrFrame
@@ -178,24 +198,44 @@ Public Class Form1
         MagnaTailUD.Insert(249, 1843, 224, 1805, 273, 1880, 3)
         MagnaTailUD.Insert(304, 1843, 277, 1805, 330, 1880, 3)
         MagnaTailUD.Insert(361, 1843, 334, 1805, 387, 1880, 3)
-        MagnaTailUD.Insert(418, 1843, 391, 1805, 444, 1880, 3)
+        MagnaTailUD.Insert(418, 1843, 391, 1805, 444, 1880, 1)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
         MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
         MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
-        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(588, 1843, 562, 1805, 613, 1880, 2)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 1)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
+        MagnaTailUD.Insert(588, 1843, 562, 1805, 613, 1880, 3)
 
         MagnaVanish = New CArrFrame
         MagnaVanish.Insert(25, 977, 6, 947, 44, 1005, 4)
@@ -492,13 +532,12 @@ Public Class Form1
             CC.Update()
         Next
 
-        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 7 Then
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
             CreateMagnaSeparateTail(2)
             CreateMagnaSeparateTail(3)
             CreateMagnaSeparateTail(4)
-        End If
-        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 9 Then
+        ElseIf (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
             CreateMagnaHomingTail(1)
             CreateMagnaHomingTail(2)
         End If
@@ -583,24 +622,24 @@ Public Class Form1
         MS.CurrState = StateMagnaSeparate.Tail1
         ReDim MS.ArrSprites(1)
         If n = 1 Then
-            MS.PosY = 148
+            MS.PosY = MC.PosY - 10
             MS.Vx = 0
-            MS.Vy = 20
+            MS.Vy = 30
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 2 Then
-            MS.PosY = 143
-            MS.Vx = -20
+            MS.PosY = MC.PosY - 15
+            MS.Vx = -30
             MS.Vy = 0
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 3 Then
-            MS.PosY = 138
-            MS.Vx = 20
+            MS.PosY = MC.PosY - 20
+            MS.Vx = 30
             MS.Vy = 0
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 4 Then
-            MS.PosY = 133
+            MS.PosY = MC.PosY - 25
             MS.Vx = 0
-            MS.Vy = -20
+            MS.Vy = -30
             MS.ArrSprites(0) = MagnaPartTail
         ElseIf n = 5 Then
             MS.PosX = MM.PosX + 3
@@ -667,7 +706,19 @@ Public Class Form1
                 MC.State(StateMagnaCenti.MagnetUD, 13)
                 MM.State(StateMegaman.MagnetStart, 3)
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
-                MC.State(StateMagnaCenti.Tail, 7)
+                If MC.PosX = 50 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Tail, 7)
+                    MC.FDir = FaceDir.Right
+                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Tail, 7)
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.TailUD, 14)
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.TailUD, 14)
+                    MC.FDir = FaceDir.Right
+                End If
 
             ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
                 If MC.PosX = 50 And MC.PosY = 158 Then
