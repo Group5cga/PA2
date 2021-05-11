@@ -710,8 +710,17 @@ Public Class Form1
                 MC.State(StateMagnaCenti.Throwing, 5)
                 CreateMagnaProjectile(3)
             ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
-                MC.State(StateMagnaCenti.MagnetUD, 13)
-                MM.State(StateMegaman.MagnetStart, 3)
+                If MM.PosX <= MC.PosX + 75 Then
+                    MC.State(StateMagnaCenti.MagnetUD, 13)
+                    MM.State(StateMegaman.MagnetStart, 3)
+                    MM.DestX = MC.PosX - 10
+                    MM.DestY = MC.PosY + 20
+                    MM.dir = 210 * Math.PI / 180
+                    MM.turnrate = 5 * Math.PI / 180
+                    MM.V = 5
+                Else
+                    MC.State(StateMagnaCenti.MagnetUD, 13)
+                End If
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
                 If MC.PosX = 50 And MC.PosY = 158 Then
                     MC.State(StateMagnaCenti.Tail, 7)

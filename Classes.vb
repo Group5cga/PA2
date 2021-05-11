@@ -147,16 +147,17 @@ Public Class CImage
 End Class
 
 Public Class CCharacter
-    Public PosX, PosY As Double
-    Public Vx, Vy As Double
+    Public PosX, PosY, DestX, DestY, Dist As Double
+    Public Vx, Vy, V As Double
     Public FrameIdx As Integer
     Public CurrFrame As Integer
     Public ArrSprites() As CArrFrame
     Public IdxArrSprites As Integer
     Public FDir As FaceDir
-    Public dir, dir2 As Double
+    Public dir, dir2, turnrate As Double
     Public CurrPos As Integer
     Public Destroy As Boolean = False
+    Public dx, dy, z As Double
 
     Public Sub RandomPos(CurrPos)
         Select Case CurrPos
@@ -401,11 +402,26 @@ Public Class CCharMegaMan
             Case StateMegaman.MagnetStart
                 GetNextFrame()
                 If FrameIdx <= 5 Then
+                    'PosX = PosX + Vx
+                    'PosY = PosY + Vy
+                    Vx = V * Math.Cos(dir)
+                    Vy = V * Math.Sin(dir)
+                    dx = DestX - PosX
+                    dy = DestY - PosY
+                    z = Vx * dy - Vy * dx
+                    If z >= 0 Then 'turn left
+                        dir = dir + turnrate
+                    Else 'turn right
+                        dir = dir - turnrate
+                    End If
+                    Vx = V * Math.Cos(dir)
+                    Vy = V * Math.Sin(dir)
                     PosX = PosX + Vx
                     PosY = PosY + Vy
-                    Vy = Vy - 1
-                    Vx = Vx - 0.5
-                    If PosY <= 95 Then
+                    Dist = (DestX - PosX) * (DestX - PosX) + (DestY - PosY) * (DestY - PosY)
+                    'Vy = Vy - 1
+                    'Vx = Vx - 0.5
+                    If Dist <= 100 Then
                         Vx = 0
                         Vy = 0
                         State(StateMegaman.MagnetGoing, 4)
