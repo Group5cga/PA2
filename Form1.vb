@@ -9,6 +9,7 @@ Public Class Form1
     Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, MagnaPartTail1, Shuriken, ShurikenStart1, ShurikenStart2, ShurikenStart3 As CArrFrame
     Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD, MegamanMagnetStart, MegamanMagnetHit As CArrFrame
     Dim ListChar As New List(Of CCharacter)
+    Dim Collision As Boolean
     Dim MC As CCharMagna
     Dim MM As CCharMegaMan
     Dim Randomizer As New Random
@@ -487,12 +488,16 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
- 
-        For Each CC In ListChar
-            CC.Update()
-        Next
+        Collision = CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM)
+        If Collision Then
+            'TODO list state megaman get hit
+        End If
 
-        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 7 Then
+        For Each CC In ListChar
+                CC.Update()
+            Next
+
+            If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
             CreateMagnaSeparateTail(2)
             CreateMagnaSeparateTail(3)
@@ -716,4 +721,23 @@ Public Class Form1
         End If
     End Sub
 
+    Public Function CollisionDetect(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagna, object2 As CCharMegaMan)
+        Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
+
+        L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
+        R1 = frame1.Right - frame1.CtrPoint.x + object1.PosX
+        T1 = frame1.Top - frame1.CtrPoint.y + object1.PosY
+        B1 = frame1.Bottom - frame1.CtrPoint.y + object1.PosY
+
+        L2 = frame2.Left - frame2.CtrPoint.x + object2.PosX + 30
+        R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX - 30
+        T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY + 30
+        B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY - 30
+
+        If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class
