@@ -284,12 +284,10 @@ Public Class CCharMagna
                 End If
             Case StateMagnaCenti.MagnetUD
                 GetNextFrame()
-                If FrameIdx = 11 Then
-                    State(StateMegaman.MagnetStart, 3)
-                    Vx = 0.5
-                    Vy = 0.5
-                    MsgBox("ok")
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMagnaCenti.StandUD, 10)
                 End If
+
             Case StateMagnaCenti.Tail
                 'If FrameIdx <= 25 Then
                 'GetNextFrame()
@@ -435,12 +433,22 @@ Public Class CCharMegaMan
                 End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()
-                If FrameIdx <= 6 Then
+                If FrameIdx <= 6 And PosX <= 160 Then
                     PosY = PosY + Vy
                     Vy = Vy + 1
                     If PosY >= 172 Then
                         State(StateMegaman.Intro, 0)
                         PosX = 40
+                        PosY = 172
+                        Vx = 0
+                        Vy = 0
+                    End If
+                ElseIf FrameIdx <= 6 And PosX >= 160 Then
+                    PosY = PosY + Vy
+                    Vy = Vy + 1
+                    If PosY >= 172 Then
+                        State(StateMegaman.Intro, 0)
+                        PosX = 205
                         PosY = 172
                         Vx = 0
                         Vy = 0
