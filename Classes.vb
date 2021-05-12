@@ -28,6 +28,7 @@ Public Enum StateMegaman
     MagnetStart
     MagnetHit
     MagnetGoing
+    Hit
 End Enum
 
 Public Enum StateMagnaProjectile
@@ -431,6 +432,8 @@ Public Class CCharMegaMan
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMegaman.MagnetHit, 3)
                 End If
+            Case StateMegaman.Hit
+                GetNextFrame()
             Case StateMegaman.MagnetHit
                 GetNextFrame()
                 If FrameIdx <= 6 And PosX <= 160 Then
