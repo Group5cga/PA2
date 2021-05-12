@@ -7,13 +7,15 @@ Public Class Form1
     Dim SpriteMap As CImage
     Dim SpriteMask As CImage
     Dim MegamanIntro, MegamanRunStart, MegamanRun, MagnaStand, MagnaJump, MagnaIntro, MagnaHit, MagnaDead, MagnaThrowing, MagnaMagnet, MagnaTail, MagnaVanish, MagnaAppear, MagnaPartTail, MagnaPartTail1, Shuriken, ShurikenStart1, ShurikenStart2, ShurikenStart3 As CArrFrame
-    Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD, MegamanMagnetStart, MegamanMagnetHit As CArrFrame
+    Dim MagnaStandUD, MagnaJumpUD, MagnaThrowingUD, MagnaMagnetUD, MagnaTailUD, MagnaVanishUD, MagnaAppearUD, MegamanMagnetStart, MegamanMagnetHit, MegamanHit As CArrFrame
     Dim ListChar As New List(Of CCharacter)
     Dim Collision As Boolean
     Dim MC As CCharMagna
     Dim MM As CCharMegaMan
     Dim Randomizer As New Random
     Dim resultrand As Integer
+    Dim projectile As CCharMagnaProjectile
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
         Bg = New CImage
@@ -376,6 +378,8 @@ Public Class Form1
         MegamanMagnetHit.Insert(819, 323, 804, 303, 835, 343, 3)
         MegamanMagnetHit.Insert(851, 323, 835, 303, 867, 343, 3)
 
+        MegamanHit = New CArrFrame
+
         MM = New CCharMegaMan
         ReDim MM.ArrSprites(4)
         MM.ArrSprites(0) = MegamanIntro
@@ -383,6 +387,7 @@ Public Class Form1
         MM.ArrSprites(2) = MegamanRunStart
         MM.ArrSprites(3) = MegamanMagnetStart
         MM.ArrSprites(4) = MegamanMagnetHit
+        MM.ArrSprites(4) = MegamanHit
 
         MM.PosX = 50
         MM.PosY = 172
@@ -533,6 +538,10 @@ Public Class Form1
             'TODO list state megaman get hit
         End If
 
+        If CollisionProjectile(projectile.ArrSprites(projectile.IdxArrSprites).Elmt(projectile.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), projectile, MM) Then
+            MM.State(StateMegaman.Hit, 5)
+            'TODO add actual state hit
+        End If
         For Each CC In ListChar
             CC.Update()
         Next
@@ -795,6 +804,25 @@ Public Class Form1
         R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX - 30
         T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY + 30
         B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY - 30
+
+        If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaProjectile, object2 As CCharMegaMan)
+        Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
+
+        L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
+        R1 = frame1.Right - frame1.CtrPoint.x + object1.PosX
+        T1 = frame1.Top - frame1.CtrPoint.y + object1.PosY
+        B1 = frame1.Bottom - frame1.CtrPoint.y + object1.PosY
+
+        L2 = frame2.Left - frame2.CtrPoint.x + object2.PosX
+        R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX
+        T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY
+        B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY
 
         If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
             Return True

@@ -28,6 +28,7 @@ Public Enum StateMegaman
     MagnetStart
     MagnetHit
     MagnetGoing
+    Hit
 End Enum
 
 Public Enum StateMagnaProjectile
