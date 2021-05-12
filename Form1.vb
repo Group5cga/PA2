@@ -536,17 +536,15 @@ Public Class Form1
         For Each CC In ListChar
             CC.Update()
         Next
-
-        If MC.CurrState = StateMagnaCenti.Tail And MC.FrameIdx = 7 Then
-            If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
-                CreateMagnaSeparateTail(1)
-                CreateMagnaSeparateTail(2)
-                CreateMagnaSeparateTail(3)
-                CreateMagnaSeparateTail(4)
-            ElseIf (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
-                CreateMagnaHomingTail(1)
-                CreateMagnaHomingTail(2)
-            End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
+            CreateMagnaSeparateTail(1)
+            CreateMagnaSeparateTail(2)
+            CreateMagnaSeparateTail(3)
+            CreateMagnaSeparateTail(4)
+        End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
+            CreateMagnaHomingTail(1)
+            CreateMagnaHomingTail(2)
         End If
 
         If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
