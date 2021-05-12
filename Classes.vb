@@ -28,7 +28,6 @@ Public Enum StateMegaman
     MagnetStart
     MagnetHit
     MagnetGoing
-    Hit
 End Enum
 
 Public Enum StateMagnaProjectile
@@ -40,6 +39,7 @@ End Enum
 Public Enum StateMagnaSeparate
     Tailstart
     Tail1
+    Tail2
 End Enum
 Public Enum StateMagnaHomingTail
     Tail
@@ -431,8 +431,6 @@ Public Class CCharMegaMan
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMegaman.MagnetHit, 3)
                 End If
-            Case StateMegaman.Hit
-                GetNextFrame()
             Case StateMegaman.MagnetHit
                 GetNextFrame()
                 If FrameIdx <= 6 And PosX <= 160 Then
@@ -612,7 +610,13 @@ Public Class CCharMagnaSeparate
                 If PosX < 0 Or PosX > 260 Or PosY = 165 Then
                     Destroy = True
                 End If
-
+            Case StateMagnaSeparate.Tail2
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If PosY = 160 Or PosX = 210 Then
+                    Destroy = True
+                End If
         End Select
     End Sub
 

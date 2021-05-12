@@ -534,13 +534,13 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
-            MM.State(StateMegaman.Hit, 5)
-        End If
+        'If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
+        'MM.State(StateMegaman.Hit, 5)
+        'End If
 
-        If CollisionProjectile(projectile.ArrSprites(projectile.IdxArrSprites).Elmt(projectile.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), projectile, MM) Then
-            MM.State(StateMegaman.Hit, 5)
-        End If
+        'If CollisionProjectile(projectile.ArrSprites(projectile.IdxArrSprites).Elmt(projectile.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), projectile, MM) Then
+        'MM.State(StateMegaman.Hit, 5)
+        'End If
         For Each CC In ListChar
             CC.Update()
         Next
@@ -654,14 +654,51 @@ Public Class Form1
             MS.Vx = 0
             MS.Vy = -30
             MS.ArrSprites(0) = MagnaPartTail
-        ElseIf n = 5 Then
-            MS.PosX = MM.PosX + 3
-            MS.PosY = 225
-            MS.ArrSprites(0) = MagnaPartTail
+            'ElseIf n = 5 Then
+            '   MS.PosX = MM.PosX + 3
+            '  MS.PosY = 225
+            ' MS.ArrSprites(0) = MagnaPartTail
         End If
         ListChar.Add(MS)
     End Sub
+    Sub CreateMagnaGatherTail(n As Integer)
+        Dim MG As CCharMagnaSeparate
 
+        MG = New CCharMagnaSeparate
+
+        MG.CurrState = StateMagnaSeparate.Tail2
+        ReDim MG.ArrSprites(1)
+        If n = 1 Then
+            MG.PosY = MC.PosY + 180
+            MG.PosX = MC.PosX
+            MG.Vx = 0
+            MG.Vy = 30
+            MG.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 2 Then
+            MG.PosX = MC.PosX - 180
+            MG.PosY = MC.PosY
+            MG.Vx = -30
+            MG.Vy = 0
+            MG.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 3 Then
+            MG.PosY = MC.PosY
+            MG.PosX = MC.PosX + 180
+            MG.Vx = 30
+            MG.Vy = 0
+            MG.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 4 Then
+            MG.PosX = MC.PosX
+            MG.PosY = MC.PosY - 180
+            MG.Vx = 0
+            MG.Vy = -30
+            MG.ArrSprites(0) = MagnaPartTail
+            'ElseIf n = 5 Then
+            '   MS.PosX = MM.PosX + 3
+            '  MS.PosY = 225
+            ' MS.ArrSprites(0) = MagnaPartTail
+        End If
+        ListChar.Add(MG)
+    End Sub
     Sub CreateMagnaHomingTail(n As Integer)
         Dim MT As CCharMagnaHomingTail
 
@@ -786,9 +823,13 @@ Public Class Form1
                 ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
                     MC.FDir = FaceDir.Right
                 ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
-                    'Test key for experiment
-                    CreateMagnaHomingTail(1)
-                CreateMagnaHomingTail(2)
+                'Test key for experiment
+                CreateMagnaGatherTail(1)
+                CreateMagnaGatherTail(2)
+                CreateMagnaGatherTail(3)
+                CreateMagnaGatherTail(4)
+                'CreateMagnaHomingTail(1)
+                'CreateMagnaHomingTail(2)
                 'CreateMagnaSeparateTail(1)
                 'CreateMagnaSeparateTail(2)
                 'CreateMagnaSeparateTail(3)
