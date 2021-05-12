@@ -379,6 +379,7 @@ Public Class Form1
         MegamanMagnetHit.Insert(851, 323, 835, 303, 867, 343, 3)
 
         MegamanHit = New CArrFrame
+        MegamanHit.Insert(1054, 255, 1041, 236, 1067, 236, 3)
 
         MM = New CCharMegaMan
         ReDim MM.ArrSprites(4)
@@ -533,14 +534,12 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        Collision = CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM)
-        If Collision Then
-            'TODO list state megaman get hit
+        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
+            MM.State(StateMegaman.Hit, 5)
         End If
 
         If CollisionProjectile(projectile.ArrSprites(projectile.IdxArrSprites).Elmt(projectile.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), projectile, MM) Then
             MM.State(StateMegaman.Hit, 5)
-            'TODO add actual state hit
         End If
         For Each CC In ListChar
             CC.Update()
