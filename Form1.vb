@@ -14,7 +14,7 @@ Public Class Form1
     Dim MM As CCharMegaMan
     Dim Randomizer As New Random
     Dim resultrand As Integer
-    Dim projectile As CCharMagnaProjectile
+    Dim MP As CCharMagnaProjectile
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
@@ -382,13 +382,13 @@ Public Class Form1
         MegamanHit.Insert(1054, 255, 1041, 236, 1067, 236, 3)
 
         MM = New CCharMegaMan
-        ReDim MM.ArrSprites(4)
+        ReDim MM.ArrSprites(5)
         MM.ArrSprites(0) = MegamanIntro
         MM.ArrSprites(1) = MegamanRun
         MM.ArrSprites(2) = MegamanRunStart
         MM.ArrSprites(3) = MegamanMagnetStart
         MM.ArrSprites(4) = MegamanMagnetHit
-        MM.ArrSprites(4) = MegamanHit
+        MM.ArrSprites(5) = MegamanHit
 
         MM.PosX = 50
         MM.PosY = 172
@@ -537,10 +537,11 @@ Public Class Form1
         'If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
         'MM.State(StateMegaman.Hit, 5)
         'End If
-
-        'If CollisionProjectile(projectile.ArrSprites(projectile.IdxArrSprites).Elmt(projectile.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), projectile, MM) Then
-        'MM.State(StateMegaman.Hit, 5)
-        'End If
+        If MC.CurrState = StateMagnaCenti.Throwing Then
+            If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
+                MM.State(StateMegaman.Hit, 4)
+            End If
+        End If
         For Each CC In ListChar
             CC.Update()
         Next
@@ -596,7 +597,6 @@ Public Class Form1
     End Sub
 
     Sub CreateMagnaProjectile(n As Integer)
-        Dim MP As CCharMagnaProjectile
 
         MP = New CCharMagnaProjectile
         If MC.FDir = FaceDir.Left Then
@@ -828,6 +828,7 @@ Public Class Form1
                 CreateMagnaGatherTail(2)
                 CreateMagnaGatherTail(3)
                 CreateMagnaGatherTail(4)
+                MM.State(StateMegaman.Hit, 4)
                 'CreateMagnaHomingTail(1)
                 'CreateMagnaHomingTail(2)
                 'CreateMagnaSeparateTail(1)
@@ -867,6 +868,26 @@ Public Class Form1
         End If
     End Function
     Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaProjectile, object2 As CCharMegaMan)
+        Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
+
+        L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
+        R1 = frame1.Right - frame1.CtrPoint.x + object1.PosX
+        T1 = frame1.Top - frame1.CtrPoint.y + object1.PosY
+        B1 = frame1.Bottom - frame1.CtrPoint.y + object1.PosY
+
+        L2 = frame2.Left - frame2.CtrPoint.x + object2.PosX
+        R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX
+        T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY
+        B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY
+
+        If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaHomingTail, object2 As CCharMegaMan)
         Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
 
         L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
