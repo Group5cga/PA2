@@ -311,7 +311,7 @@ Public Class CCharMagna
                 End If
             Case StateMagnaCenti.Throwing
                 GetNextFrame()
-                If FrameIdx = 0 And CurrFrame = 0 Then
+                If FrameIdx = 4 And CurrFrame = 3 Then
                     State(StateMagnaCenti.Stand, 1)
                     Vx = 0
                     Vy = 0

@@ -309,9 +309,12 @@ Public Class Form1
         Shuriken.Insert(178, 913, 174, 908, 183, 914, 1)
 
         MP = New CCharMagnaProjectile
-        ReDim MP.ArrSprites(1)
+        ReDim MP.ArrSprites(4)
         MP.ArrSprites(0) = Shuriken
         MP.ArrSprites(1) = Shuriken
+        MP.ArrSprites(2) = ShurikenStart1
+        MP.ArrSprites(3) = ShurikenStart2
+        MP.ArrSprites(4) = ShurikenStart3
 
         MegamanRunStart = New CArrFrame
 
@@ -539,12 +542,15 @@ Public Class Form1
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        'If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
-        'MM.State(StateMegaman.Hit, 5)
-        'End If
+        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
+            MM.State(StateMegaman.Hit, 5)
+        End If
         If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
             MM.State(StateMegaman.Hit, 4)
         End If
+        For Each CC In ListChar
+            CC.Update()
+        Next
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
             CreateMagnaSeparateTail(2)
@@ -584,9 +590,6 @@ Public Class Form1
         'If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
         '    CreateMagnaHomingTail(1)
         'End If
-        For Each CC In ListChar
-            CC.Update()
-        Next
 
         Dim Listchar1 As New List(Of CCharacter)
         For Each CC In ListChar
