@@ -308,6 +308,11 @@ Public Class Form1
         Shuriken.Insert(169, 913, 166, 908, 174, 914, 1)
         Shuriken.Insert(178, 913, 174, 908, 183, 914, 1)
 
+        MP = New CCharMagnaProjectile
+        ReDim MP.ArrSprites(1)
+        MP.ArrSprites(0) = Shuriken
+        MP.ArrSprites(1) = Shuriken
+
         MegamanRunStart = New CArrFrame
 
         MegamanRunStart.Insert(1171, 614, 1142, 580, 1200, 648, 1)
@@ -537,14 +542,9 @@ Public Class Form1
         'If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
         'MM.State(StateMegaman.Hit, 5)
         'End If
-        If MC.CurrState = StateMagnaCenti.Throwing Then
-            If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
-                MM.State(StateMegaman.Hit, 4)
-            End If
+        If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
+            MM.State(StateMegaman.Hit, 4)
         End If
-        For Each CC In ListChar
-            CC.Update()
-        Next
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
             CreateMagnaSeparateTail(2)
@@ -584,6 +584,9 @@ Public Class Form1
         'If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
         '    CreateMagnaHomingTail(1)
         'End If
+        For Each CC In ListChar
+            CC.Update()
+        Next
 
         Dim Listchar1 As New List(Of CCharacter)
         For Each CC In ListChar
@@ -782,47 +785,47 @@ Public Class Form1
                     End If
                 End If
             ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
-                    If MC.PosX = 50 And MC.PosY = 158 Then
-                        MC.State(StateMagnaCenti.Tail, 7)
-                        MC.FDir = FaceDir.Right
-                    ElseIf MC.PosX = 200 And MC.PosY = 158 Then
-                        MC.State(StateMagnaCenti.Tail, 7)
-                        MC.FDir = FaceDir.Left
-                    ElseIf MC.PosX = 205 And MC.PosY = 65 Then
-                        MC.State(StateMagnaCenti.TailUD, 14)
-                        MC.FDir = FaceDir.Left
-                    ElseIf MC.PosX = 50 And MC.PosY = 65 Then
-                        MC.State(StateMagnaCenti.TailUD, 14)
-                        MC.FDir = FaceDir.Right
-                    End If
-
-                ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
-                    If MC.PosX = 50 And MC.PosY = 158 Then
-                        MC.State(StateMagnaCenti.Jump1, 2)
-                        MC.Vx = 4
-                        MC.Vy = 1
-                        MC.FDir = FaceDir.Left
-                    ElseIf MC.PosX = 200 And MC.PosY = 158 Then
-                        MC.State(StateMagnaCenti.Jump2, 2)
-                        MC.Vx = 4
-                        MC.Vy = 1
-                        MC.FDir = FaceDir.Right
-                    ElseIf MC.PosX = 205 And MC.PosY = 65 Then
-                        MC.State(StateMagnaCenti.JumpUD1, 11)
-                        MC.Vx = 4
-                        MC.Vy = -1
-                        MC.FDir = FaceDir.Right
-                    ElseIf MC.PosX = 50 And MC.PosY = 65 Then
-                        MC.State(StateMagnaCenti.JumpUD2, 11)
-                        MC.Vx = 4
-                        MC.Vy = -1
-                        MC.FDir = FaceDir.Left
-                    End If
-                ElseIf e.KeyChar = ChrW(Keys.A) Or e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
-                    MC.FDir = FaceDir.Left
-                ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
+                If MC.PosX = 50 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Tail, 7)
                     MC.FDir = FaceDir.Right
-                ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
+                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Tail, 7)
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.TailUD, 14)
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.TailUD, 14)
+                    MC.FDir = FaceDir.Right
+                End If
+
+            ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
+                If MC.PosX = 50 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Jump1, 2)
+                    MC.Vx = 4
+                    MC.Vy = 1
+                    MC.FDir = FaceDir.Left
+                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Jump2, 2)
+                    MC.Vx = 4
+                    MC.Vy = 1
+                    MC.FDir = FaceDir.Right
+                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.JumpUD1, 11)
+                    MC.Vx = 4
+                    MC.Vy = -1
+                    MC.FDir = FaceDir.Right
+                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.JumpUD2, 11)
+                    MC.Vx = 4
+                    MC.Vy = -1
+                    MC.FDir = FaceDir.Left
+                End If
+            ElseIf e.KeyChar = ChrW(Keys.A) Or e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
+                MC.FDir = FaceDir.Left
+            ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
+                MC.FDir = FaceDir.Right
+            ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
                 'Test key for experiment
                 CreateMagnaGatherTail(1)
                 CreateMagnaGatherTail(2)
@@ -868,26 +871,6 @@ Public Class Form1
         End If
     End Function
     Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaProjectile, object2 As CCharMegaMan)
-        Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
-
-        L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
-        R1 = frame1.Right - frame1.CtrPoint.x + object1.PosX
-        T1 = frame1.Top - frame1.CtrPoint.y + object1.PosY
-        B1 = frame1.Bottom - frame1.CtrPoint.y + object1.PosY
-
-        L2 = frame2.Left - frame2.CtrPoint.x + object2.PosX
-        R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX
-        T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY
-        B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY
-
-        If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaHomingTail, object2 As CCharMegaMan)
         Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
 
         L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
