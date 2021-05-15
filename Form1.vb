@@ -544,9 +544,9 @@ Public Class Form1
         PictureBox1.Refresh()
         If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) And MC.CurrState = StateMagnaCenti.Stand Then
             MC.State(StateMagnaCenti.Vanish, 8)
-            resultrand = Randomizer.Next(1, 5)
-            If resultrand = 5 Then
-                resultrand = Randomizer.Next(1, 5)
+            resultrand = Randomizer.Next(1, 3)
+            If resultrand = 3 Then
+                resultrand = Randomizer.Next(1, 3)
             End If
             MC.CurrPos = resultrand
         End If
