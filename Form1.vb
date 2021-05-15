@@ -13,6 +13,7 @@ Public Class Form1
     Dim Randomizer As New Random
     Dim resultrand As Integer
     Dim MP As CCharMagnaProjectile
+    Dim MT As CCharMagnaHomingTail
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'open image for background, assign to bg
@@ -190,6 +191,11 @@ Public Class Form1
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 1)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(587, 298, 562, 259, 612, 335, 3)
+
+        MT = New CCharMagnaHomingTail
+        ReDim MT.ArrSprites(2)
+        MT.ArrSprites(0) = MagnaTail
+        MT.ArrSprites(1) = MagnaTailUD
 
         MagnaTailUD = New CArrFrame
         MagnaTailUD.Insert(40, 1843, 16, 1805, 63, 1880, 3)
@@ -542,6 +548,11 @@ Public Class Form1
         If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
             MM.State(StateMegaman.Hit, 4)
         End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 40 Then
+            If CollisionProjectail(MT.ArrSprites(MT.IdxArrSprites).Elmt(MT.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MT, MM) Then
+                MM.State(StateMegaman.Hit, 4)
+            End If
+        End If
         For Each CC In ListChar
             CC.Update()
         Next
@@ -559,11 +570,11 @@ Public Class Form1
             CreateMagnaSeparateTail(3)
             CreateMagnaSeparateTail(4)
         End If
-        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
-            CreateMagnaHomingTail(1)
-            CreateMagnaHomingTail(2)
-        End If
-        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 42 Then
+            If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
+                CreateMagnaHomingTail(1)
+                CreateMagnaHomingTail(2)
+            End If
+            If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 42 Then
             CreateMagnaGatherTail(1)
             CreateMagnaGatherTail(2)
             CreateMagnaGatherTail(3)
@@ -734,8 +745,6 @@ Public Class Form1
         ListChar.Add(MG)
     End Sub
     Sub CreateMagnaHomingTail(n As Integer)
-        Dim MT As CCharMagnaHomingTail
-
         MT = New CCharMagnaHomingTail
         If MM.FDir = FaceDir.Left Then
             MT.PosX = MM.PosX + 40
@@ -902,6 +911,25 @@ Public Class Form1
         End If
     End Function
     Public Function CollisionProjectile(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaProjectile, object2 As CCharMegaMan)
+        Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
+
+        L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
+        R1 = frame1.Right - frame1.CtrPoint.x + object1.PosX
+        T1 = frame1.Top - frame1.CtrPoint.y + object1.PosY
+        B1 = frame1.Bottom - frame1.CtrPoint.y + object1.PosY
+
+        L2 = frame2.Left - frame2.CtrPoint.x + object2.PosX
+        R2 = frame2.Right - frame2.CtrPoint.x + object2.PosX
+        T2 = frame2.Top - frame2.CtrPoint.y + object2.PosY
+        B2 = frame2.Bottom - frame2.CtrPoint.y + object2.PosY
+
+        If L2 < R1 And L1 < R2 And T1 < B2 And T2 < B1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Function CollisionProjectail(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagnaHomingTail, object2 As CCharMegaMan)
         Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
 
         L1 = frame1.Left - frame1.CtrPoint.x + object1.PosX
