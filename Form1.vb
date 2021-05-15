@@ -566,6 +566,7 @@ Public Class Form1
         If MM.Destroy = True Then
             MM.countdown = MM.countdown - 1
             If MM.countdown = 0 Then
+                MM.FDir = FaceDir.Left
                 MM.Vx = 0.2
                 MM.Destroy = False
                 resultrand = Randomizer.Next(70, 175)
@@ -591,11 +592,11 @@ Public Class Form1
             CreateMagnaGatherTail(4)
         End If
 
-        If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
+        If (MC.CurrState = StateMagnaCenti.Throwing Or MC.CurrState = StateMagnaCenti.ThrowingUD) And MC.CurrFrame = 3 Then
             CreateMagnaProjectile(1)
-        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 5 Then
+        ElseIf (MC.CurrState = StateMagnaCenti.Throwing Or MC.CurrState = StateMagnaCenti.ThrowingUD) And MC.CurrFrame = 5 Then
             CreateMagnaProjectile(2)
-        ElseIf MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 7 Then
+        ElseIf (MC.CurrState = StateMagnaCenti.Throwing Or MC.CurrState = StateMagnaCenti.ThrowingUD) And MC.CurrFrame = 7 Then
             CreateMagnaProjectile(3)
         End If
 
@@ -642,20 +643,63 @@ Public Class Form1
         MP.PosY = MC.PosY - 3
         MP.CurrState = StateMagnaProjectile.ShurikenStart
         ReDim MP.ArrSprites(1)
-        If n = 1 Then
-            MP.Vx = 0
-            MP.Vy = -7
-            MP.ArrSprites(0) = ShurikenStart1
-        ElseIf n = 2 Then
-            MP.Vx = 0
-            MP.Vy = -6
-            MP.ArrSprites(0) = ShurikenStart2
-        Else
-            MP.Vx = 0
-            MP.Vy = -6
-            MP.ArrSprites(0) = ShurikenStart3
+        If MC.PosY = 158 And MC.PosX = 200 Then
+            If n = 1 Then
+                MP.Vx = -0.3
+                MP.Vy = -7
+                MP.ArrSprites(0) = ShurikenStart1
+            ElseIf n = 2 Then
+                MP.Vx = -0.3
+                MP.Vy = -6
+                MP.ArrSprites(0) = ShurikenStart2
+            Else
+                MP.Vx = -0.3
+                MP.Vy = -6
+                MP.ArrSprites(0) = ShurikenStart3
+            End If
+        ElseIf MC.PosY = 158 And MC.PosX = 50 Then
+            If n = 1 Then
+                MP.Vx = -8
+                MP.Vy = -7
+                MP.ArrSprites(0) = ShurikenStart1
+            ElseIf n = 2 Then
+                MP.Vx = -8
+                MP.Vy = -6
+                MP.ArrSprites(0) = ShurikenStart2
+            Else
+                MP.Vx = -8
+                MP.Vy = -6
+                MP.ArrSprites(0) = ShurikenStart3
+            End If
+        ElseIf MC.PosY = 65 And MC.PosX = 50 Then
+            If n = 1 Then
+                MP.Vx = -8
+                MP.Vy = 3
+                MP.ArrSprites(0) = ShurikenStart1
+            ElseIf n = 2 Then
+                MP.Vx = -7
+                MP.Vy = 2
+                MP.ArrSprites(0) = ShurikenStart2
+            Else
+                MP.Vx = -7
+                MP.Vy = 2
+                MP.ArrSprites(0) = ShurikenStart3
+            End If
+        ElseIf MC.PosY = 65 And MC.PosX = 205 Then
+            If n = 1 Then
+                MP.Vx = 1
+                MP.Vy = 0
+                MP.ArrSprites(0) = ShurikenStart1
+            ElseIf n = 2 Then
+                MP.Vx = 1
+                MP.Vy = 0
+                MP.ArrSprites(0) = ShurikenStart2
+            Else
+                MP.Vx = 1
+                MP.Vy = 0
+                MP.ArrSprites(0) = ShurikenStart3
+            End If
         End If
-
         MP.ArrSprites(1) = Shuriken
 
         ListChar.Add(MP)
@@ -802,81 +846,85 @@ Public Class Form1
                 End If
                 'MsgBox(MC.CurrPos)
             ElseIf e.KeyChar = ChrW(Keys.S) Or e.KeyChar = Char.ToLower(ChrW(Keys.S)) Then
-                MC.State(StateMagnaCenti.Throwing, 5)
+                If MC.PosY = 158 Then
+                    MC.State(StateMagnaCenti.Throwing, 5)
+                ElseIf MC.PosY = 65 Then
+                    MC.State(StateMagnaCenti.ThrowingUD, 12)
+                End If
                 CreateMagnaProjectile(3)
-            ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
-                If MC.PosY <= 65 Then
-                    If MC.PosX <= 50 Then
-                        If MM.PosX <= MC.PosX + 75 Then
-                            MC.State(StateMagnaCenti.MagnetUD, 13)
-                            MM.State(StateMegaman.MagnetStart, 3)
-                            MM.DestX = MC.PosX - 10
-                            MM.DestY = MC.PosY + 20
-                            MM.dir = 210 * Math.PI / 180
-                            MM.turnrate = 5 * Math.PI / 180
-                            MM.V = 5
-                        Else
-                            MC.State(StateMagnaCenti.MagnetUD, 13)
-                        End If
-                    ElseIf MC.PosX >= 200 Then
-                        If MM.PosX >= MC.PosX - 75 Then
-                            MC.State(StateMagnaCenti.MagnetUD, 13)
-                            MM.State(StateMegaman.MagnetStart, 3)
-                            MM.DestX = MC.PosX + 10
-                            MM.DestY = MC.PosY + 25
-                            MM.dir = 0 * Math.PI / 180
-                            MM.turnrate = 7 * Math.PI / 180
-                            MM.V = 5
-                            MM.FDir = FaceDir.Right
-                        Else
-                            MC.State(StateMagnaCenti.MagnetUD, 13)
+                ElseIf e.KeyChar = ChrW(Keys.M) Or e.KeyChar = Char.ToLower(ChrW(Keys.M)) Then
+                    If MC.PosY <= 65 Then
+                        If MC.PosX <= 50 Then
+                            If MM.PosX <= MC.PosX + 75 Then
+                                MC.State(StateMagnaCenti.MagnetUD, 13)
+                                MM.State(StateMegaman.MagnetStart, 3)
+                                MM.DestX = MC.PosX - 10
+                                MM.DestY = MC.PosY + 20
+                                MM.dir = 210 * Math.PI / 180
+                                MM.turnrate = 5 * Math.PI / 180
+                                MM.V = 5
+                            Else
+                                MC.State(StateMagnaCenti.MagnetUD, 13)
+                            End If
+                        ElseIf MC.PosX >= 200 Then
+                            If MM.PosX >= MC.PosX - 75 Then
+                                MC.State(StateMagnaCenti.MagnetUD, 13)
+                                MM.State(StateMegaman.MagnetStart, 3)
+                                MM.DestX = MC.PosX + 10
+                                MM.DestY = MC.PosY + 25
+                                MM.dir = 0 * Math.PI / 180
+                                MM.turnrate = 7 * Math.PI / 180
+                                MM.V = 5
+                                MM.FDir = FaceDir.Right
+                            Else
+                                MC.State(StateMagnaCenti.MagnetUD, 13)
+                            End If
                         End If
                     End If
-                End If
-            ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
-                If MC.PosX = 50 And MC.PosY = 158 Then
-                    MC.State(StateMagnaCenti.Tail, 7)
-                    MC.FDir = FaceDir.Right
-                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
-                    MC.State(StateMagnaCenti.Tail, 7)
-                    MC.FDir = FaceDir.Left
-                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
-                    MC.State(StateMagnaCenti.TailUD, 14)
-                    MC.FDir = FaceDir.Left
-                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
-                    MC.State(StateMagnaCenti.TailUD, 14)
-                    MC.FDir = FaceDir.Right
-                End If
+                ElseIf e.KeyChar = ChrW(Keys.T) Or e.KeyChar = Char.ToLower(ChrW(Keys.T)) Then
+                    If MC.PosX = 50 And MC.PosY = 158 Then
+                        MC.State(StateMagnaCenti.Tail, 7)
+                        MC.FDir = FaceDir.Right
+                    ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                        MC.State(StateMagnaCenti.Tail, 7)
+                        MC.FDir = FaceDir.Left
+                    ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                        MC.State(StateMagnaCenti.TailUD, 14)
+                        MC.FDir = FaceDir.Left
+                    ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                        MC.State(StateMagnaCenti.TailUD, 14)
+                        MC.FDir = FaceDir.Right
+                    End If
 
-            ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
-                If MC.PosX = 50 And MC.PosY = 158 Then
-                    MC.State(StateMagnaCenti.Jump1, 2)
-                    MC.Vx = 4
-                    MC.Vy = 1
+                ElseIf e.KeyChar = ChrW(Keys.J) Or e.KeyChar = Char.ToLower(ChrW(Keys.J)) Then
+                    If MC.PosX = 50 And MC.PosY = 158 Then
+                        MC.State(StateMagnaCenti.Jump1, 2)
+                        MC.Vx = 4
+                        MC.Vy = 1
+                        MC.FDir = FaceDir.Left
+                    ElseIf MC.PosX = 200 And MC.PosY = 158 Then
+                        MC.State(StateMagnaCenti.Jump2, 2)
+                        MC.Vx = 4
+                        MC.Vy = 1
+                        MC.FDir = FaceDir.Right
+                    ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+                        MC.State(StateMagnaCenti.JumpUD1, 11)
+                        MC.Vx = 4
+                        MC.Vy = -1
+                        MC.FDir = FaceDir.Right
+                    ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+                        MC.State(StateMagnaCenti.JumpUD2, 11)
+                        MC.Vx = 4
+                        MC.Vy = -1
+                        MC.FDir = FaceDir.Left
+                    End If
+                ElseIf e.KeyChar = ChrW(Keys.A) Or e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
                     MC.FDir = FaceDir.Left
-                ElseIf MC.PosX = 200 And MC.PosY = 158 Then
-                    MC.State(StateMagnaCenti.Jump2, 2)
-                    MC.Vx = 4
-                    MC.Vy = 1
+                ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
                     MC.FDir = FaceDir.Right
-                ElseIf MC.PosX = 205 And MC.PosY = 65 Then
-                    MC.State(StateMagnaCenti.JumpUD1, 11)
-                    MC.Vx = 4
-                    MC.Vy = -1
-                    MC.FDir = FaceDir.Right
-                ElseIf MC.PosX = 50 And MC.PosY = 65 Then
-                    MC.State(StateMagnaCenti.JumpUD2, 11)
-                    MC.Vx = 4
-                    MC.Vy = -1
-                    MC.FDir = FaceDir.Left
-                End If
-            ElseIf e.KeyChar = ChrW(Keys.A) Or e.KeyChar = Char.ToLower(ChrW(Keys.A)) Then
-                MC.FDir = FaceDir.Left
-            ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
-                MC.FDir = FaceDir.Right
-            ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
-                'Test key for experiment
-                CreateMagnaCloseTail(1)
+                ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
+                    'Test key for experiment
+                    CreateMagnaCloseTail(1)
                 CreateMagnaCloseTail(2)
                 'CreateMagnaGatherTail(1)
                 'CreateMagnaGatherTail(2)

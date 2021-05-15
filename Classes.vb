@@ -308,6 +308,13 @@ Public Class CCharMagna
                     Vx = 0
                     Vy = 0
                 End If
+            Case StateMagnaCenti.ThrowingUD
+                GetNextFrame()
+                If FrameIdx = 4 And CurrFrame = 3 Then
+                    State(StateMagnaCenti.StandUD, 10)
+                    Vx = 0
+                    Vy = 0
+                End If
             Case StateMagnaCenti.Vanish
                 GetNextFrame()
                 If FrameIdx = 5 And CurrFrame = 2 And CurrPos <= 2 Then
