@@ -674,6 +674,27 @@ Public Class Form1
         End If
         ListChar.Add(MS)
     End Sub
+    Sub CreateMagnaCloseTail(n As Integer)
+        Dim MCT As CCharMagnaSeparate
+
+        MCT = New CCharMagnaSeparate
+
+        MCT.PosY = MM.PosY + 40
+        MCT.CurrState = StateMagnaSeparate.Tail3
+        ReDim MCT.ArrSprites(1)
+        If n = 1 Then
+            MCT.PosX = MM.PosX - 10
+            MCT.Vx = 0
+            MCT.Vy = 10
+            MCT.ArrSprites(0) = MagnaPartTail
+        ElseIf n = 2 Then
+            MCT.PosX = MM.PosX + 10
+            MCT.Vx = 0
+            MCT.Vy = 10
+            MCT.ArrSprites(0) = MagnaPartTail
+        End If
+        ListChar.Add(MCT)
+    End Sub
     Sub CreateMagnaGatherTail(n As Integer)
         Dim MG As CCharMagnaSeparate
 
@@ -836,10 +857,12 @@ Public Class Form1
                 MC.FDir = FaceDir.Right
             ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
                 'Test key for experiment
-                CreateMagnaGatherTail(1)
-                CreateMagnaGatherTail(2)
-                CreateMagnaGatherTail(3)
-                CreateMagnaGatherTail(4)
+                CreateMagnaCloseTail(1)
+                CreateMagnaCloseTail(2)
+                'CreateMagnaGatherTail(1)
+                'CreateMagnaGatherTail(2)
+                'CreateMagnaGatherTail(3)
+                'CreateMagnaGatherTail(4)
                 MM.State(StateMegaman.Hit, 4)
                 'CreateMagnaHomingTail(1)
                 'CreateMagnaHomingTail(2)

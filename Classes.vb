@@ -38,6 +38,7 @@ Public Enum StateMagnaSeparate
     Tailstart
     Tail1
     Tail2
+    Tail3
 End Enum
 Public Enum StateMagnaHomingTail
     Tail
@@ -612,6 +613,13 @@ Public Class CCharMagnaSeparate
                     Destroy = True
                 End If
                 If (PosX > 190 And PosX < 205) Then
+                    Destroy = True
+                End If
+            Case StateMagnaSeparate.Tail3
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If PosY < 165 Then
                     Destroy = True
                 End If
         End Select
