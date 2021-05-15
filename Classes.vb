@@ -39,6 +39,9 @@ Public Enum StateMagnaSeparate
     Tail1
     Tail2
     Tail3
+    Tail4
+    Tail5
+    Tail6
 End Enum
 Public Enum StateMagnaHomingTail
     Tail
@@ -629,6 +632,36 @@ Public Class CCharMagnaSeparate
                 PosX = PosX - Vx
                 PosY = PosY - Vy
                 If PosY < 165 Then
+                    Destroy = True
+                End If
+            Case StateMagnaSeparate.Tail4
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If (PosY > 60 And PosY < 70) Then
+                    Destroy = True
+                End If
+                If (PosX > 40 And PosX < 60) Then
+                    Destroy = True
+                End If
+            Case StateMagnaSeparate.Tail5
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If (PosX > 195 And PosX < 210) Then
+                    Destroy = True
+                End If
+                If (PosY > 60 And PosY < 70) Then
+                    Destroy = True
+                End If
+            Case StateMagnaSeparate.Tail6
+                GetNextFrame()
+                PosX = PosX - Vx
+                PosY = PosY - Vy
+                If (PosX > 40 And PosX < 60) Then
+                    Destroy = True
+                End If
+                If (PosY > 150 And PosY < 160) Then
                     Destroy = True
                 End If
         End Select

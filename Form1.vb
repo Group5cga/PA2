@@ -154,8 +154,8 @@ Public Class Form1
         MagnaTail.Insert(303, 298, 276, 259, 329, 335, 3)
         MagnaTail.Insert(360, 298, 333, 259, 386, 335, 3)
         MagnaTail.Insert(417, 298, 390, 259, 444, 335, 1)
-        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
+        MagnaTail.Insert(475, 298, 448, 259, 500, 335, 2)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 1)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 2)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 1)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
@@ -207,7 +207,7 @@ Public Class Form1
         MagnaTailUD.Insert(361, 1843, 334, 1805, 387, 1880, 3)
         MagnaTailUD.Insert(418, 1843, 391, 1805, 444, 1880, 1)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 2)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 1)
         MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 2)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 1)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
@@ -240,7 +240,7 @@ Public Class Form1
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
         MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
-        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 3)
+        MagnaTailUD.Insert(531, 1843, 504, 1805, 558, 1880, 1)
         MagnaTailUD.Insert(474, 1843, 448, 1805, 500, 1880, 3)
         MagnaTailUD.Insert(588, 1843, 562, 1805, 613, 1880, 3)
 
@@ -542,7 +542,7 @@ Public Class Form1
     End Sub
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) And MC.CurrState <> StateMagnaCenti.MagnetUD And MC.CurrState <> StateMagnaCenti.Vanish Then
+        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) And MC.CurrState = StateMagnaCenti.Stand Then
             MC.State(StateMagnaCenti.Vanish, 8)
             resultrand = Randomizer.Next(1, 5)
             If resultrand = 5 Then
@@ -580,6 +580,10 @@ Public Class Form1
             CreateMagnaSeparateTail(2)
             CreateMagnaSeparateTail(3)
             CreateMagnaSeparateTail(4)
+        End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 9 Then
+            CreateMagnaCloseTail(1)
+            CreateMagnaCloseTail(2)
         End If
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
             CreateMagnaHomingTail(1)
@@ -764,37 +768,76 @@ Public Class Form1
         Dim MG As CCharMagnaSeparate
 
         MG = New CCharMagnaSeparate
-
-        MG.CurrState = StateMagnaSeparate.Tail2
+        If MC.PosX = 200 And MC.PosY = 158 Then
+            MG.CurrState = StateMagnaSeparate.Tail2
+        ElseIf MC.PosX = 50 And MC.PosY = 158 Then
+            MG.CurrState = StateMagnaSeparate.Tail6
+        ElseIf MC.PosX = 50 And MC.PosY = 65 Then
+            MG.CurrState = StateMagnaSeparate.Tail4
+        ElseIf MC.PosX = 205 And MC.PosY = 65 Then
+            MG.CurrState = StateMagnaSeparate.Tail5
+        End If
         ReDim MG.ArrSprites(1)
-        If n = 1 Then
-            MG.PosY = MC.PosY + 180
-            MG.PosX = MC.PosX + 10
-            MG.Vx = 0
-            MG.Vy = 30
-            MG.ArrSprites(0) = MagnaPartTail
-        ElseIf n = 2 Then
-            MG.PosX = MC.PosX - 180
-            MG.PosY = MC.PosY - 10
-            MG.Vx = -30
-            MG.Vy = 0
-            MG.ArrSprites(0) = MagnaPartTail
-        ElseIf n = 3 Then
-            MG.PosY = MC.PosY - 10
-            MG.PosX = MC.PosX + 180
-            MG.Vx = 30
-            MG.Vy = 0
-            MG.ArrSprites(0) = MagnaPartTail
-        ElseIf n = 4 Then
-            MG.PosX = MC.PosX + 10
-            MG.PosY = MC.PosY - 180
-            MG.Vx = 0
-            MG.Vy = -30
-            MG.ArrSprites(0) = MagnaPartTail
-            'ElseIf n = 5 Then
-            '   MS.PosX = MM.PosX + 3
-            '  MS.PosY = 225
-            ' MS.ArrSprites(0) = MagnaPartTail
+        If MC.PosY = 158 Then
+            If n = 1 Then
+                MG.PosY = MC.PosY + 180
+                MG.PosX = MC.PosX + 10
+                MG.Vx = 0
+                MG.Vy = 30
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 2 Then
+                MG.PosX = MC.PosX - 180
+                MG.PosY = MC.PosY - 10
+                MG.Vx = -30
+                MG.Vy = 0
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 3 Then
+                MG.PosY = MC.PosY - 10
+                MG.PosX = MC.PosX + 180
+                MG.Vx = 30
+                MG.Vy = 0
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 4 Then
+                MG.PosX = MC.PosX + 10
+                MG.PosY = MC.PosY - 180
+                MG.Vx = 0
+                MG.Vy = -30
+                MG.ArrSprites(0) = MagnaPartTail
+                'ElseIf n = 5 Then
+                '   MS.PosX = MM.PosX + 3
+                '  MS.PosY = 225
+                ' MS.ArrSprites(0) = MagnaPartTail
+            End If
+        Else
+            If n = 1 Then
+                MG.PosY = MC.PosY + 180
+                MG.PosX = MC.PosX + 10
+                MG.Vx = 0
+                MG.Vy = 30
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 2 Then
+                MG.PosX = MC.PosX - 180
+                MG.PosY = MC.PosY - 10
+                MG.Vx = -30
+                MG.Vy = 0
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 3 Then
+                MG.PosY = MC.PosY - 10
+                MG.PosX = MC.PosX + 180
+                MG.Vx = 30
+                MG.Vy = 0
+                MG.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 4 Then
+                MG.PosX = MC.PosX + 10
+                MG.PosY = MC.PosY - 180
+                MG.Vx = 0
+                MG.Vy = -30
+                MG.ArrSprites(0) = MagnaPartTail
+                'ElseIf n = 5 Then
+                '   MS.PosX = MM.PosX + 3
+                '  MS.PosY = 225
+                ' MS.ArrSprites(0) = MagnaPartTail
+            End If
         End If
         ListChar.Add(MG)
     End Sub
@@ -923,14 +966,14 @@ Public Class Form1
                 ElseIf e.KeyChar = ChrW(Keys.D) Or e.KeyChar = Char.ToLower(ChrW(Keys.D)) Then
                     MC.FDir = FaceDir.Right
                 ElseIf e.KeyChar = ChrW(Keys.Q) Or e.KeyChar = Char.ToLower(ChrW(Keys.Q)) Then
-                    'Test key for experiment
-                    CreateMagnaCloseTail(1)
-                CreateMagnaCloseTail(2)
-                'CreateMagnaGatherTail(1)
-                'CreateMagnaGatherTail(2)
-                'CreateMagnaGatherTail(3)
-                'CreateMagnaGatherTail(4)
-                MM.State(StateMegaman.Hit, 4)
+                'Test key for experiment
+                'CreateMagnaCloseTail(1)
+                'CreateMagnaCloseTail(2)
+                CreateMagnaGatherTail(1)
+                CreateMagnaGatherTail(2)
+                CreateMagnaGatherTail(3)
+                CreateMagnaGatherTail(4)
+                'MM.State(StateMegaman.Hit, 4)
                 'CreateMagnaHomingTail(1)
                 'CreateMagnaHomingTail(2)
                 'CreateMagnaSeparateTail(1)
