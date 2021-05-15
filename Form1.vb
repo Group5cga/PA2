@@ -542,11 +542,18 @@ Public Class Form1
     End Sub
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
-        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
-            MM.State(StateMegaman.Hit, 5)
+        If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) And MC.CurrState <> StateMagnaCenti.MagnetUD And MC.CurrState <> StateMagnaCenti.Vanish Then
+            MC.State(StateMagnaCenti.Vanish, 8)
+            resultrand = Randomizer.Next(1, 5)
+            If resultrand = 5 Then
+                resultrand = Randomizer.Next(1, 5)
+            End If
+            MC.CurrPos = resultrand
         End If
         If CollisionProjectile(MP.ArrSprites(MP.IdxArrSprites).Elmt(MP.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MP, MM) Then
             MM.State(StateMegaman.Hit, 4)
+            MM.Vx = 0
+            MM.Vy = 0
         End If
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 40 Then
             If CollisionProjectail(MT.ArrSprites(MT.IdxArrSprites).Elmt(MT.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MT, MM) Then
@@ -557,12 +564,15 @@ Public Class Form1
             CC.Update()
         Next
         If MM.Destroy = True Then
-            MM.Vx = 0
-            MM.Destroy = False
-            resultrand = Randomizer.Next(70, 175)
-            MM.State(StateMegaman.Intro, 0)
-            MM.PosX = resultrand
-            ListChar.Add(MM)
+            MM.countdown = MM.countdown - 1
+            If MM.countdown = 0 Then
+                MM.Vx = 0.2
+                MM.Destroy = False
+                resultrand = Randomizer.Next(70, 175)
+                MM.State(StateMegaman.Intro, 0)
+                MM.PosX = resultrand
+                ListChar.Add(MM)
+            End If
         End If
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
@@ -570,11 +580,11 @@ Public Class Form1
             CreateMagnaSeparateTail(3)
             CreateMagnaSeparateTail(4)
         End If
-            If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
-                CreateMagnaHomingTail(1)
-                CreateMagnaHomingTail(2)
-            End If
-            If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 42 Then
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 11 Then
+            CreateMagnaHomingTail(1)
+            CreateMagnaHomingTail(2)
+        End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 42 Then
             CreateMagnaGatherTail(1)
             CreateMagnaGatherTail(2)
             CreateMagnaGatherTail(3)
@@ -589,23 +599,23 @@ Public Class Form1
             CreateMagnaProjectile(3)
         End If
 
-        If MC.PosY = 158 Then
-            If Math.Round(MM.PosX) = MC.PosX - 20 Then
-                MC.State(StateMagnaCenti.Vanish, 8)
-                resultrand = Randomizer.Next(1, 5)
-                If resultrand = 5 Then
-                    resultrand = Randomizer.Next(1, 5)
-                End If
-                MC.CurrPos = resultrand
-            ElseIf Math.Round(MM.PosX) = MC.PosX + 20 Then
-                MC.State(StateMagnaCenti.Vanish, 8)
-                resultrand = Randomizer.Next(1, 5)
-                If resultrand = 5 Then
-                    resultrand = Randomizer.Next(1, 5)
-                End If
-                MC.CurrPos = resultrand
-            End If
-        End If
+        'If MC.PosY = 158 Then
+        'If Math.Round(MM.PosX) = MC.PosX - 20 Then
+        'MC.State(StateMagnaCenti.Vanish, 8)
+        'resultrand = Randomizer.Next(1, 5)
+        'If resultrand = 5 Then
+        'resultrand = Randomizer.Next(1, 5)
+        'End If
+        'MC.CurrPos = resultrand
+        'ElseIf Math.Round(MM.PosX) = MC.PosX + 20 Then
+        'MC.State(StateMagnaCenti.Vanish, 8)
+        'resultrand = Randomizer.Next(1, 5)
+        'If resultrand = 5 Then
+        'resultrand = Randomizer.Next(1, 5)
+        ''End If
+        'MC.CurrPos = resultrand
+        'End If
+        'End If
         'If MC.CurrState = StateMagnaCenti.Tail And MC.CurrFrame = 1 Then
         '    CreateMagnaHomingTail(1)
         'End If

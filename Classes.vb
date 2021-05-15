@@ -152,6 +152,7 @@ Public Class CCharacter
     Public CurrPos As Integer
     Public Destroy As Boolean = False
     Public dx, dy, z As Double
+    Public countdown As Integer
 
     Public Sub RandomPos(CurrPos)
         Select Case CurrPos
@@ -369,12 +370,12 @@ Public Class CCharMegaMan
         Select Case CurrState
             Case StateMegaman.Intro
                 GetNextFrame()
-                If FrameIdx = 0 Then
+                If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMegaman.RunStart, 2)
                 End If
             Case StateMegaman.RunStart
                 GetNextFrame()
-                If FrameIdx = 0 Then
+                If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMegaman.Run, 1)
                 End If
             Case StateMegaman.Run
@@ -426,6 +427,7 @@ Public Class CCharMegaMan
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     Destroy = True
+                    countdown = 30
                 End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()
