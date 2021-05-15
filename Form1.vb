@@ -843,29 +843,37 @@ Public Class Form1
     End Sub
     Sub CreateMagnaHomingTail(n As Integer)
         MT = New CCharMagnaHomingTail
-        If MM.FDir = FaceDir.Left Then
-            MT.PosX = MM.PosX + 40
-            MT.FDir = FaceDir.Left
-        Else
-            MT.PosX = MM.PosX + 40
-            MT.FDir = FaceDir.Right
-        End If
 
         MT.PosY = MM.PosY - 3
         MT.Vx = MM.Vx
         MT.Vy = MM.Vy
         ReDim MT.ArrSprites(1)
-        If n = 1 Then
-            MT.CurrState = StateMagnaHomingTail.Tail
-            MT.PosX = MM.PosX + 40
-            MT.dir = 90 * Math.PI / 180
-            MT.ArrSprites(0) = MagnaPartTail
-        ElseIf n = 2 Then
-            MT.CurrState = StateMagnaHomingTail.Tail2
-            MT.PosX = MM.PosX - 20
-            MT.dir = 270 * Math.PI / 180
-            MT.ArrSprites(0) = MagnaPartTail
+        If MM.FDir = FaceDir.Left Then
+            If n = 1 Then
+                MT.CurrState = StateMagnaHomingTail.Tail
+                MT.PosX = MM.PosX + 40
+                MT.dir = 90 * Math.PI / 180
+                MT.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 2 Then
+                MT.CurrState = StateMagnaHomingTail.Tail2
+                MT.PosX = MM.PosX - 20
+                MT.dir = 270 * Math.PI / 180
+                MT.ArrSprites(0) = MagnaPartTail
+            End If
+        Else
+            If n = 1 Then
+                MT.CurrState = StateMagnaHomingTail.Tail
+                MT.PosX = MM.PosX + 20
+                MT.dir = 90 * Math.PI / 180
+                MT.ArrSprites(0) = MagnaPartTail
+            ElseIf n = 2 Then
+                MT.CurrState = StateMagnaHomingTail.Tail2
+                MT.PosX = MM.PosX - 40
+                MT.dir = 270 * Math.PI / 180
+                MT.ArrSprites(0) = MagnaPartTail
+            End If
         End If
+
         MT.ArrSprites(1) = MagnaPartTail1
         ListChar.Add(MT)
     End Sub
@@ -969,13 +977,13 @@ Public Class Form1
                 'Test key for experiment
                 'CreateMagnaCloseTail(1)
                 'CreateMagnaCloseTail(2)
-                CreateMagnaGatherTail(1)
-                CreateMagnaGatherTail(2)
-                CreateMagnaGatherTail(3)
-                CreateMagnaGatherTail(4)
+                'CreateMagnaGatherTail(1)
+                'CreateMagnaGatherTail(2)
+                'CreateMagnaGatherTail(3)
+                'CreateMagnaGatherTail(4)
                 'MM.State(StateMegaman.Hit, 4)
-                'CreateMagnaHomingTail(1)
-                'CreateMagnaHomingTail(2)
+                CreateMagnaHomingTail(1)
+                CreateMagnaHomingTail(2)
                 'CreateMagnaSeparateTail(1)
                 'CreateMagnaSeparateTail(2)
                 'CreateMagnaSeparateTail(3)
