@@ -424,7 +424,7 @@ Public Class CCharMegaMan
             Case StateMegaman.Hit
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
-                    Destroy = True
+                    State(StateMegaman.RunStart, 2)
                 End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()

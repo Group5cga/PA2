@@ -545,14 +545,6 @@ Public Class Form1
         For Each CC In ListChar
             CC.Update()
         Next
-        If MM.Destroy = True Then
-            MM.Vx = 0
-            MM.Destroy = False
-            resultrand = Randomizer.Next(70, 175)
-            MM.State(StateMegaman.Intro, 0)
-            MM.PosX = resultrand
-            ListChar.Add(MM)
-        End If
         If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 7 Then
             CreateMagnaSeparateTail(1)
             CreateMagnaSeparateTail(2)
