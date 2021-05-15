@@ -1,7 +1,5 @@
 ﻿Imports System.IO
-
 Public Class Form1
-
     Dim bmp As Bitmap
     Dim Bg, Bg1, Img As CImage
     Dim SpriteMap As CImage
@@ -418,7 +416,6 @@ Public Class Form1
         Timer1.Enabled = True
 
     End Sub
-
     Sub PutSprite()
         Dim cc As CCharacter
         Dim i, j As Integer
@@ -510,7 +507,6 @@ Public Class Form1
         Next
 
     End Sub
-
     Sub DisplayImg()
         'display bg and sprite on picturebox
         Dim i, j As Integer
@@ -532,14 +528,12 @@ Public Class Form1
         'Me.Width = PictureBox1.Width + 30
         'Me.Height = PictureBox1.Height + 100
     End Sub
-
     Sub ResizeImg()
         Dim w, h As Integer
         w = PictureBox1.Width
         h = PictureBox1.Height
         Me.ClientSize = New Size(w, h)
     End Sub
-
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         PictureBox1.Refresh()
         If CollisionDetect(MC.ArrSprites(MC.IdxArrSprites).Elmt(MC.FrameIdx), MM.ArrSprites(MM.IdxArrSprites).Elmt(MM.FrameIdx), MC, MM) Then
@@ -607,7 +601,6 @@ Public Class Form1
         'MM.Update()
         DisplayImg()
     End Sub
-
     Sub CreateMagnaProjectile(n As Integer)
 
         MP = New CCharMagnaProjectile
@@ -741,7 +734,6 @@ Public Class Form1
         MT.ArrSprites(1) = MagnaPartTail1
         ListChar.Add(MT)
     End Sub
-
     Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         If MC.CurrState = StateMagnaCenti.Stand Or MC.CurrState = StateMagnaCenti.StandUD Then
             If e.KeyChar = ChrW(Keys.V) Or e.KeyChar = Char.ToLower(ChrW(Keys.V)) Then
@@ -859,7 +851,6 @@ Public Class Form1
             MsgBox("Animation Not Finished")
         End If
     End Sub
-
     Public Function CollisionDetect(frame1 As CElmtFrame, frame2 As CElmtFrame, object1 As CCharMagna, object2 As CCharMegaMan)
         Dim L1, L2, R1, R2, T1, T2, B1, B2 As Integer
 

@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-
 Public Enum StateMagnaCenti
     Intro
     Stand
@@ -30,13 +29,11 @@ Public Enum StateMegaman
     MagnetGoing
     Hit
 End Enum
-
 Public Enum StateMagnaProjectile
     ShurikenStart
     Shuriken1
     Tail
 End Enum
-
 Public Enum StateMagnaSeparate
     Tailstart
     Tail1
@@ -52,7 +49,6 @@ Public Enum FaceDir
     Up
     Down
 End Enum
-
 Public Class CImage
     Public Width As Integer
     Public Height As Integer
@@ -110,8 +106,6 @@ Public Class CImage
         End Try
         BR.Close()
     End Sub
-
-
     Sub CreateMask(ByRef Mask As CImage)
         Dim i, j As Integer
 
@@ -131,8 +125,6 @@ Public Class CImage
             Next
         Next
     End Sub
-
-
     Sub CopyImg(ByRef Img As CImage)
         'copies image to Img
         Img = New CImage
@@ -147,7 +139,6 @@ Public Class CImage
         Next
     End Sub
 End Class
-
 Public Class CCharacter
     Public PosX, PosY, DestX, DestY, Dist As Double
     Public Vx, Vy, V As Double
@@ -197,7 +188,6 @@ Public Class CCharacter
 
     End Sub
 End Class
-
 Public Class CCharMagna
     Inherits CCharacter
     Public CurrState As StateMagnaCenti
@@ -364,7 +354,6 @@ Public Class CCharMagna
         End Select
     End Sub
 End Class
-
 Public Class CCharMegaMan
     Inherits CCharacter
     Public CurrState As StateMegaman
@@ -588,7 +577,6 @@ Public Class CCharMagnaHomingTail
     End Sub
 
 End Class
-
 Public Class CCharMagnaSeparate
     Inherits CCharacter
 
@@ -647,7 +635,6 @@ Public Class CElmtFrame
 
     End Sub
 End Class
-
 Public Class CArrFrame
     Public N As Integer
     Public Elmt As CElmtFrame()
