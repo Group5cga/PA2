@@ -189,7 +189,7 @@ Public Class Form1
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
-        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 3)
+        MagnaTail.Insert(531, 298, 505, 259, 558, 335, 1)
         MagnaTail.Insert(475, 298, 448, 259, 500, 335, 3)
         MagnaTail.Insert(587, 298, 562, 259, 612, 335, 3)
 
@@ -561,6 +561,12 @@ Public Class Form1
             CreateMagnaHomingTail(1)
             CreateMagnaHomingTail(2)
         End If
+        If (MC.CurrState = StateMagnaCenti.Tail Or MC.CurrState = StateMagnaCenti.TailUD) And MC.FrameIdx = 42 Then
+            CreateMagnaGatherTail(1)
+            CreateMagnaGatherTail(2)
+            CreateMagnaGatherTail(3)
+            CreateMagnaGatherTail(4)
+        End If
 
         If MC.CurrState = StateMagnaCenti.Throwing And MC.CurrFrame = 3 Then
             CreateMagnaProjectile(1)
@@ -676,24 +682,24 @@ Public Class Form1
         ReDim MG.ArrSprites(1)
         If n = 1 Then
             MG.PosY = MC.PosY + 180
-            MG.PosX = MC.PosX
+            MG.PosX = MC.PosX + 10
             MG.Vx = 0
             MG.Vy = 30
             MG.ArrSprites(0) = MagnaPartTail
         ElseIf n = 2 Then
             MG.PosX = MC.PosX - 180
-            MG.PosY = MC.PosY
+            MG.PosY = MC.PosY - 10
             MG.Vx = -30
             MG.Vy = 0
             MG.ArrSprites(0) = MagnaPartTail
         ElseIf n = 3 Then
-            MG.PosY = MC.PosY
+            MG.PosY = MC.PosY - 10
             MG.PosX = MC.PosX + 180
             MG.Vx = 30
             MG.Vy = 0
             MG.ArrSprites(0) = MagnaPartTail
         ElseIf n = 4 Then
-            MG.PosX = MC.PosX
+            MG.PosX = MC.PosX + 10
             MG.PosY = MC.PosY - 180
             MG.Vx = 0
             MG.Vy = -30

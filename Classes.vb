@@ -434,6 +434,9 @@ Public Class CCharMegaMan
                 End If
             Case StateMegaman.Hit
                 GetNextFrame()
+                If FrameIdx = 0 And CurrFrame = 0 Then
+                    State(StateMegaman.RunStart, 2)
+                End If
             Case StateMegaman.MagnetHit
                 GetNextFrame()
                 If FrameIdx <= 6 And PosX <= 160 Then
@@ -617,7 +620,10 @@ Public Class CCharMagnaSeparate
                 GetNextFrame()
                 PosX = PosX - Vx
                 PosY = PosY - Vy
-                If PosY = 160 Or PosX = 210 Then
+                If (PosY > 150 And PosY < 160) Then
+                    Destroy = True
+                End If
+                If (PosX > 190 And PosX < 205) Then
                     Destroy = True
                 End If
         End Select
