@@ -76,14 +76,11 @@ Public Class CImage
                 MsgBox("Not a BMP file")
             Else 'BMP file
                 BlockReadInt(BR, 4, L) 'size
-                'MsgBox("Size = " + CStr(L))
                 BlankRead(BR, 4) 'reserved
                 BlockReadInt(BR, 4, pos) 'start of data
                 BlankRead(BR, 4) 'size of header
                 BlockReadInt(BR, 4, Width) 'width
-                'MsgBox("Width = " + CStr(I.Width))
                 BlockReadInt(BR, 4, Height) 'height
-                'MsgBox("Height = " + CStr(I.Height))
                 BlankRead(BR, 2) 'color panels
                 BlockReadInt(BR, 2, ColorMode) 'colormode
                 If ColorMode <> 24 Then
@@ -223,7 +220,6 @@ Public Class CCharMagna
                 End If
 
             Case StateMagnaCenti.Jump1
-                'untested
                 GetNextFrame()
                 PosX = PosX + Vx
                 PosY = PosY + Vy
@@ -236,7 +232,6 @@ Public Class CCharMagna
                 End If
 
             Case StateMagnaCenti.Jump2
-                'untested
                 GetNextFrame()
                 PosX = PosX - Vx
                 PosY = PosY + Vy
@@ -249,7 +244,6 @@ Public Class CCharMagna
                 End If
 
             Case StateMagnaCenti.JumpUD1
-                'untested
                 GetNextFrame()
                 PosX = PosX - Vx
                 PosY = PosY + Vy
@@ -262,7 +256,6 @@ Public Class CCharMagna
                 End If
 
             Case StateMagnaCenti.JumpUD2
-                'untested
                 GetNextFrame()
                 PosX = PosX + Vx
                 PosY = PosY + Vy
@@ -285,9 +278,6 @@ Public Class CCharMagna
                 End If
 
             Case StateMagnaCenti.Tail
-                'If FrameIdx <= 25 Then
-                'GetNextFrame()
-                'End If
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMagnaCenti.Stand, 1)
@@ -295,9 +285,6 @@ Public Class CCharMagna
                     Vy = 0
                 End If
             Case StateMagnaCenti.TailUD
-                'If FrameIdx <= 25 Then
-                'GetNextFrame()
-                'End If
                 GetNextFrame()
                 If FrameIdx = 0 And CurrFrame = 0 Then
                     State(StateMagnaCenti.StandUD, 10)
@@ -403,8 +390,6 @@ Public Class CCharMegaMan
             Case StateMegaman.MagnetStart
                 GetNextFrame()
                 If FrameIdx <= 5 Then
-                    'PosX = PosX + Vx
-                    'PosY = PosY + Vy
                     Vx = V * Math.Cos(dir)
                     Vy = V * Math.Sin(dir)
                     dx = DestX - PosX
@@ -420,8 +405,6 @@ Public Class CCharMegaMan
                     PosX = PosX + Vx
                     PosY = PosY + Vy
                     Dist = (DestX - PosX) * (DestX - PosX) + (DestY - PosY) * (DestY - PosY)
-                    'Vy = Vy - 1
-                    'Vx = Vx - 0.5
                     If Dist <= 100 Then
                         Vx = 0
                         Vy = 0
@@ -572,20 +555,6 @@ Public Class CCharMagnaHomingTail
                 Else
                     Destroy = True
                 End If
-                'Case StateMagnaProjectile.Tail
-                '    GetNextFrame()
-                '    If PosX <= 220 Then
-                '        dir = dir + 1 * Math.PI / 180
-                '        'update v
-                '        Vx = Math.Cos(dir)
-                '        Vy = Math.Sin(dir)
-                '        'update pos
-                '        PosX = PosX + Vx
-                '        PosY = PosY + Vy
-                '    Else
-                '        Destroy = True
-                '    End If
-
         End Select
     End Sub
 
